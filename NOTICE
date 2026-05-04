@@ -1,0 +1,10 @@
+GeoCode-Release
+===============
+
+This repository is the public distribution channel for GeoCode, a desktop
+fork of OpenCode (https://github.com/sst/opencode) focused on GIS workflows.
+
+We are grateful to the SST team and every OpenCode contributor for
+building the foundation this project stands on. The original OpenCode
+source remains MIT-licensed and Copyright (c) 2025 opencode; see
+LICENSE for the full notice.
