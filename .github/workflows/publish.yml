@@ -2,9 +2,15 @@ name: Build and publish
 
 # On every push to main, rebuild the dist/ payload (catalog + hash-stamped
 # skill packages) and push it to the release branch. jsdelivr mirrors the
-# release branch automatically; clients fetch from there. The final step
-# purges jsdelivr's edge cache so users see new skills within ~1 minute
-# instead of waiting up to 12h for the natural refresh cycle.
+# release branch automatically; clients fetch from there.
+#
+# The final purge step is *conditional*: it only runs when this build
+# actually moved the release branch tip. Re-runs that produce identical
+# dist/ (no commit pushed) skip the purge to avoid burning jsdelivr's
+# per-URL throttle budget on no-op refreshes. When it does run, it
+# sleeps 2 minutes first so jsdelivr's upstream view of the GitHub repo
+# has time to see the new commit — purging before propagation makes
+# jsdelivr cache the *old* content for another 12h.
 
 on:
   push:
@@ -41,6 +47,12 @@ jobs:
           CATALOG_PATH=dist/store/catalog.json node scripts/aggregate-stats.mjs || \
             echo "Stats refresh failed (non-fatal at publish time)"
 
+      # Snapshot the release branch tip before deploy so we can decide
+      # afterwards whether the deploy actually changed anything.
+      - name: Capture pre-deploy release SHA
+        id: pre
+        run: echo "sha=$(git ls-remote origin release | awk '{print $1}')" >> "$GITHUB_OUTPUT"
+
       - name: Deploy to release branch
         uses: JamesIves/github-pages-deploy-action@v4
         with:
@@ -49,11 +61,27 @@ jobs:
           clean: true
           commit-message: "chore: rebuild from ${{ github.sha }}"
 
-      # Force jsdelivr to drop its cached catalog.json and refetch from the
-      # release branch. Without this, clients see the stale catalog for up
-      # to 12h. SKILL files don't need purging — their content-hashed
-      # filenames already bypass the CDN cache for new versions.
+      - name: Capture post-deploy release SHA
+        id: post
+        run: echo "sha=$(git ls-remote origin release | awk '{print $1}')" >> "$GITHUB_OUTPUT"
+
+      # Sleep 2 minutes before purge: jsdelivr's "is the GitHub branch
+      # newer than my cache?" check lags GitHub by tens of seconds to
+      # a couple of minutes. Purging immediately after deploy makes
+      # jsdelivr's first refetch see the *old* commit and re-cache it.
+      - name: Wait for GitHub propagation
+        if: steps.pre.outputs.sha != steps.post.outputs.sha
+        run: sleep 120
+
+      # Force jsdelivr to drop its cached catalog.json and refetch the
+      # now-propagated commit. SKILL files don't need purging — their
+      # content-hashed filenames already bypass the CDN cache.
       - name: Purge jsdelivr cache
+        if: steps.pre.outputs.sha != steps.post.outputs.sha
         run: |
           curl -sfL "https://purge.jsdelivr.net/gh/${{ github.repository }}@release/store/catalog.json" \
             || echo "jsdelivr purge failed (non-fatal — cache will refresh within 12h anyway)"
+
+      - name: Skip purge (no release change)
+        if: steps.pre.outputs.sha == steps.post.outputs.sha
+        run: echo "Release branch unchanged (${{ steps.pre.outputs.sha }}); skipping purge to preserve jsdelivr throttle budget."
