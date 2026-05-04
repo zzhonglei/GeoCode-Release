@@ -1,0 +1,8 @@
+{
+  "version": "0.1.0",
+  "description": "Temporary skill used to exercise the full install / update / orphan lifecycle in the desktop UI.",
+  "author": "GeoCode",
+  "tags": ["test", "lifecycle", "temporary"],
+  "minClientVersion": "0.9.0",
+  "license": "MIT"
+}
