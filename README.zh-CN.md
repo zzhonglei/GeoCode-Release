@@ -64,6 +64,9 @@
   <img src="assets/setup-wizard.png" width="700" alt="GeoCode 启动后输入 /set 进入配置向导">
 </p>
 
+> [!TIP]
+> 不建议使用 OpenCode 内置的免费模型，能力有限，不足以支撑真实任务。推荐自备 [**DeepSeek v4**](https://platform.deepseek.com/sign_in) API Key，或登录 **ChatGPT Plus** 会员账号，体验会有明显提升。
+
 ## Skill 集市
 
 Skill 是智能体能否顺利工作的关键一环。GeoCode 提供了便捷的 Skill 管理界面 —— 浏览、安装、启用、禁用全部图形化操作，无需手动管理文件。

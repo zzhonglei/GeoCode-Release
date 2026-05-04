@@ -64,6 +64,9 @@ After installing QGIS and your environment manager, launch GeoCode and type `/se
   <img src="assets/setup-wizard.png" width="700" alt="Type /set in GeoCode to launch the setup wizard">
 </p>
 
+> [!TIP]
+> The free models bundled with OpenCode are limited in capability and not recommended for real work. For a noticeably better experience, plug in your own [**DeepSeek v4**](https://platform.deepseek.com/sign_in) API key, or sign in with a **ChatGPT Plus** subscription.
+
 ## Skill Bazaar
 
 Skills are a key piece of how smoothly the agent works. GeoCode ships a built-in management UI for them — browse, install, enable, disable, all click-driven, no manual file shuffling.
