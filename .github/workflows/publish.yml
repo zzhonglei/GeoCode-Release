@@ -1,8 +1,10 @@
 name: Build and publish
 
-# On every push to main, rebuild the dist/ payload (catalog + READMEs +
-# hash-stamped skill packages) and push it to the release branch. jsdelivr
-# mirrors the release branch automatically; clients fetch from there.
+# On every push to main, rebuild the dist/ payload (catalog + hash-stamped
+# skill packages) and push it to the release branch. jsdelivr mirrors the
+# release branch automatically; clients fetch from there. The final step
+# purges jsdelivr's edge cache so users see new skills within ~1 minute
+# instead of waiting up to 12h for the natural refresh cycle.
 
 on:
   push:
@@ -46,3 +48,12 @@ jobs:
           folder: dist
           clean: true
           commit-message: "chore: rebuild from ${{ github.sha }}"
+
+      # Force jsdelivr to drop its cached catalog.json and refetch from the
+      # release branch. Without this, clients see the stale catalog for up
+      # to 12h. SKILL files don't need purging — their content-hashed
+      # filenames already bypass the CDN cache for new versions.
+      - name: Purge jsdelivr cache
+        run: |
+          curl -sfL "https://purge.jsdelivr.net/gh/${{ github.repository }}@release/store/catalog.json" \
+            || echo "jsdelivr purge failed (non-fatal — cache will refresh within 12h anyway)"
