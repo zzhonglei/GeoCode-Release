@@ -23,4 +23,4 @@ After you confirm everything works, you can disable or uninstall it.
 
 ## Author
 
-GeoCode Core team.
+GeoCode.

@@ -1,0 +1,8 @@
+{
+  "version": "0.1.0",
+  "description": "Choose an appropriate projected coordinate system for your geographic analysis.",
+  "author": "GeoCode",
+  "tags": ["projection", "crs", "cartography", "gis"],
+  "minClientVersion": "0.9.0",
+  "license": "MIT"
+}

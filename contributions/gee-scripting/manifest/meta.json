@@ -1,0 +1,8 @@
+{
+  "version": "0.1.0",
+  "description": "Google Earth Engine scripting workflow guide for remote sensing analysis.",
+  "author": "GeoCode",
+  "tags": ["gee", "earth-engine", "remote-sensing"],
+  "minClientVersion": "0.9.0",
+  "license": "MIT"
+}
