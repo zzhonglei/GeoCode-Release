@@ -24,6 +24,11 @@ import {
   walkFiles,
 } from "./util.mjs"
 
+// Release layout (kept intentionally minimal — clients only ever fetch
+// catalog.json + the SKILL package files; manifest/README.md and meta.json
+// stay on the main branch for contributors and GitHub web rendering).
+//   dist/store/catalog.json
+//   dist/core/<id>/SKILL.<hash>.<ext>  (and any other files under skill/)
 const DIST_DIR = path.join(REPO_ROOT, "dist")
 const DIST_CORE = path.join(DIST_DIR, "core")
 const DIST_STORE = path.join(DIST_DIR, "store")
@@ -95,12 +100,8 @@ async function buildSkill(id, generatedAt) {
     totalBytes += buf.byteLength
   }
 
-  // 3. Copy manifest/* to dist/store/<id>/
-  const storeDestDir = path.join(DIST_STORE, id)
-  await copyFile(path.join(manifestDir, "README.md"), path.join(storeDestDir, "README.md"))
-  await copyFile(path.join(manifestDir, "meta.json"), path.join(storeDestDir, "meta.json"))
-
-  // 4. Build the catalog row
+  // 3. Build the catalog row (manifest/* stays on main only — the catalog
+  //    already carries every field a client needs)
   return {
     id,
     name: displayName,
