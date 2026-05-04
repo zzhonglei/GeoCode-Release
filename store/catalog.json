@@ -1,7 +1,49 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-05-04T08:32:42.352Z",
+  "generatedAt": "2026-05-04T08:42:31.388Z",
   "skills": [
+    {
+      "id": "gee-scripting",
+      "name": "gee-scripting",
+      "version": "0.1.0",
+      "description": "Google Earth Engine scripting workflow guide for remote sensing analysis.",
+      "tags": [
+        "gee",
+        "earth-engine",
+        "remote-sensing"
+      ],
+      "author": "GeoCode",
+      "minClientVersion": "0.9.0",
+      "license": "MIT",
+      "deprecated": false,
+      "size": 62085,
+      "fileCount": 5,
+      "updatedAt": "2026-05-04T08:42:31.388Z",
+      "downloadCount": 0,
+      "packageBaseUrl": "/core/gee-scripting/",
+      "packageFiles": [
+        {
+          "source": "SKILL.d9a70d7b.md",
+          "dest": "SKILL.md"
+        },
+        {
+          "source": "references/change-detection.a37168c0.md",
+          "dest": "references/change-detection.md"
+        },
+        {
+          "source": "references/classification.5b75a4d2.md",
+          "dest": "references/classification.md"
+        },
+        {
+          "source": "references/image-composite.0116bb60.md",
+          "dest": "references/image-composite.md"
+        },
+        {
+          "source": "templates/single-date-image.a015b1f1.md",
+          "dest": "templates/single-date-image.md"
+        }
+      ]
+    },
     {
       "id": "hello-geocode",
       "name": "hello-geocode",
@@ -12,19 +54,97 @@
         "hello-world",
         "verification"
       ],
-      "author": "GeoCode Core",
+      "author": "GeoCode",
       "minClientVersion": "0.9.0",
       "license": "MIT",
       "deprecated": false,
       "size": 1196,
       "fileCount": 1,
-      "updatedAt": "2026-05-04T08:32:42.352Z",
+      "updatedAt": "2026-05-04T08:42:31.388Z",
       "downloadCount": 0,
       "packageBaseUrl": "/core/hello-geocode/",
       "packageFiles": [
         {
           "source": "SKILL.24e1f28b.md",
           "dest": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "projection-selection",
+      "name": "projection-selection",
+      "version": "0.1.0",
+      "description": "Choose an appropriate projected coordinate system for your geographic analysis.",
+      "tags": [
+        "projection",
+        "crs",
+        "cartography",
+        "gis"
+      ],
+      "author": "GeoCode",
+      "minClientVersion": "0.9.0",
+      "license": "MIT",
+      "deprecated": false,
+      "size": 25812,
+      "fileCount": 2,
+      "updatedAt": "2026-05-04T08:42:31.388Z",
+      "downloadCount": 0,
+      "packageBaseUrl": "/core/projection-selection/",
+      "packageFiles": [
+        {
+          "source": "SKILL.299bc567.md",
+          "dest": "SKILL.md"
+        },
+        {
+          "source": "references/中国制图投影坐标系规范.00a8f024.md",
+          "dest": "references/中国制图投影坐标系规范.md"
+        }
+      ]
+    },
+    {
+      "id": "thematic-map",
+      "name": "thematic-map",
+      "version": "0.1.0",
+      "description": "Create professional thematic maps with Cartopy, Matplotlib, and frykit.",
+      "tags": [
+        "mapping",
+        "cartography",
+        "matplotlib",
+        "cartopy"
+      ],
+      "author": "GeoCode",
+      "minClientVersion": "0.9.0",
+      "license": "MIT",
+      "deprecated": false,
+      "size": 105431,
+      "fileCount": 6,
+      "updatedAt": "2026-05-04T08:42:31.388Z",
+      "downloadCount": 0,
+      "packageBaseUrl": "/core/thematic-map/",
+      "packageFiles": [
+        {
+          "source": "SKILL.39937c03.md",
+          "dest": "SKILL.md"
+        },
+        {
+          "source": "references/basemap.2ef65d3f.md",
+          "dest": "references/basemap.md"
+        },
+        {
+          "source": "references/cartopy-projection.c084b548.md",
+          "dest": "references/cartopy-projection.md"
+        },
+        {
+          "source": "references/frykit.98366426.md",
+          "dest": "references/frykit.md"
+        },
+        {
+          "source": "templates/中国东北三省地图示例.9efae9a0.md",
+          "dest": "templates/中国东北三省地图示例.md"
+        },
+        {
+          "source": "templates/中国地图示例(frykit).c50de68d.md",
+          "dest": "templates/中国地图示例(frykit).md"
         }
       ]
     }
