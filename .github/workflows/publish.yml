@@ -1,0 +1,42 @@
+name: Build and publish
+
+# On every push to main, rebuild the dist/ payload (catalog + READMEs +
+# hash-stamped skill packages) and push it to the release branch. jsdelivr
+# mirrors the release branch automatically; clients fetch from there.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "contributions/**"
+      - "scripts/**"
+      - ".github/workflows/publish.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Build store
+        run: node scripts/build-store.mjs
+
+      - name: Refresh download counts (best-effort)
+        run: |
+          CATALOG_PATH=dist/store/catalog.json node scripts/aggregate-stats.mjs || \
+            echo "Stats refresh failed (non-fatal at publish time)"
+
+      - name: Deploy to release branch
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: release
+          folder: dist
+          clean: true
+          commit-message: "chore: rebuild from ${{ github.sha }}"

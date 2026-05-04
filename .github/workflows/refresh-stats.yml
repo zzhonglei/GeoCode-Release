@@ -1,0 +1,50 @@
+name: Refresh download counts
+
+# Hourly cron that pulls jsdelivr stats and overwrites downloadCount in the
+# release branch's store/catalog.json. The catalog source-of-truth lives on
+# the release branch (it's CI-managed), so we check that branch out, run the
+# aggregator script (fetched from main since release intentionally has no
+# scripts/ directory), and commit if anything changed.
+
+on:
+  schedule:
+    - cron: "13 * * * *" # 13min past each hour, off-peak
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: release
+          fetch-depth: 1
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Fetch aggregator script from main
+        run: |
+          mkdir -p .ci
+          curl -sfL "https://raw.githubusercontent.com/${{ github.repository }}/main/scripts/aggregate-stats.mjs" \
+            -o .ci/aggregate-stats.mjs
+
+      - name: Refresh stats
+        run: node .ci/aggregate-stats.mjs
+
+      - name: Commit if changed
+        run: |
+          rm -rf .ci
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet; then
+            echo "No catalog changes."
+            exit 0
+          fi
+          git add store/catalog.json
+          git commit -m "chore: refresh download counts"
+          git push

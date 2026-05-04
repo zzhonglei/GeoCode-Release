@@ -1,0 +1,24 @@
+name: Validate skills
+
+# Run validate-skill.mjs on every PR that touches contributions/ or scripts/.
+# Catches malformed manifests, missing SKILL.md frontmatter, and bad slugs
+# before they get merged.
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "contributions/**"
+      - "scripts/**"
+      - ".github/workflows/validate.yml"
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Validate
+        run: node scripts/validate-skill.mjs

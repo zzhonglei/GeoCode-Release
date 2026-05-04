@@ -1,0 +1,11 @@
+{
+  "name": "geocode-release-tooling",
+  "private": true,
+  "type": "module",
+  "description": "CI scripts for the GeoCode skill store.",
+  "scripts": {
+    "validate": "node scripts/validate-skill.mjs",
+    "build": "node scripts/build-store.mjs",
+    "stats": "node scripts/aggregate-stats.mjs"
+  }
+}
