@@ -1,8 +1,0 @@
-{
-  "version": "0.2.0",
-  "description": "生命周期测试 v2 —— 多文件 skill 包,用来验证元数据刷新、[更新] 流程、嵌套目录,以及 jsdelivr→raw 兜底链路在真实文件量下是否正常工作。",
-  "author": "GeoCode 测试组",
-  "tags": ["测试", "生命周期", "v2", "多文件", "回归"],
-  "minClientVersion": "0.9.0",
-  "license": "MIT"
-}
