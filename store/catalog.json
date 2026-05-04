@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-05-04T08:59:48.454Z",
+  "generatedAt": "2026-05-04T09:33:43.016Z",
   "skills": [
     {
       "id": "gee-scripting",
@@ -18,7 +18,7 @@
       "deprecated": false,
       "size": 62085,
       "fileCount": 5,
-      "updatedAt": "2026-05-04T08:59:48.454Z",
+      "updatedAt": "2026-05-04T09:33:43.016Z",
       "downloadCount": 0,
       "packageBaseUrl": "/core/gee-scripting/",
       "packageFiles": [
@@ -60,12 +60,38 @@
       "deprecated": false,
       "size": 1196,
       "fileCount": 1,
-      "updatedAt": "2026-05-04T08:59:48.454Z",
+      "updatedAt": "2026-05-04T09:33:43.016Z",
       "downloadCount": 0,
       "packageBaseUrl": "/core/hello-geocode/",
       "packageFiles": [
         {
           "source": "SKILL.24e1f28b.md",
+          "dest": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "lifecycle-test",
+      "name": "lifecycle-test",
+      "version": "0.1.0",
+      "description": "Temporary skill used to exercise the full install / update / orphan lifecycle in the desktop UI.",
+      "tags": [
+        "test",
+        "lifecycle",
+        "temporary"
+      ],
+      "author": "GeoCode",
+      "minClientVersion": "0.9.0",
+      "license": "MIT",
+      "deprecated": false,
+      "size": 800,
+      "fileCount": 1,
+      "updatedAt": "2026-05-04T09:33:43.016Z",
+      "downloadCount": 0,
+      "packageBaseUrl": "/core/lifecycle-test/",
+      "packageFiles": [
+        {
+          "source": "SKILL.6fbe11d2.md",
           "dest": "SKILL.md"
         }
       ]
@@ -87,7 +113,7 @@
       "deprecated": false,
       "size": 25812,
       "fileCount": 2,
-      "updatedAt": "2026-05-04T08:59:48.454Z",
+      "updatedAt": "2026-05-04T09:33:43.016Z",
       "downloadCount": 0,
       "packageBaseUrl": "/core/projection-selection/",
       "packageFiles": [
@@ -118,7 +144,7 @@
       "deprecated": false,
       "size": 105431,
       "fileCount": 6,
-      "updatedAt": "2026-05-04T08:59:48.454Z",
+      "updatedAt": "2026-05-04T09:33:43.016Z",
       "downloadCount": 0,
       "packageBaseUrl": "/core/thematic-map/",
       "packageFiles": [
