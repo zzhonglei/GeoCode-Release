@@ -11,6 +11,7 @@
 
 import { promises as fs } from "node:fs"
 import path from "node:path"
+import { execFileSync } from "node:child_process"
 import {
   CONTRIBUTIONS_DIR,
   ID_REGEX,
@@ -19,6 +20,100 @@ import {
   parseFrontmatter,
   readJson,
 } from "./util.mjs"
+
+// ----------------------------------------------------------------------------
+// Semver helpers (hand-rolled — keep this script dependency-free)
+// ----------------------------------------------------------------------------
+
+const SEMVER_REGEX = /^(\d+)\.(\d+)\.(\d+)$/
+
+/** Parse "1.2.3" → [1, 2, 3]. Returns null on malformed input. */
+function parseSemver(v) {
+  if (typeof v !== "string") return null
+  const m = v.trim().match(SEMVER_REGEX)
+  if (!m) return null
+  return [Number(m[1]), Number(m[2]), Number(m[3])]
+}
+
+/** Strict-greater compare. Returns true iff a > b. */
+function semverGt(a, b) {
+  for (let i = 0; i < 3; i++) {
+    if (a[i] > b[i]) return true
+    if (a[i] < b[i]) return false
+  }
+  return false
+}
+
+// ----------------------------------------------------------------------------
+// Release-branch catalog snapshot (for monotonic version check)
+// ----------------------------------------------------------------------------
+
+/**
+ * Detect which contributions/<id>/ directories were modified in this PR.
+ *
+ * On GitHub Actions PRs, GITHUB_BASE_REF points at the target branch (e.g.
+ * "main"); we diff against origin/<base> to get the change set. Outside CI
+ * (manual run, push events, local debugging) we have no reliable base, so we
+ * return null — the caller treats null as "skip the changed-only filter and
+ * only flag downgrades", which is conservative without being annoying.
+ *
+ * Requires the workflow to checkout with fetch-depth: 0 so the diff base is
+ * actually present in the local repo.
+ */
+function getChangedSkillIds() {
+  const baseRef = process.env.GITHUB_BASE_REF
+  if (!baseRef) return null
+  let out
+  try {
+    out = execFileSync(
+      "git",
+      ["diff", "--name-only", `origin/${baseRef}...HEAD`, "--", "contributions/"],
+      { stdio: ["ignore", "pipe", "ignore"], encoding: "utf-8" },
+    )
+  } catch (err) {
+    console.warn(`Warning: git diff against origin/${baseRef} failed (${err.message}); skipping changed-only filter.`)
+    return null
+  }
+  const ids = new Set()
+  for (const line of out.split("\n")) {
+    const m = line.match(/^contributions\/([^/]+)\//)
+    if (m) ids.add(m[1])
+  }
+  return ids
+}
+
+/**
+ * Read store/catalog.json from the release branch via `git show`. Returns a
+ * Map<id, version-string> for skills already published. Returns an empty Map
+ * when the branch / file isn't available (first publish, shallow clone, etc.).
+ */
+function loadReleaseVersions() {
+  let blob
+  try {
+    blob = execFileSync("git", ["show", "origin/release:store/catalog.json"], {
+      stdio: ["ignore", "pipe", "ignore"],
+      encoding: "utf-8",
+    })
+  } catch {
+    // No release branch yet, or no catalog at that path — treat all PR skills
+    // as brand new. The monotonic check then only enforces semver shape.
+    return new Map()
+  }
+  let parsed
+  try {
+    parsed = JSON.parse(blob)
+  } catch (err) {
+    console.warn(`Warning: release catalog.json is not valid JSON (${err.message}); skipping monotonic check.`)
+    return new Map()
+  }
+  const out = new Map()
+  for (const s of parsed?.skills ?? []) {
+    if (typeof s?.id === "string" && typeof s?.version === "string") {
+      out.set(s.id, s.version)
+    }
+  }
+  return out
+}
 
 // ----------------------------------------------------------------------------
 // meta.json schema validation (hand-rolled, no npm deps)
@@ -45,7 +140,12 @@ function validateMeta(meta, errors, prefix) {
   requireString("author")
   requireString("minClientVersion")
   requireString("license")
-  requireString("version", { optional: true }) // CI auto-bumps if absent
+  // version is required and must be MAJOR.MINOR.PATCH. Monotonic check below
+  // (validateVersionMonotonic) compares it against the release branch.
+  requireString("version")
+  if (typeof meta.version === "string" && meta.version.trim() !== "" && !parseSemver(meta.version)) {
+    errors.push(`${prefix} field version must be MAJOR.MINOR.PATCH (e.g. "0.1.0")`)
+  }
 
   if (!Array.isArray(meta.tags)) {
     errors.push(`${prefix} field tags must be an array`)
@@ -127,6 +227,74 @@ async function validateSkill(id, errors) {
 }
 
 // ----------------------------------------------------------------------------
+// Cross-cutting: monotonic version check
+// ----------------------------------------------------------------------------
+
+/**
+ * For every PR-modified skill that already exists on the release branch,
+ * require its meta.json version to be strictly greater than the published
+ * version. Brand-new skills (no entry on release) are exempt — only their
+ * semver shape was already enforced by validateMeta.
+ *
+ * Skills that are not part of this PR are not checked, so an unrelated PR
+ * cannot fail just because some other skill happens to share its current
+ * version with the release branch.
+ *
+ * Downgrades are forbidden (===, < both fail). To pull a bad release, ship a
+ * higher-numbered patch with the rollback.
+ *
+ * Outside a PR context (no GITHUB_BASE_REF), we still flag any id that has
+ * a numerically lower version than release — that catches accidental
+ * downgrades during ad-hoc/manual runs without scaring off contributors who
+ * touch unrelated skills.
+ */
+async function validateVersionMonotonic(ids, errors) {
+  const released = loadReleaseVersions()
+  if (released.size === 0) return // first publish — nothing to compare against
+
+  const changed = getChangedSkillIds() // Set<string> | null
+
+  for (const id of ids) {
+    const oldStr = released.get(id)
+    if (!oldStr) continue // brand-new skill
+
+    const metaPath = path.join(CONTRIBUTIONS_DIR, id, "manifest", "meta.json")
+    let meta
+    try {
+      meta = await readJson(metaPath)
+    } catch {
+      continue // validateSkill already surfaces this
+    }
+    const newStr = meta?.version
+    const oldVer = parseSemver(oldStr)
+    const newVer = parseSemver(newStr)
+    if (!oldVer) continue // released version itself is malformed; don't double-report
+    if (!newVer) continue // shape error already reported by validateMeta
+
+    // Two enforcement modes:
+    //   - PR context (changed != null): if this skill was edited, demand strict
+    //     bump; if it wasn't edited, skip entirely (== is fine).
+    //   - Non-PR context (changed == null): only forbid downgrade (< old). Equal
+    //     is allowed because we cannot prove anything was modified.
+    if (changed !== null) {
+      if (!changed.has(id)) continue
+      if (!semverGt(newVer, oldVer)) {
+        errors.push(
+          `[${id}] version must be strictly greater than the released version (${oldStr}); got ${newStr}. ` +
+            `Bump patch/minor/major — downgrades and unchanged versions are not allowed when files change.`,
+        )
+      }
+    } else {
+      if (semverGt(oldVer, newVer)) {
+        errors.push(
+          `[${id}] version downgrade detected (released ${oldStr}, got ${newStr}). Downgrades are not allowed.`,
+        )
+      }
+    }
+  }
+}
+
+// ----------------------------------------------------------------------------
 // Main
 // ----------------------------------------------------------------------------
 
@@ -141,6 +309,7 @@ async function main() {
   for (const id of ids) {
     await validateSkill(id, errors)
   }
+  await validateVersionMonotonic(ids, errors)
 
   if (errors.length > 0) {
     console.error(`Validation failed for ${errors.length} issue(s):\n`)

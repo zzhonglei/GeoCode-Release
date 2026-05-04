@@ -16,9 +16,20 @@ jobs:
   validate:
     runs-on: ubuntu-latest
     steps:
+      # fetch-depth: 0 lets validate-skill.mjs diff PR HEAD vs the base branch
+      # to detect which contributions/<id>/ directories were actually touched.
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
+
+      # Make the release branch's catalog available to validate-skill.mjs so
+      # it can enforce monotonic version bumps. `|| true` keeps the first-ever
+      # publish working when the release branch doesn't exist yet.
+      - name: Fetch release branch (for monotonic version check)
+        run: git fetch origin release --depth 1 || true
+
       - name: Validate
         run: node scripts/validate-skill.mjs

@@ -15,22 +15,26 @@ import path from "node:path"
 const CATALOG_PATH = process.env.CATALOG_PATH
   ? path.resolve(process.env.CATALOG_PATH)
   : path.resolve("./store/catalog.json")
+// jsdelivr per-file stats endpoint. The `@release` ref scopes hits to files
+// served from the release branch (where our skill packages actually live).
+// `period=year` is the widest window v1 supports — refresh-stats.yml runs
+// hourly, so a year-long sliding window never loses data.
 const STATS_URL =
-  "https://data.jsdelivr.com/v1/stats/packages/gh/zzhonglei/GeoCode-Release/files?period=all"
+  "https://data.jsdelivr.com/v1/package/gh/zzhonglei/GeoCode-Release@release/stats?period=year"
 
 /**
- * jsdelivr returns one entry per served file. Aggregate by skill id by
- * matching the well-known SKILL.<hash>.md path pattern. Each install pulls
- * SKILL.md exactly once, so summing those is a fair proxy for "installs".
+ * jsdelivr v1 returns `{ total, files: { "/path/to/file": { total, dates } } }`.
+ * Aggregate by skill id by matching the well-known SKILL.<hash>.md path
+ * pattern. Each install pulls SKILL.md exactly once, so summing those is a
+ * fair proxy for "installs".
  */
-function aggregateBySkill(files) {
+function aggregateBySkill(filesObj) {
   const counts = {}
-  for (const file of files) {
-    const name = typeof file?.name === "string" ? file.name : ""
-    const m = name.match(/^\/core\/([^/]+)\/SKILL\.[a-f0-9]+\.md$/)
+  for (const [filePath, stats] of Object.entries(filesObj)) {
+    const m = filePath.match(/^\/core\/([^/]+)\/SKILL\.[a-f0-9]+\.md$/)
     if (!m) continue
     const id = m[1]
-    const hits = Number(file?.hits?.total ?? file?.hits ?? 0)
+    const hits = Number(stats?.total ?? 0)
     if (!Number.isFinite(hits)) continue
     counts[id] = (counts[id] ?? 0) + hits
   }
@@ -42,15 +46,23 @@ async function fetchStats() {
   if (res.status === 404) {
     // jsdelivr returns 404 until the package has been served at least once.
     // Fresh repos hit this — treat as "no downloads yet".
-    return []
+    return {}
   }
   if (!res.ok) throw new Error(`Stats API failed: ${res.status} ${res.statusText}`)
   const body = await res.json()
-  // jsdelivr's response shape is `{ files: [...] }` in newer schemas and a
-  // bare array in older ones. Tolerate both.
-  if (Array.isArray(body)) return body
-  if (Array.isArray(body?.files)) return body.files
-  return []
+  // Expected shape: { total, files: { ... } }. Tolerate the older bare-array
+  // shape by converting it back to a path→stats map.
+  if (body && typeof body === "object" && body.files && typeof body.files === "object" && !Array.isArray(body.files)) {
+    return body.files
+  }
+  if (Array.isArray(body)) {
+    const out = {}
+    for (const f of body) {
+      if (typeof f?.name === "string") out[f.name] = { total: Number(f?.hits?.total ?? f?.hits ?? 0) }
+    }
+    return out
+  }
+  return {}
 }
 
 async function main() {
@@ -62,8 +74,8 @@ async function main() {
     process.exit(0) // not an error: release branch may not be built yet
   }
 
-  const files = await fetchStats()
-  const counts = aggregateBySkill(files)
+  const filesObj = await fetchStats()
+  const counts = aggregateBySkill(filesObj)
 
   let changed = 0
   for (const skill of catalog.skills) {
