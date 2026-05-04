@@ -4,3 +4,7 @@ dist/
 .DS_Store
 .idea/
 .vscode/
+
+# Maintainer-only personal notes (never commit)
+MAINTAINER.local.md
+*.local.md
