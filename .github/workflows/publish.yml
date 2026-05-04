@@ -8,7 +8,13 @@ on:
   push:
     branches: [main]
     paths:
-      - "contributions/**"
+      # Skill payload — anything under skill/ ships into core/ on release.
+      - "contributions/*/skill/**"
+      # Catalog input — meta.json fields land in store/catalog.json. Other
+      # files under manifest/ (README.md, images for the README, …) only feed
+      # GitHub web rendering and must NOT cost a rebuild + CDN refetch.
+      - "contributions/*/manifest/meta.json"
+      # CI tooling itself.
       - "scripts/**"
       - ".github/workflows/publish.yml"
   workflow_dispatch:
