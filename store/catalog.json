@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-05-04T08:20:23.081Z",
+  "generatedAt": "2026-05-04T08:32:42.352Z",
   "skills": [
     {
       "id": "hello-geocode",
@@ -18,7 +18,7 @@
       "deprecated": false,
       "size": 1196,
       "fileCount": 1,
-      "updatedAt": "2026-05-04T08:20:23.081Z",
+      "updatedAt": "2026-05-04T08:32:42.352Z",
       "downloadCount": 0,
       "packageBaseUrl": "/core/hello-geocode/",
       "packageFiles": [
