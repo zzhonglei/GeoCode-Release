@@ -1,10 +1,11 @@
-# lifecycle-test
+# 生命周期测试 (v2)
 
-Temporary skill for end-to-end testing of the GeoCode skill store UI:
+GeoCode Skill 商店的端到端测试 fixture。v2 在 v1 单文件的基础上扩展为多文件包,
+覆盖以下场景:
 
-1. **Install** — appears in Settings → Skill Store, install button works
-2. **Update** — when the maintainer bumps version, [Update] button shows
-3. **Orphan** — when the maintainer removes this from contributions/, the
-   row stays visible with the "No longer in store" badge
+- 多文件 install(SKILL.md + 2 篇 references + 1 个 template)
+- `skill/` 下嵌套目录布局
+- 版本号 bump 后 catalog 元数据刷新
+- 桌面端 [更新] 流程的可视化验证
 
-Will be deleted after the lifecycle test passes.
+完成全部生命周期测试后将被删除。
