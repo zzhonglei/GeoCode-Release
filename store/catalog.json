@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-05-04T09:49:28.025Z",
+  "generatedAt": "2026-05-04T11:36:43.637Z",
   "skills": [
     {
       "id": "gee-scripting",
@@ -18,7 +18,7 @@
       "deprecated": false,
       "size": 62085,
       "fileCount": 5,
-      "updatedAt": "2026-05-04T09:49:28.025Z",
+      "updatedAt": "2026-05-04T11:36:43.637Z",
       "downloadCount": 0,
       "packageBaseUrl": "/core/gee-scripting/",
       "packageFiles": [
@@ -60,7 +60,7 @@
       "deprecated": false,
       "size": 1196,
       "fileCount": 1,
-      "updatedAt": "2026-05-04T09:49:28.025Z",
+      "updatedAt": "2026-05-04T11:36:43.637Z",
       "downloadCount": 0,
       "packageBaseUrl": "/core/hello-geocode/",
       "packageFiles": [
@@ -73,26 +73,40 @@
     {
       "id": "lifecycle-test",
       "name": "lifecycle-test",
-      "version": "0.1.0",
-      "description": "Temporary skill used to exercise the full install / update / orphan lifecycle in the desktop UI.",
+      "version": "0.2.0",
+      "description": "生命周期测试 v2 —— 多文件 skill 包,用来验证元数据刷新、[更新] 流程、嵌套目录,以及 jsdelivr→raw 兜底链路在真实文件量下是否正常工作。",
       "tags": [
-        "test",
-        "lifecycle",
-        "temporary"
+        "测试",
+        "生命周期",
+        "v2",
+        "多文件",
+        "回归"
       ],
-      "author": "GeoCode",
+      "author": "GeoCode 测试组",
       "minClientVersion": "0.9.0",
       "license": "MIT",
       "deprecated": false,
-      "size": 800,
-      "fileCount": 1,
-      "updatedAt": "2026-05-04T09:49:28.025Z",
+      "size": 5263,
+      "fileCount": 4,
+      "updatedAt": "2026-05-04T11:36:43.637Z",
       "downloadCount": 0,
       "packageBaseUrl": "/core/lifecycle-test/",
       "packageFiles": [
         {
-          "source": "SKILL.6fbe11d2.md",
+          "source": "SKILL.a7c93149.md",
           "dest": "SKILL.md"
+        },
+        {
+          "source": "references/lifecycle-checklist.53539a74.md",
+          "dest": "references/lifecycle-checklist.md"
+        },
+        {
+          "source": "references/upgrade-notes.fa52e089.md",
+          "dest": "references/upgrade-notes.md"
+        },
+        {
+          "source": "templates/sample-greeting.c79e3e4f.md",
+          "dest": "templates/sample-greeting.md"
         }
       ]
     },
@@ -113,7 +127,7 @@
       "deprecated": false,
       "size": 25812,
       "fileCount": 2,
-      "updatedAt": "2026-05-04T09:49:28.025Z",
+      "updatedAt": "2026-05-04T11:36:43.637Z",
       "downloadCount": 0,
       "packageBaseUrl": "/core/projection-selection/",
       "packageFiles": [
@@ -144,7 +158,7 @@
       "deprecated": false,
       "size": 105431,
       "fileCount": 6,
-      "updatedAt": "2026-05-04T09:49:28.025Z",
+      "updatedAt": "2026-05-04T11:36:43.637Z",
       "downloadCount": 0,
       "packageBaseUrl": "/core/thematic-map/",
       "packageFiles": [
