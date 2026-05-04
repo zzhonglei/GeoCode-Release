@@ -1,31 +1,42 @@
-# GeoCode-Release
+<p align="center">
+  <img src="assets/logo.svg" width="500" alt="GeoCode">
+</p>
 
-Public distribution repo for [GeoCode](https://github.com/zzhonglei/GeoCode):
+<p align="center"><strong>GIS workflows for your desktop, powered by AI.</strong></p>
 
-- **Releases**: macOS / Windows installers under [Releases](https://github.com/zzhonglei/GeoCode-Release/releases).
-- **Skill store**: GIS-focused skills served via jsdelivr CDN to GeoCode clients.
+<p align="center">
+  <a href="https://github.com/zzhonglei/GeoCode-Release/releases">
+    <img src="https://img.shields.io/github/v/release/zzhonglei/GeoCode-Release?label=download&style=flat-square" alt="Latest release">
+  </a>
+  <img src="https://img.shields.io/badge/macOS-arm64-blue?style=flat-square" alt="macOS arm64">
+  <img src="https://img.shields.io/badge/Windows-x64-blue?style=flat-square" alt="Windows x64">
+  <a href="LICENSE">
+    <img src="https://img.shields.io/badge/license-MIT-yellow?style=flat-square" alt="MIT License">
+  </a>
+</p>
 
-## Repository layout
+<p align="center">
+  <a href="https://github.com/zzhonglei/GeoCode-Release/releases">📥 Download</a>
+  ·
+  <a href="contributions/">🧠 Skill Bazaar</a>
+  ·
+  <a href="https://github.com/sst/opencode">🌱 Fork of OpenCode</a>
+</p>
 
-```
-contributions/              ← skill source (one directory per skill)
-  <skill-id>/
-    manifest/
-      README.md             ← user-facing description (shown in store UI)
-      meta.json             ← metadata (description, tags, author, ...)
-    skill/
-      SKILL.md              ← OpenCode-protocol skill content (frontmatter: name, description)
-      ...                   ← any other files / subdirs (free-form)
+---
 
-scripts/                    ← CI tooling
-  validate-skill.mjs        ← PR-time checks
-  build-store.mjs           ← merge-time build of dist/ → release branch
-  aggregate-stats.mjs       ← hourly cron to refresh download counts
+## What is GeoCode?
 
-.github/workflows/          ← GitHub Actions
-```
+A desktop AI assistant for GIS workflows — drive GDAL, QGIS, and Google Earth Engine through natural conversation. Built on [OpenCode](https://github.com/sst/opencode).
 
-The `release` branch is CI-managed and contains the built artifacts under
-`store/` (catalog + readmes) and `core/` (skill packages with content-hashed
-filenames). jsdelivr mirrors `release` automatically — clients fetch from
-`https://cdn.jsdelivr.net/gh/zzhonglei/GeoCode-Release@release/...`.
+## Install
+
+Grab the latest installer from [Releases](https://github.com/zzhonglei/GeoCode-Release/releases): macOS arm64 (`.dmg`) or Windows x64 (`.exe`).
+
+## Skill Bazaar
+
+Skills under [`contributions/`](contributions/) are GIS-focused prompt packages the app can install on demand. To contribute one, open a PR — copy any existing skill as a template.
+
+## License
+
+MIT — see [LICENSE](LICENSE) and [NOTICE](NOTICE).
