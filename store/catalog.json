@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-05-07T06:49:20.362Z",
+  "generatedAt": "2026-05-07T07:38:09.777Z",
   "skills": [
     {
       "id": "gee-scripting",
@@ -18,7 +18,7 @@
       "deprecated": false,
       "size": 62085,
       "fileCount": 5,
-      "updatedAt": "2026-05-07T06:49:20.362Z",
+      "updatedAt": "2026-05-07T07:38:09.777Z",
       "downloadCount": 18,
       "packageBaseUrl": "/core/gee-scripting/",
       "packageFiles": [
@@ -60,7 +60,7 @@
       "deprecated": false,
       "size": 1196,
       "fileCount": 1,
-      "updatedAt": "2026-05-07T06:49:20.362Z",
+      "updatedAt": "2026-05-07T07:38:09.777Z",
       "downloadCount": 32,
       "packageBaseUrl": "/core/hello-geocode/",
       "packageFiles": [
@@ -87,7 +87,7 @@
       "deprecated": false,
       "size": 25812,
       "fileCount": 2,
-      "updatedAt": "2026-05-07T06:49:20.362Z",
+      "updatedAt": "2026-05-07T07:38:09.777Z",
       "downloadCount": 20,
       "packageBaseUrl": "/core/projection-selection/",
       "packageFiles": [
@@ -118,7 +118,7 @@
       "deprecated": false,
       "size": 105431,
       "fileCount": 6,
-      "updatedAt": "2026-05-07T06:49:20.362Z",
+      "updatedAt": "2026-05-07T07:38:09.777Z",
       "downloadCount": 17,
       "packageBaseUrl": "/core/thematic-map/",
       "packageFiles": [
@@ -150,9 +150,9 @@
     },
     {
       "id": "update-test",
-      "name": "update-test",
+      "name": "升级测试",
       "version": "0.1.0",
-      "description": "Throwaway skill used to verify the GeoCode skill-store update flow. Install once, then bump the version server-side to confirm the [Update] badge appears in Settings -> Skill Bazaar.",
+      "description": "用于验证 GeoCode 技能商店升级流程的一次性测试技能。安装一次后,服务端再 bump 版本号,即可在「设置 → 技能商店」里看到 [更新] 标记。",
       "tags": [
         "sample",
         "test",
@@ -162,14 +162,14 @@
       "minClientVersion": "0.9.0",
       "license": "MIT",
       "deprecated": false,
-      "size": 1345,
+      "size": 1385,
       "fileCount": 1,
-      "updatedAt": "2026-05-07T06:49:20.362Z",
+      "updatedAt": "2026-05-07T07:38:09.777Z",
       "downloadCount": 0,
       "packageBaseUrl": "/core/update-test/",
       "packageFiles": [
         {
-          "source": "SKILL.03c282ed.md",
+          "source": "SKILL.84e9d056.md",
           "dest": "SKILL.md"
         }
       ]
