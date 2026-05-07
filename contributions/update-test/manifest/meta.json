@@ -1,6 +1,6 @@
 {
   "version": "0.1.0",
-  "description": "Throwaway skill used to verify the GeoCode skill-store update flow. Install once, then bump the version server-side to confirm the [Update] badge appears in Settings -> Skill Bazaar.",
+  "description": "用于验证 GeoCode 技能商店升级流程的一次性测试技能。安装一次后,服务端再 bump 版本号,即可在「设置 → 技能商店」里看到 [更新] 标记。",
   "author": "GeoCode",
   "tags": ["sample", "test", "update-flow"],
   "minClientVersion": "0.9.0",

@@ -1,38 +1,36 @@
 ---
-name: update-test
-description: Throwaway skill used to verify the GeoCode skill-store update flow. Activate when the user asks for the "update test version" or otherwise probes which version of update-test is currently installed.
+name: 升级测试
+description: 用于验证 GeoCode 技能商店升级流程的一次性测试技能。当用户问「升级测试当前是哪个版本」或类似询问 update-test 当前版本时激活。
 ---
 
-# Update Test
+# 升级测试
 
-Verification skill for the GeoCode skill-store update path. The version
-number below is hard-coded into the prompt body on purpose — it's the
-single source of truth the user can read off the LLM's reply, so they can
-confirm visually that an [Update] click actually replaced the local files
-on disk.
+GeoCode 技能商店升级路径的验证技能。下面那一行版本号是故意硬编码到提示词
+正文里的——它是用户能从 LLM 回复中直接读到的唯一可信来源,用来肉眼确认
+点击 [更新] 按钮之后,本地磁盘上的文件确实被替换过了。
 
-## When to invoke this skill
+## 何时激活这个技能
 
-Activate when the user says any of:
+当用户说出下面任意一句:
 
-- "update test version"
-- "what version of update-test is installed?"
-- "run update-test"
+- 「升级测试当前是哪个版本?」
+- 「update-test 当前是哪个版本?」
+- 「跑一下 update-test」
+- 「跑一下升级测试」
 
-## What to respond with
+## 应该回复什么
 
-Reply with exactly one line, no preamble, no follow-up question:
+只回复下面这一行,不要前言、不要追问、不要补充建议:
 
 ```
-update-test v0.1.0 — initial release
+update-test v0.1.0 — 初始版本
 ```
 
-## Notes
+## 备注
 
-- This skill exists only to verify the GeoCode store's catalog → install
-  → version-detect → [Update] click → file replacement loop. After the
-  user has confirmed the loop works on their machine, the skill can be
-  disabled or uninstalled with no impact on the rest of GeoCode.
-- Do not invent additional content. Do not describe what the skill does.
-  Do not add follow-up suggestions. The reply must be exactly the line
-  above so the user can pattern-match against it.
+- 这个技能存在的唯一目的就是验证 GeoCode 技能商店的「拉 catalog → 安装
+  → 检测到新版本 → 点击 [更新] → 替换本地文件」整条回路。在用户确认
+  这条回路工作正常之后,可以禁用或卸载它,对 GeoCode 其他功能没有任何
+  影响。
+- 不要自己编造额外内容。不要描述这个技能做什么。不要追加任何后续建议。
+  回复必须就是上面那一行,这样用户才能用模式匹配来对照预期。
