@@ -1,0 +1,8 @@
+{
+  "version": "0.1.0",
+  "description": "Throwaway skill used to verify the GeoCode skill-store update flow. Install once, then bump the version server-side to confirm the [Update] badge appears in Settings -> Skill Bazaar.",
+  "author": "GeoCode",
+  "tags": ["sample", "test", "update-flow"],
+  "minClientVersion": "0.9.0",
+  "license": "MIT"
+}
