@@ -54,7 +54,13 @@
 
 ### 2. GeoCode 版本
 
-**v0.9.0** 是 GeoCode 的**第一个公开测试版**，覆盖 macOS arm64 和 Windows x64，从 [Releases](https://github.com/zzhonglei/GeoCode-Release/releases) 下载即可。欢迎尝鲜、欢迎反馈。
+GeoCode 当前以 0.9.x 系列进行公开预览，从 [Releases](https://github.com/zzhonglei/GeoCode-Release/releases) 获取最新版本。欢迎尝鲜、欢迎反馈。
+
+| 版本 | 发布日期 | 更新说明 |
+| :--- | :--- | :--- |
+| [**v0.9.2**](https://github.com/zzhonglei/GeoCode-Release/releases/tag/v0.9.2) `最新` | 2026-05-07 | `修复` 部分 QGIS 版本的兼容性问题<br>`修复` 部分 Windows 机型「设置」窗口卡顿问题 |
+| [**v0.9.1**](https://github.com/zzhonglei/GeoCode-Release/releases/tag/v0.9.1) | 2026-05-05 | `修复` Windows 平台 Google Earth Engine 显示异常 |
+| [**v0.9.0**](https://github.com/zzhonglei/GeoCode-Release/releases/tag/v0.9.0) | 2026-05-04 | `首发` 公开预览版 |
 
 ### 3. 如何配置
 

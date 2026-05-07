@@ -54,7 +54,13 @@ No complex setup required. Before installing GeoCode, only two things need to be
 
 ### 2. GeoCode Versions
 
-**v0.9.0** is GeoCode's **first public preview**, covering macOS arm64 and Windows x64. Grab it from [Releases](https://github.com/zzhonglei/GeoCode-Release/releases). Early adopters and feedback are welcome.
+GeoCode is currently in public preview as the 0.9.x series. Grab the latest build from [Releases](https://github.com/zzhonglei/GeoCode-Release/releases). Early adopters and feedback are welcome.
+
+| Version | Released | Changes |
+| :--- | :--- | :--- |
+| [**v0.9.2**](https://github.com/zzhonglei/GeoCode-Release/releases/tag/v0.9.2) `Latest` | 2026-05-07 | `Fixed` Compatibility issues with certain QGIS versions<br>`Fixed` Settings window stutter on certain Windows machines |
+| [**v0.9.1**](https://github.com/zzhonglei/GeoCode-Release/releases/tag/v0.9.1) | 2026-05-05 | `Fixed` Google Earth Engine display issue on Windows |
+| [**v0.9.0**](https://github.com/zzhonglei/GeoCode-Release/releases/tag/v0.9.0) | 2026-05-04 | `Initial` First public preview |
 
 ### 3. How to configure
 
