@@ -62,6 +62,9 @@ GeoCode is currently in public preview as the 0.9.x series. Grab the latest buil
 | [**v0.9.1**](https://github.com/zzhonglei/GeoCode-Release/releases/tag/v0.9.1) | 2026-05-05 | `Fixed` Google Earth Engine display issue on Windows |
 | [**v0.9.0**](https://github.com/zzhonglei/GeoCode-Release/releases/tag/v0.9.0) | 2026-05-04 | `Initial` First public preview |
 
+> [!TIP]
+> This repo primarily hosts GeoCode's **Skill** store; each version's source code is published alongside its release packages.
+
 ### 3. How to configure
 
 After installing QGIS and your environment manager, launch GeoCode and type `/set` in the input box to enter the setup wizard. Just follow the prompts to the end.

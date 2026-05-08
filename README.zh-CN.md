@@ -62,6 +62,9 @@ GeoCode 当前以 0.9.x 系列进行公开预览，从 [Releases](https://github
 | [**v0.9.1**](https://github.com/zzhonglei/GeoCode-Release/releases/tag/v0.9.1) | 2026-05-05 | `修复` Windows 平台 Google Earth Engine 显示异常 |
 | [**v0.9.0**](https://github.com/zzhonglei/GeoCode-Release/releases/tag/v0.9.0) | 2026-05-04 | `首发` 公开预览版 |
 
+> [!TIP]
+> 本仓库主要用于发布 GeoCode 的 **Skill**；GeoCode 每个版本的源代码会随 release 包一起发布。
+
 ### 3. 如何配置
 
 装好 QGIS 和环境管理工具，启动 GeoCode，在输入框敲 `/set` 进入配置向导，跟着提示走完即可。
