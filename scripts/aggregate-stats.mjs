@@ -74,7 +74,17 @@ async function main() {
     process.exit(0) // not an error: release branch may not be built yet
   }
 
-  const filesObj = await fetchStats()
+  let filesObj
+  try {
+    filesObj = await fetchStats()
+  } catch (err) {
+    // jsdelivr stats API is best-effort — 5xx, 429 throttling, and network
+    // blips are common. Bail clean instead of red-flagging CI, and crucially
+    // do NOT fall through with an empty object: that would zero out every
+    // downloadCount in the catalog. The next hourly run will retry.
+    console.warn(`Stats fetch failed (non-fatal): ${err.message}. Skipping this refresh; catalog left unchanged.`)
+    return
+  }
   const counts = aggregateBySkill(filesObj)
 
   let changed = 0
