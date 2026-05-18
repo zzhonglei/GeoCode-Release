@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-05-07T07:43:10.730Z",
+  "generatedAt": "2026-05-18T03:07:24.748Z",
   "skills": [
     {
       "id": "gee-scripting",
@@ -18,8 +18,8 @@
       "deprecated": false,
       "size": 62085,
       "fileCount": 5,
-      "updatedAt": "2026-05-07T07:43:10.730Z",
-      "downloadCount": 54,
+      "updatedAt": "2026-05-18T03:07:24.748Z",
+      "downloadCount": 0,
       "packageBaseUrl": "/core/gee-scripting/",
       "packageFiles": [
         {
@@ -60,8 +60,8 @@
       "deprecated": false,
       "size": 1196,
       "fileCount": 1,
-      "updatedAt": "2026-05-07T07:43:10.730Z",
-      "downloadCount": 64,
+      "updatedAt": "2026-05-18T03:07:24.748Z",
+      "downloadCount": 0,
       "packageBaseUrl": "/core/hello-geocode/",
       "packageFiles": [
         {
@@ -87,8 +87,8 @@
       "deprecated": false,
       "size": 25812,
       "fileCount": 2,
-      "updatedAt": "2026-05-07T07:43:10.730Z",
-      "downloadCount": 56,
+      "updatedAt": "2026-05-18T03:07:24.748Z",
+      "downloadCount": 0,
       "packageBaseUrl": "/core/projection-selection/",
       "packageFiles": [
         {
@@ -118,8 +118,8 @@
       "deprecated": false,
       "size": 105431,
       "fileCount": 6,
-      "updatedAt": "2026-05-07T07:43:10.730Z",
-      "downloadCount": 52,
+      "updatedAt": "2026-05-18T03:07:24.748Z",
+      "downloadCount": 0,
       "packageBaseUrl": "/core/thematic-map/",
       "packageFiles": [
         {
@@ -164,8 +164,8 @@
       "deprecated": false,
       "size": 1385,
       "fileCount": 1,
-      "updatedAt": "2026-05-07T07:43:10.730Z",
-      "downloadCount": 24,
+      "updatedAt": "2026-05-18T03:07:24.748Z",
+      "downloadCount": 0,
       "packageBaseUrl": "/core/update-test/",
       "packageFiles": [
         {
