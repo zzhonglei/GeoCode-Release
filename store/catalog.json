@@ -19,7 +19,7 @@
       "size": 62085,
       "fileCount": 5,
       "updatedAt": "2026-05-18T05:59:39.754Z",
-      "downloadCount": 0,
+      "downloadCount": 54,
       "packageBaseUrl": "/core/gee-scripting/",
       "packageFiles": [
         {
@@ -61,7 +61,7 @@
       "size": 1196,
       "fileCount": 1,
       "updatedAt": "2026-05-18T05:59:39.754Z",
-      "downloadCount": 0,
+      "downloadCount": 64,
       "packageBaseUrl": "/core/hello-geocode/",
       "packageFiles": [
         {
@@ -88,7 +88,7 @@
       "size": 25812,
       "fileCount": 2,
       "updatedAt": "2026-05-18T05:59:39.754Z",
-      "downloadCount": 0,
+      "downloadCount": 56,
       "packageBaseUrl": "/core/projection-selection/",
       "packageFiles": [
         {
@@ -119,7 +119,7 @@
       "size": 105431,
       "fileCount": 6,
       "updatedAt": "2026-05-18T05:59:39.754Z",
-      "downloadCount": 0,
+      "downloadCount": 52,
       "packageBaseUrl": "/core/thematic-map/",
       "packageFiles": [
         {
@@ -165,7 +165,7 @@
       "size": 1385,
       "fileCount": 1,
       "updatedAt": "2026-05-18T05:59:39.754Z",
-      "downloadCount": 0,
+      "downloadCount": 24,
       "packageBaseUrl": "/core/update-test/",
       "packageFiles": [
         {
@@ -174,5 +174,6 @@
         }
       ]
     }
-  ]
+  ],
+  "lastStatsAt": "2026-05-18T07:22:52.495Z"
 }
