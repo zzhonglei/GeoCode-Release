@@ -1,10 +1,11 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-05-18T08:08:53.531Z",
+  "generatedAt": "2026-05-18T09:00:18.540Z",
   "skills": [
     {
       "id": "gee-scripting",
       "name": "gee-scripting",
+      "displayName": "gee-scripting",
       "version": "0.1.0",
       "description": "Google Earth Engine scripting workflow guide for remote sensing analysis.",
       "tags": [
@@ -18,7 +19,7 @@
       "deprecated": false,
       "size": 62085,
       "fileCount": 5,
-      "updatedAt": "2026-05-18T08:08:53.531Z",
+      "updatedAt": "2026-05-18T09:00:18.540Z",
       "downloadCount": 54,
       "packageBaseUrl": "/core/gee-scripting/",
       "packageFiles": [
@@ -47,6 +48,7 @@
     {
       "id": "hello-geocode",
       "name": "hello-geocode",
+      "displayName": "hello-geocode",
       "version": "0.1.0",
       "description": "A minimal sample skill verifying the GeoCode store pipeline.",
       "tags": [
@@ -60,7 +62,7 @@
       "deprecated": false,
       "size": 1196,
       "fileCount": 1,
-      "updatedAt": "2026-05-18T08:08:53.531Z",
+      "updatedAt": "2026-05-18T09:00:18.540Z",
       "downloadCount": 64,
       "packageBaseUrl": "/core/hello-geocode/",
       "packageFiles": [
@@ -73,6 +75,7 @@
     {
       "id": "projection-selection",
       "name": "projection-selection",
+      "displayName": "projection-selection",
       "version": "0.1.0",
       "description": "Choose an appropriate projected coordinate system for your geographic analysis.",
       "tags": [
@@ -87,7 +90,7 @@
       "deprecated": false,
       "size": 25812,
       "fileCount": 2,
-      "updatedAt": "2026-05-18T08:08:53.531Z",
+      "updatedAt": "2026-05-18T09:00:18.540Z",
       "downloadCount": 56,
       "packageBaseUrl": "/core/projection-selection/",
       "packageFiles": [
@@ -104,6 +107,7 @@
     {
       "id": "thematic-map",
       "name": "thematic-map",
+      "displayName": "thematic-map",
       "version": "0.1.0",
       "description": "Create professional thematic maps with Cartopy, Matplotlib, and frykit.",
       "tags": [
@@ -118,7 +122,7 @@
       "deprecated": false,
       "size": 105431,
       "fileCount": 6,
-      "updatedAt": "2026-05-18T08:08:53.531Z",
+      "updatedAt": "2026-05-18T09:00:18.540Z",
       "downloadCount": 52,
       "packageBaseUrl": "/core/thematic-map/",
       "packageFiles": [
@@ -151,6 +155,7 @@
     {
       "id": "update-test",
       "name": "升级测试",
+      "displayName": "升级测试",
       "version": "0.1.1",
       "description": "用于验证 GeoCode 技能商店升级流程的一次性测试技能。安装一次后,服务端再 bump 版本号,即可在「设置 → 技能商店」里看到 [更新] 标记。",
       "tags": [
@@ -164,7 +169,7 @@
       "deprecated": false,
       "size": 1385,
       "fileCount": 1,
-      "updatedAt": "2026-05-18T08:08:53.531Z",
+      "updatedAt": "2026-05-18T09:00:18.540Z",
       "downloadCount": 24,
       "packageBaseUrl": "/core/update-test/",
       "packageFiles": [
@@ -175,5 +180,5 @@
       ]
     }
   ],
-  "lastStatsAt": "2026-05-18T08:08:54.651Z"
+  "lastStatsAt": "2026-05-18T09:00:19.641Z"
 }
