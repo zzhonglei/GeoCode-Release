@@ -110,10 +110,16 @@ async function buildSkill(id, generatedAt) {
   }
 
   // 3. Build the catalog row (manifest/* stays on main only — the catalog
-  //    already carries every field a client needs)
+  //    already carries every field a client needs).
+  //    `displayName` is always emitted so the client can render skill cards
+  //    by reading a single field without any fallback logic. When meta.json
+  //    didn't supply a displayName, it equals SKILL.md frontmatter.name —
+  //    same value as `name`. `name` stays in the schema for backward
+  //    compatibility with already-installed clients.
   return {
     id,
     name: displayName,
+    displayName,
     version: typeof meta.version === "string" && meta.version.trim() ? meta.version.trim() : "0.1.0",
     description: meta.description,
     tags: meta.tags,
