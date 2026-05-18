@@ -42,6 +42,23 @@ jobs:
       - name: Build store
         run: node scripts/build-store.mjs
 
+      # Preserve the running stats-history.json across the `clean: true` deploy
+      # below. aggregate-stats.mjs records per-hash hit peaks in this file so
+      # download counts survive jsdelivr's year-window aging; if we let the
+      # clean deploy wipe it, every publish would silently reset the running
+      # peaks and the next stats refresh would lose any data that has aged out
+      # of the year window.
+      - name: Preserve stats history from release
+        run: |
+          git fetch origin release --depth 1 || true
+          mkdir -p dist/store
+          if git show origin/release:store/stats-history.json > dist/store/stats-history.json 2>/dev/null; then
+            echo "Preserved existing stats-history.json ($(wc -l < dist/store/stats-history.json) lines)"
+          else
+            echo "{}" > dist/store/stats-history.json
+            echo "Initialized empty stats-history.json (no prior history on release)"
+          fi
+
       - name: Refresh download counts (best-effort)
         run: |
           CATALOG_PATH=dist/store/catalog.json node scripts/aggregate-stats.mjs || \

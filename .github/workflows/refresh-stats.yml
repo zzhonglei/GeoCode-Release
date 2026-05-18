@@ -42,9 +42,9 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           if git diff --quiet; then
-            echo "No catalog changes."
+            echo "No catalog or history changes."
             exit 0
           fi
-          git add store/catalog.json
+          git add store/catalog.json store/stats-history.json
           git commit -m "chore: refresh download counts"
           git push
