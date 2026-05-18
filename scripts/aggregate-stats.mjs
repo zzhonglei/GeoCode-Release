@@ -17,6 +17,17 @@
 // Hash-level max is the right granularity: a single hash's hit count is
 // monotonically non-decreasing in reality, so any apparent drop is purely
 // the window sliding — exactly what we want to ignore.
+//
+// Invariants:
+//   - history is the source of truth; catalog.downloadCount is a derived
+//     view (re-aggregated from history every run).
+//   - jsdelivr is just a data source, not a dependency. When its stats API
+//     returns 5xx/429/etc, we still rebuild catalog from the existing
+//     history — that's what keeps publish from zeroing downloadCount when
+//     stats API is down (build-store.mjs always emits dc=0 catalogs).
+//   - Once jsdelivr succeeds at least once and history is populated, every
+//     subsequent run keeps catalog in sync with history regardless of
+//     whether jsdelivr is reachable.
 
 import { promises as fs } from "node:fs"
 import path from "node:path"
@@ -109,34 +120,41 @@ async function main() {
     // first run on this branch — start from empty
   }
 
-  let filesObj
+  // Fetch is best-effort. When jsdelivr's stats API is down we still rebuild
+  // catalog from the existing history below — that's what lets a transient
+  // 5xx during publish NOT zero out downloadCount. build-store.mjs always
+  // emits a fresh catalog with downloadCount=0, so history is the only
+  // place real numbers survive across runs.
+  let filesObj = {}
   try {
     filesObj = await fetchStats()
   } catch (err) {
-    // jsdelivr stats API is best-effort — 5xx, 429 throttling, and network
-    // blips are common. Bail clean instead of red-flagging CI, and crucially
-    // do NOT fall through with an empty object: that would zero out every
-    // downloadCount in the catalog. The next hourly run will retry.
-    console.warn(`Stats fetch failed (non-fatal): ${err.message}. Skipping this refresh; catalog/history left unchanged.`)
-    return
+    console.warn(`Stats fetch failed (non-fatal): ${err.message}. Reusing existing history; catalog still rebuilt from it.`)
   }
 
   const historyChanged = mergeIntoHistory(history, filesObj)
-  const counts = aggregateFromHistory(history)
 
+  // Rebuild catalog.downloadCount from the full history. Skip this when
+  // history is empty — that means we have nothing to derive from, and the
+  // catalog's existing values (if any) are more authoritative than zeroing
+  // them out. Once jsdelivr serves stats at least once, history takes over
+  // as the source of truth from then on.
   let catalogChanged = false
-  for (const skill of catalog.skills) {
-    const next = counts[skill.id] ?? 0
-    if (skill.downloadCount !== next) {
-      skill.downloadCount = next
-      catalogChanged = true
+  if (Object.keys(history).length > 0) {
+    const counts = aggregateFromHistory(history)
+    for (const skill of catalog.skills) {
+      const next = counts[skill.id] ?? 0
+      if (skill.downloadCount !== next) {
+        skill.downloadCount = next
+        catalogChanged = true
+      }
     }
   }
 
   if (catalogChanged) {
     catalog.lastStatsAt = new Date().toISOString()
     await fs.writeFile(CATALOG_PATH, JSON.stringify(catalog, null, 2) + "\n", "utf-8")
-    console.log(`Updated downloadCount for ${Object.keys(counts).length} skill(s).`)
+    console.log(`Updated downloadCount for ${catalog.skills.length} skill(s).`)
   } else {
     console.log("No downloadCount changes — catalog unchanged.")
   }
