@@ -14,6 +14,14 @@ on:
 permissions:
   contents: write
 
+# Share the release-write lock with publish.yml so the two never race.
+# Without this, a cron tick could push a commit that a publish then
+# clean-deploys over (or vice versa), silently rolling back the loser's
+# changes.
+concurrency:
+  group: release-write
+  cancel-in-progress: false
+
 jobs:
   refresh:
     runs-on: ubuntu-latest
@@ -41,10 +49,15 @@ jobs:
           rm -rf .ci
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          if git diff --quiet; then
+          # Stage everything under store/ — catches both modifications to
+          # catalog.json and a brand-new stats-history.json that the script
+          # may create on first successful fetch. Plain `git add <file>` would
+          # fail with "pathspec did not match" if history.json doesn't exist
+          # yet on this branch.
+          git add -A store/
+          if git diff --cached --quiet; then
             echo "No catalog or history changes."
             exit 0
           fi
-          git add store/catalog.json store/stats-history.json
           git commit -m "chore: refresh download counts"
           git push

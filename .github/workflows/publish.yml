@@ -30,6 +30,15 @@ on:
 permissions:
   contents: write
 
+# Serialize all writes to the release branch. refresh-stats.yml also pushes
+# there; without this guard, a publish that overlaps with a cron could
+# clean-deploy a stale dist over fresher downloadCount/history data and
+# silently roll the stats back. We let in-progress runs finish (no cancel)
+# because each publish carries a unique commit payload.
+concurrency:
+  group: release-write
+  cancel-in-progress: false
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -50,13 +59,21 @@ jobs:
       # of the year window.
       - name: Preserve stats history from release
         run: |
-          git fetch origin release --depth 1 || true
           mkdir -p dist/store
-          if git show origin/release:store/stats-history.json > dist/store/stats-history.json 2>/dev/null; then
-            echo "Preserved existing stats-history.json ($(wc -l < dist/store/stats-history.json) lines)"
+          # Fail-fast on fetch errors. If we silently fell back to an empty
+          # history here, the clean-deploy below would overwrite real history
+          # on release with {}, wiping every accumulated download peak.
+          git fetch origin release --depth 1
+          if git cat-file -e "origin/release:store/stats-history.json" 2>/dev/null; then
+            # File definitely exists on release — let any git show failure
+            # surface (don't redirect stderr away, don't || true).
+            git show "origin/release:store/stats-history.json" > dist/store/stats-history.json
+            echo "Preserved existing stats-history.json ($(wc -c < dist/store/stats-history.json) bytes)"
           else
+            # First publish that ever touched stats — release branch has no
+            # history file yet. Safe to seed empty.
             echo "{}" > dist/store/stats-history.json
-            echo "Initialized empty stats-history.json (no prior history on release)"
+            echo "Initialized empty stats-history.json (release has no prior history file)"
           fi
 
       - name: Refresh download counts (best-effort)
