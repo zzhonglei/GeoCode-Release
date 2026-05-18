@@ -158,6 +158,21 @@ function validateMeta(meta, errors, prefix) {
   if (meta.deprecated !== undefined && typeof meta.deprecated !== "boolean") {
     errors.push(`${prefix} field deprecated must be a boolean if present`)
   }
+
+  // displayName is OPTIONAL. When present, build-store.mjs uses it as the
+  // catalog's UI-facing name in place of SKILL.md frontmatter.name. This
+  // lets the LLM trigger label (frontmatter.name, often verbose) and the
+  // UI card title (short, scannable) diverge when needed.
+  if (meta.displayName !== undefined) {
+    if (typeof meta.displayName !== "string") {
+      errors.push(`${prefix} field displayName must be a string when present`)
+    } else if (meta.displayName.trim() === "") {
+      errors.push(`${prefix} field displayName must not be empty when present`)
+    }
+    // Length is enforced cross-field in validateSkill below — the effective
+    // display name (displayName ?? frontmatter.name) is what actually ships
+    // to the UI, so the check belongs there.
+  }
 }
 
 // ----------------------------------------------------------------------------
@@ -193,13 +208,14 @@ async function validateSkill(id, errors) {
     errors.push(`${prefix} manifest/README.md is empty`)
   }
 
-  // 2. meta.json
+  // 2. meta.json (hoisted out of try so step 4 can cross-check displayName)
+  let meta
   const metaPath = path.join(manifestDir, "meta.json")
   if (!(await exists(metaPath))) {
     errors.push(`${prefix} missing manifest/meta.json`)
   } else {
     try {
-      const meta = await readJson(metaPath)
+      meta = await readJson(metaPath)
       validateMeta(meta, errors, prefix)
     } catch (err) {
       errors.push(`${prefix} ${err.message}`)
@@ -223,6 +239,22 @@ async function validateSkill(id, errors) {
   }
   if (typeof fm.data.description !== "string" || fm.data.description.trim() === "") {
     errors.push(`${prefix} skill/SKILL.md frontmatter.description must be a non-empty string`)
+  }
+
+  // 4. Cross-field: effective display name (what actually ships to catalog
+  //    and renders in UI cards) must stay short enough to display cleanly.
+  //    Mirror the resolution rule in build-store.mjs: meta.displayName wins
+  //    when present, otherwise SKILL.md frontmatter.name.
+  const DISPLAY_NAME_MAX = 30
+  const metaDisplayName = typeof meta?.displayName === "string" ? meta.displayName.trim() : ""
+  const frontmatterName = typeof fm.data.name === "string" ? fm.data.name.trim() : ""
+  const effectiveDisplayName = metaDisplayName || frontmatterName
+  if (effectiveDisplayName.length > DISPLAY_NAME_MAX) {
+    const source = metaDisplayName ? "manifest/meta.json displayName" : "SKILL.md frontmatter.name"
+    errors.push(
+      `${prefix} effective display name too long (${effectiveDisplayName.length} chars > ${DISPLAY_NAME_MAX}). ` +
+        `Shorten ${source}, or — if frontmatter.name needs to stay verbose for LLM matching — add a short "displayName" in manifest/meta.json.`,
+    )
   }
 }
 

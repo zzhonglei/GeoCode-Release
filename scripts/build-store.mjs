@@ -81,8 +81,17 @@ async function buildSkill(id, generatedAt) {
   const skillMd = await fs.readFile(skillMdAbs, "utf-8")
   const fm = parseFrontmatter(skillMd)
   if (!fm) throw new Error(`[${id}] SKILL.md missing frontmatter`)
-  const displayName = String(fm.data.name ?? "").trim()
-  if (!displayName) throw new Error(`[${id}] frontmatter.name is required`)
+  const frontmatterName = String(fm.data.name ?? "").trim()
+  if (!frontmatterName) throw new Error(`[${id}] frontmatter.name is required`)
+  // UI display name. SKILL.md frontmatter.name serves a double role:
+  //   - LLM trigger label (often verbose for matching accuracy)
+  //   - UI card title (needs to be short)
+  // When both readers want different strings, contributors can set
+  // meta.displayName to override the catalog name for UI purposes while
+  // leaving frontmatter.name untouched for LLM matching. When absent we
+  // fall back to frontmatter.name so existing skills don't need to change.
+  const metaDisplayName = typeof meta.displayName === "string" ? meta.displayName.trim() : ""
+  const displayName = metaDisplayName || frontmatterName
 
   // 2. Walk skill/ and lay out hashed copies under dist/core/<id>/
   const skillFiles = await walkFiles(skillDir)
