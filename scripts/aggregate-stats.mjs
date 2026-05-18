@@ -43,8 +43,18 @@ const HISTORY_PATH = path.join(path.dirname(CATALOG_PATH), "stats-history.json")
 // served from the release branch (where our skill packages actually live).
 // `period=year` is jsdelivr v1's widest window; hash-level max accumulation
 // (see file header) covers anything that ages out beyond a year.
+//
+// We use the modern v1/stats/packages/.../files endpoint. The older
+// v1/package/.../stats endpoint has been deprecated since 2023 (the response
+// includes a Deprecation header) and may be removed without notice.
+//
+// `limit=100` is jsdelivr's hard cap on this endpoint. With 5 active skills
+// and a few hash files each, our footprint is well under 100. If history
+// ever grows past ~80 SKILL.<hash>.md files we should add pagination — see
+// the `?page=N` parameter on the same endpoint. jsdelivr sorts by hits
+// desc, so even without pagination we'd retain the most popular hashes.
 const STATS_URL =
-  "https://data.jsdelivr.com/v1/package/gh/zzhonglei/GeoCode-Release@release/stats?period=year"
+  "https://data.jsdelivr.com/v1/stats/packages/gh/zzhonglei/GeoCode-Release@release/files?period=year&limit=100"
 
 const SKILL_PATH_REGEX = /^\/core\/([^/]+)\/SKILL\.[a-f0-9]+\.md$/
 
@@ -57,17 +67,24 @@ async function fetchStats() {
   }
   if (!res.ok) throw new Error(`Stats API failed: ${res.status} ${res.statusText}`)
   const body = await res.json()
-  // Expected shape: { total, files: { ... } }. Tolerate the older bare-array
-  // shape by converting it back to a path→stats map.
-  if (body && typeof body === "object" && body.files && typeof body.files === "object" && !Array.isArray(body.files)) {
-    return body.files
-  }
+  // The new /files endpoint returns a bare array: [{ name, hits: { total, dates }, bandwidth: {...} }, ...]
+  // We normalize it into a { path -> { total } } map so the rest of the
+  // pipeline (mergeIntoHistory) stays endpoint-agnostic.
   if (Array.isArray(body)) {
     const out = {}
     for (const f of body) {
-      if (typeof f?.name === "string") out[f.name] = { total: Number(f?.hits?.total ?? f?.hits ?? 0) }
+      if (typeof f?.name !== "string") continue
+      const total = Number(f?.hits?.total ?? f?.hits ?? 0)
+      if (!Number.isFinite(total)) continue
+      out[f.name] = { total }
     }
     return out
+  }
+  // Fallback: the deprecated v1/package/.../stats endpoint returned
+  // { total, files: { "/path": { total, dates } } }. Keep this so a
+  // temporary jsdelivr regression to the old shape doesn't break us.
+  if (body && typeof body === "object" && body.files && typeof body.files === "object" && !Array.isArray(body.files)) {
+    return body.files
   }
   // Unknown body shape (schema change, empty response, etc). Throw so the
   // outer soft-fail catches it — falling through with {} would zero out
