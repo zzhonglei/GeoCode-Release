@@ -63,7 +63,7 @@
       "size": 1196,
       "fileCount": 1,
       "updatedAt": "2026-05-18T09:00:18.540Z",
-      "downloadCount": 67,
+      "downloadCount": 70,
       "packageBaseUrl": "/core/hello-geocode/",
       "packageFiles": [
         {
@@ -180,5 +180,5 @@
       ]
     }
   ],
-  "lastStatsAt": "2026-05-21T05:18:51.251Z"
+  "lastStatsAt": "2026-05-22T04:33:44.071Z"
 }
