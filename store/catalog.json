@@ -20,7 +20,7 @@
       "size": 62085,
       "fileCount": 5,
       "updatedAt": "2026-05-18T09:00:18.540Z",
-      "downloadCount": 62,
+      "downloadCount": 65,
       "packageBaseUrl": "/core/gee-scripting/",
       "packageFiles": [
         {
@@ -180,5 +180,5 @@
       ]
     }
   ],
-  "lastStatsAt": "2026-05-28T04:36:07.839Z"
+  "lastStatsAt": "2026-05-30T04:14:31.208Z"
 }
