@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Create professional thematic maps with Cartopy, Matplotlib, and frykit.",
   "author": "GeoCode",
   "tags": ["mapping", "cartography", "matplotlib", "cartopy"],
