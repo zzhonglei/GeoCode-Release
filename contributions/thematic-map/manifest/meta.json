@@ -1,8 +1,9 @@
 {
   "version": "0.2.0",
-  "description": "Create professional thematic maps with Cartopy, Matplotlib, and frykit.",
+  "displayName": "Thematic Mapping",
+  "description": "Compose polished thematic maps that follow cartographic conventions.",
   "author": "GeoCode",
-  "tags": ["mapping", "cartography", "matplotlib", "cartopy"],
+  "tags": ["mapping", "cartography", "thematic-map", "visualization"],
   "minClientVersion": "0.9.0",
   "license": "MIT"
 }
