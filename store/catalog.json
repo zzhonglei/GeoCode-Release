@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-05-18T09:00:18.540Z",
+  "generatedAt": "2026-05-31T08:38:26.420Z",
   "skills": [
     {
       "id": "gee-scripting",
@@ -19,7 +19,7 @@
       "deprecated": false,
       "size": 62085,
       "fileCount": 5,
-      "updatedAt": "2026-05-18T09:00:18.540Z",
+      "updatedAt": "2026-05-31T08:38:26.420Z",
       "downloadCount": 65,
       "packageBaseUrl": "/core/gee-scripting/",
       "packageFiles": [
@@ -62,7 +62,7 @@
       "deprecated": false,
       "size": 1196,
       "fileCount": 1,
-      "updatedAt": "2026-05-18T09:00:18.540Z",
+      "updatedAt": "2026-05-31T08:38:26.420Z",
       "downloadCount": 79,
       "packageBaseUrl": "/core/hello-geocode/",
       "packageFiles": [
@@ -90,7 +90,7 @@
       "deprecated": false,
       "size": 25812,
       "fileCount": 2,
-      "updatedAt": "2026-05-18T09:00:18.540Z",
+      "updatedAt": "2026-05-31T08:38:26.420Z",
       "downloadCount": 61,
       "packageBaseUrl": "/core/projection-selection/",
       "packageFiles": [
@@ -108,7 +108,7 @@
       "id": "thematic-map",
       "name": "thematic-map",
       "displayName": "thematic-map",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "description": "Create professional thematic maps with Cartopy, Matplotlib, and frykit.",
       "tags": [
         "mapping",
@@ -120,27 +120,55 @@
       "minClientVersion": "0.9.0",
       "license": "MIT",
       "deprecated": false,
-      "size": 105431,
-      "fileCount": 6,
-      "updatedAt": "2026-05-18T09:00:18.540Z",
+      "size": 118805,
+      "fileCount": 13,
+      "updatedAt": "2026-05-31T08:38:26.420Z",
       "downloadCount": 60,
       "packageBaseUrl": "/core/thematic-map/",
       "packageFiles": [
         {
-          "source": "SKILL.39937c03.md",
+          "source": "SKILL.7adb9dc6.md",
           "dest": "SKILL.md"
         },
         {
-          "source": "references/basemap.2ef65d3f.md",
+          "source": "references/basemap.4106f00f.md",
           "dest": "references/basemap.md"
         },
         {
-          "source": "references/cartopy-projection.c084b548.md",
+          "source": "references/cartopy-projection.e442b2bb.md",
           "dest": "references/cartopy-projection.md"
         },
         {
-          "source": "references/frykit.98366426.md",
-          "dest": "references/frykit.md"
+          "source": "references/legend.a02461da.md",
+          "dest": "references/legend.md"
+        },
+        {
+          "source": "references/raster-data.2ad76009.md",
+          "dest": "references/raster-data.md"
+        },
+        {
+          "source": "references/scale-bar-and-north-arrow.9afca63a.md",
+          "dest": "references/scale-bar-and-north-arrow.md"
+        },
+        {
+          "source": "references/study-area-boundary.40a5d085.md",
+          "dest": "references/study-area-boundary.md"
+        },
+        {
+          "source": "references/ticks-and-graticules.3eb09cfa.md",
+          "dest": "references/ticks-and-graticules.md"
+        },
+        {
+          "source": "references/vector-data.ce124e63.md",
+          "dest": "references/vector-data.md"
+        },
+        {
+          "source": "scripts/basemap_helpers.7fe22ce7.py",
+          "dest": "scripts/basemap_helpers.py"
+        },
+        {
+          "source": "scripts/legend_helpers.ff9b4ca8.py",
+          "dest": "scripts/legend_helpers.py"
         },
         {
           "source": "templates/中国东北三省地图示例.9efae9a0.md",
@@ -169,7 +197,7 @@
       "deprecated": false,
       "size": 1385,
       "fileCount": 1,
-      "updatedAt": "2026-05-18T09:00:18.540Z",
+      "updatedAt": "2026-05-31T08:38:26.420Z",
       "downloadCount": 29,
       "packageBaseUrl": "/core/update-test/",
       "packageFiles": [
@@ -180,5 +208,5 @@
       ]
     }
   ],
-  "lastStatsAt": "2026-05-30T04:14:31.208Z"
+  "lastStatsAt": "2026-05-31T08:38:27.471Z"
 }

@@ -436,6 +436,7 @@ A conformal azimuthal projection that projects from a point on the sphere onto t
 ccrs.Orthographic(
     central_longitude=0.0,
     central_latitude=0.0,
+    azimuth=0.0,
     globe=None
 )
 ```
@@ -451,7 +452,7 @@ A parallel projection from infinity onto a tangent plane, creating a "view from 
 ### 16. Mollweide — Mollweide Projection
 
 ```python
-ccrs.Mollweide(central_longitude=0, globe=None)
+ccrs.Mollweide(central_longitude=0, globe=None, false_easting=None, false_northing=None)
 ```
 
 An equal-area pseudocylindrical projection; the entire globe appears as an ellipse. Meridians are elliptical arcs; parallels are unevenly spaced horizontal lines.
@@ -463,7 +464,7 @@ An equal-area pseudocylindrical projection; the entire globe appears as an ellip
 ### 17. Robinson — Robinson Projection
 
 ```python
-ccrs.Robinson(central_longitude=0, globe=None)
+ccrs.Robinson(central_longitude=0, globe=None, false_easting=None, false_northing=None)
 ```
 
 A compromise pseudocylindrical projection that is neither conformal nor equal-area, but produces a visually balanced and attractive result. Formerly used by the National Geographic Society for many years.
@@ -664,13 +665,14 @@ Applies a cylindrical projection after rotating Earth's "pole" to a new position
 ccrs.Spilhaus(
     rotation=45,
     false_easting=0.0,
-    false_northing=0.0
+    false_northing=0.0,
+    globe=None
 )
 ```
 
 An ocean-centered map based on the Adams Square projection that presents the world's oceans as a single continuous body. The two main antipodal points are located on land (southern China and Argentina), ensuring that the ocean is not split on the map.
 
-> **Note:** This projection was introduced in Cartopy v0.23+.
+> **Note:** Requires Cartopy v0.23+ **and** PROJ ≥ 9.6. On older PROJ (e.g. 9.5) it raises `Unknown projection`.
 
 **Use cases:** Oceanographic research, global ocean current visualization.
 
