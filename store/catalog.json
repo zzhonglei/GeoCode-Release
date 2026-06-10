@@ -123,7 +123,7 @@
       "size": 118805,
       "fileCount": 13,
       "updatedAt": "2026-05-31T09:26:13.656Z",
-      "downloadCount": 73,
+      "downloadCount": 75,
       "packageBaseUrl": "/core/thematic-map/",
       "packageFiles": [
         {
@@ -208,5 +208,5 @@
       ]
     }
   ],
-  "lastStatsAt": "2026-06-09T04:21:21.083Z"
+  "lastStatsAt": "2026-06-10T05:47:07.680Z"
 }
