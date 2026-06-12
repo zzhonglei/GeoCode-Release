@@ -58,7 +58,8 @@ GeoCode 当前以 0.9.x 系列进行公开预览，从 [Releases](https://github
 
 | 版本 | 发布日期 | 更新说明 |
 | :--- | :--- | :--- |
-| [**v0.9.3**](https://github.com/zzhonglei/GeoCode-Release/releases/tag/v0.9.3) `最新` | 2026-06-12 | `新增` 内置 Playwright MCP，智能体可以自己操控浏览器了（默认关闭，需手动开启）<br>`优化` OSM 数据下载子智能体的工作流程更加顺畅<br>`优化` 智能体读取地理数据更高效<br>`修复` 部分模型视觉能力失效的问题<br>`修复` Codex（OpenAI 订阅）无法登录的问题<br>`修复` 若干已知问题 |
+| [**v0.9.4**](https://github.com/zzhonglei/GeoCode-Release/releases/tag/v0.9.4) `最新` | 2026-06-12 | `紧急修复` 针对 v0.9.3 的紧急修复——Windows 安装程序的文件组织错误 |
+| [**v0.9.3**](https://github.com/zzhonglei/GeoCode-Release/releases/tag/v0.9.3) | 2026-06-12 | `新增` 内置 Playwright MCP，智能体可以自己操控浏览器了（默认关闭，需手动开启）<br>`优化` OSM 数据下载子智能体的工作流程更加顺畅<br>`优化` 智能体读取地理数据更高效<br>`修复` 部分模型视觉能力失效的问题<br>`修复` Codex（OpenAI 订阅）无法登录的问题<br>`修复` 若干已知问题 |
 | [**v0.9.2**](https://github.com/zzhonglei/GeoCode-Release/releases/tag/v0.9.2) | 2026-05-07 | `修复` 部分 QGIS 版本的兼容性问题<br>`修复` 部分 Windows 机型「设置」窗口卡顿问题 |
 | [**v0.9.1**](https://github.com/zzhonglei/GeoCode-Release/releases/tag/v0.9.1) | 2026-05-05 | `修复` Windows 平台 Google Earth Engine 显示异常 |
 | [**v0.9.0**](https://github.com/zzhonglei/GeoCode-Release/releases/tag/v0.9.0) | 2026-05-04 | `首发` 公开预览版 |
