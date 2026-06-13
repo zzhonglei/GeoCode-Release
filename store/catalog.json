@@ -1,7 +1,39 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-06-13T01:51:46.810Z",
+  "generatedAt": "2026-06-13T06:39:36.370Z",
   "skills": [
+    {
+      "id": "docx-reader",
+      "name": "DOCX Reader",
+      "displayName": "DOCX Reader",
+      "version": "0.1.0",
+      "description": "Read and extract content from Word/DOCX documents.",
+      "tags": [
+        "docx",
+        "word",
+        "document",
+        "reader"
+      ],
+      "author": "GeoCode",
+      "minClientVersion": "0.9.0",
+      "license": "MIT",
+      "deprecated": false,
+      "size": 8383,
+      "fileCount": 2,
+      "updatedAt": "2026-06-13T06:39:36.370Z",
+      "downloadCount": 0,
+      "packageBaseUrl": "/core/docx-reader/",
+      "packageFiles": [
+        {
+          "source": "SKILL.b0f00773.md",
+          "dest": "SKILL.md"
+        },
+        {
+          "source": "scripts/reader.753bfe2c.py",
+          "dest": "scripts/reader.py"
+        }
+      ]
+    },
     {
       "id": "gee-scripting",
       "name": "GEE Scripting",
@@ -19,7 +51,7 @@
       "deprecated": false,
       "size": 62085,
       "fileCount": 5,
-      "updatedAt": "2026-06-13T01:51:46.810Z",
+      "updatedAt": "2026-06-13T06:39:36.370Z",
       "downloadCount": 76,
       "packageBaseUrl": "/core/gee-scripting/",
       "packageFiles": [
@@ -62,7 +94,7 @@
       "deprecated": true,
       "size": 1196,
       "fileCount": 1,
-      "updatedAt": "2026-06-13T01:51:46.810Z",
+      "updatedAt": "2026-06-13T06:39:36.370Z",
       "downloadCount": 84,
       "packageBaseUrl": "/core/hello-geocode/",
       "packageFiles": [
@@ -90,7 +122,7 @@
       "deprecated": false,
       "size": 25812,
       "fileCount": 2,
-      "updatedAt": "2026-06-13T01:51:46.810Z",
+      "updatedAt": "2026-06-13T06:39:36.370Z",
       "downloadCount": 70,
       "packageBaseUrl": "/core/projection-selection/",
       "packageFiles": [
@@ -122,7 +154,7 @@
       "deprecated": false,
       "size": 118805,
       "fileCount": 13,
-      "updatedAt": "2026-06-13T01:51:46.810Z",
+      "updatedAt": "2026-06-13T06:39:36.370Z",
       "downloadCount": 75,
       "packageBaseUrl": "/core/thematic-map/",
       "packageFiles": [
@@ -197,7 +229,7 @@
       "deprecated": true,
       "size": 1385,
       "fileCount": 1,
-      "updatedAt": "2026-06-13T01:51:46.810Z",
+      "updatedAt": "2026-06-13T06:39:36.370Z",
       "downloadCount": 35,
       "packageBaseUrl": "/core/update-test/",
       "packageFiles": [
@@ -208,5 +240,5 @@
       ]
     }
   ],
-  "lastStatsAt": "2026-06-13T01:51:47.681Z"
+  "lastStatsAt": "2026-06-13T06:39:37.458Z"
 }
