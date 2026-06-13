@@ -1,0 +1,10 @@
+{
+  "version": "0.1.0",
+  "displayName": "XLSX",
+  "description": "Create, edit, analyze, and recalculate Excel workbooks.",
+  "author": "K-Dense Inc.",
+  "tags": ["xlsx", "excel", "spreadsheet", "workbook"],
+  "minClientVersion": "0.9.0",
+  "license": "MIT",
+  "sourceUrl": "https://github.com/k-dense-ai/scientific-agent-skills"
+}
