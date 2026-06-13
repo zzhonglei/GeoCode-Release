@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-06-13T06:39:36.370Z",
+  "generatedAt": "2026-06-13T07:53:10.058Z",
   "skills": [
     {
       "id": "docx-reader",
@@ -20,7 +20,7 @@
       "deprecated": false,
       "size": 8383,
       "fileCount": 2,
-      "updatedAt": "2026-06-13T06:39:36.370Z",
+      "updatedAt": "2026-06-13T07:53:10.058Z",
       "downloadCount": 0,
       "packageBaseUrl": "/core/docx-reader/",
       "packageFiles": [
@@ -51,7 +51,7 @@
       "deprecated": false,
       "size": 62085,
       "fileCount": 5,
-      "updatedAt": "2026-06-13T06:39:36.370Z",
+      "updatedAt": "2026-06-13T07:53:10.058Z",
       "downloadCount": 76,
       "packageBaseUrl": "/core/gee-scripting/",
       "packageFiles": [
@@ -94,12 +94,44 @@
       "deprecated": true,
       "size": 1196,
       "fileCount": 1,
-      "updatedAt": "2026-06-13T06:39:36.370Z",
+      "updatedAt": "2026-06-13T07:53:10.058Z",
       "downloadCount": 84,
       "packageBaseUrl": "/core/hello-geocode/",
       "packageFiles": [
         {
           "source": "SKILL.24e1f28b.md",
+          "dest": "SKILL.md"
+        }
+      ]
+    },
+    {
+      "id": "pdf",
+      "name": "PDF",
+      "displayName": "PDF",
+      "version": "0.1.0",
+      "description": "Create, edit, and review PDF files.",
+      "tags": [
+        "pdf",
+        "document",
+        "reportlab"
+      ],
+      "author": "OpenAI",
+      "minClientVersion": "0.9.0",
+      "license": "Apache-2.0",
+      "deprecated": false,
+      "sourceUrl": "https://github.com/openai/skills/tree/main/skills/.curated/pdf",
+      "size": 13293,
+      "fileCount": 2,
+      "updatedAt": "2026-06-13T07:53:10.058Z",
+      "downloadCount": 0,
+      "packageBaseUrl": "/core/pdf/",
+      "packageFiles": [
+        {
+          "source": "LICENSE.4dd13869.txt",
+          "dest": "LICENSE.txt"
+        },
+        {
+          "source": "SKILL.d108cf2b.md",
           "dest": "SKILL.md"
         }
       ]
@@ -122,7 +154,7 @@
       "deprecated": false,
       "size": 25812,
       "fileCount": 2,
-      "updatedAt": "2026-06-13T06:39:36.370Z",
+      "updatedAt": "2026-06-13T07:53:10.058Z",
       "downloadCount": 70,
       "packageBaseUrl": "/core/projection-selection/",
       "packageFiles": [
@@ -154,7 +186,7 @@
       "deprecated": false,
       "size": 118805,
       "fileCount": 13,
-      "updatedAt": "2026-06-13T06:39:36.370Z",
+      "updatedAt": "2026-06-13T07:53:10.058Z",
       "downloadCount": 75,
       "packageBaseUrl": "/core/thematic-map/",
       "packageFiles": [
@@ -229,7 +261,7 @@
       "deprecated": true,
       "size": 1385,
       "fileCount": 1,
-      "updatedAt": "2026-06-13T06:39:36.370Z",
+      "updatedAt": "2026-06-13T07:53:10.058Z",
       "downloadCount": 35,
       "packageBaseUrl": "/core/update-test/",
       "packageFiles": [
@@ -240,5 +272,5 @@
       ]
     }
   ],
-  "lastStatsAt": "2026-06-13T06:39:37.458Z"
+  "lastStatsAt": "2026-06-13T07:53:11.104Z"
 }
