@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-06-13T01:26:31.221Z",
+  "generatedAt": "2026-06-13T01:51:46.810Z",
   "skills": [
     {
       "id": "gee-scripting",
-      "name": "gee-scripting",
-      "displayName": "gee-scripting",
+      "name": "GEE Scripting",
+      "displayName": "GEE Scripting",
       "version": "0.1.0",
-      "description": "Google Earth Engine scripting workflow guide for remote sensing analysis.",
+      "description": "Guidance for writing and running Google Earth Engine scripts.",
       "tags": [
         "gee",
         "earth-engine",
@@ -19,7 +19,7 @@
       "deprecated": false,
       "size": 62085,
       "fileCount": 5,
-      "updatedAt": "2026-06-13T01:26:31.221Z",
+      "updatedAt": "2026-06-13T01:51:46.810Z",
       "downloadCount": 76,
       "packageBaseUrl": "/core/gee-scripting/",
       "packageFiles": [
@@ -62,7 +62,7 @@
       "deprecated": true,
       "size": 1196,
       "fileCount": 1,
-      "updatedAt": "2026-06-13T01:26:31.221Z",
+      "updatedAt": "2026-06-13T01:51:46.810Z",
       "downloadCount": 84,
       "packageBaseUrl": "/core/hello-geocode/",
       "packageFiles": [
@@ -74,10 +74,10 @@
     },
     {
       "id": "projection-selection",
-      "name": "projection-selection",
-      "displayName": "projection-selection",
+      "name": "Projection Selection",
+      "displayName": "Projection Selection",
       "version": "0.1.0",
-      "description": "Choose an appropriate projected coordinate system for your geographic analysis.",
+      "description": "Choose the right projected coordinate system for the task at hand.",
       "tags": [
         "projection",
         "crs",
@@ -90,7 +90,7 @@
       "deprecated": false,
       "size": 25812,
       "fileCount": 2,
-      "updatedAt": "2026-06-13T01:26:31.221Z",
+      "updatedAt": "2026-06-13T01:51:46.810Z",
       "downloadCount": 70,
       "packageBaseUrl": "/core/projection-selection/",
       "packageFiles": [
@@ -122,7 +122,7 @@
       "deprecated": false,
       "size": 118805,
       "fileCount": 13,
-      "updatedAt": "2026-06-13T01:26:31.221Z",
+      "updatedAt": "2026-06-13T01:51:46.810Z",
       "downloadCount": 75,
       "packageBaseUrl": "/core/thematic-map/",
       "packageFiles": [
@@ -197,7 +197,7 @@
       "deprecated": true,
       "size": 1385,
       "fileCount": 1,
-      "updatedAt": "2026-06-13T01:26:31.221Z",
+      "updatedAt": "2026-06-13T01:51:46.810Z",
       "downloadCount": 35,
       "packageBaseUrl": "/core/update-test/",
       "packageFiles": [
@@ -208,5 +208,5 @@
       ]
     }
   ],
-  "lastStatsAt": "2026-06-13T01:26:31.769Z"
+  "lastStatsAt": "2026-06-13T01:51:47.681Z"
 }
