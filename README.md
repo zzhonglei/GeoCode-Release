@@ -58,7 +58,8 @@ GeoCode is currently in public preview as the 0.9.x series. Grab the latest buil
 
 | Version | Released | Changes |
 | :--- | :--- | :--- |
-| [**v0.9.4**](https://github.com/zzhonglei/GeoCode-Release/releases/tag/v0.9.4) `Latest` | 2026-06-12 | `Hotfix` Emergency fix for v0.9.3 — faulty file layout in the Windows installer |
+| [**v0.9.5**](https://github.com/zzhonglei/GeoCode-Release/releases/tag/v0.9.5) `Latest` | 2026-06-13 | `Improved` Skill Bazaar — a smoother experience browsing, installing, and managing skills |
+| [**v0.9.4**](https://github.com/zzhonglei/GeoCode-Release/releases/tag/v0.9.4) | 2026-06-12 | `Hotfix` Emergency fix for v0.9.3 — faulty file layout in the Windows installer |
 | [**v0.9.3**](https://github.com/zzhonglei/GeoCode-Release/releases/tag/v0.9.3) | 2026-06-12 | `New` Built-in Playwright MCP — the agent can now drive a web browser (off by default, enable it manually)<br>`Improved` Smoother workflow for the OSM download subagent<br>`Improved` Faster, more reliable geospatial data reading<br>`Fixed` Vision features not working with certain models<br>`Fixed` Sign-in failures with Codex (OpenAI subscription)<br>`Fixed` A number of known issues |
 | [**v0.9.2**](https://github.com/zzhonglei/GeoCode-Release/releases/tag/v0.9.2) | 2026-05-07 | `Fixed` Compatibility issues with certain QGIS versions<br>`Fixed` Settings window stutter on certain Windows machines |
 | [**v0.9.1**](https://github.com/zzhonglei/GeoCode-Release/releases/tag/v0.9.1) | 2026-05-05 | `Fixed` Google Earth Engine display issue on Windows |
