@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-06-13T09:16:34.395Z",
+  "generatedAt": "2026-06-13T09:23:31.005Z",
   "skills": [
     {
       "id": "docx-reader",
@@ -20,7 +20,7 @@
       "deprecated": false,
       "size": 8383,
       "fileCount": 2,
-      "updatedAt": "2026-06-13T09:16:34.395Z",
+      "updatedAt": "2026-06-13T09:23:31.005Z",
       "downloadCount": 0,
       "packageBaseUrl": "/core/docx-reader/",
       "packageFiles": [
@@ -51,7 +51,7 @@
       "deprecated": false,
       "size": 62085,
       "fileCount": 5,
-      "updatedAt": "2026-06-13T09:16:34.395Z",
+      "updatedAt": "2026-06-13T09:23:31.005Z",
       "downloadCount": 76,
       "packageBaseUrl": "/core/gee-scripting/",
       "packageFiles": [
@@ -94,7 +94,7 @@
       "deprecated": true,
       "size": 1196,
       "fileCount": 1,
-      "updatedAt": "2026-06-13T09:16:34.395Z",
+      "updatedAt": "2026-06-13T09:23:31.005Z",
       "downloadCount": 84,
       "packageBaseUrl": "/core/hello-geocode/",
       "packageFiles": [
@@ -108,31 +108,68 @@
       "id": "pdf",
       "name": "PDF Skill",
       "displayName": "PDF Skill",
-      "version": "0.1.0",
-      "description": "Create, edit, and review PDF files.",
+      "version": "0.2.0",
+      "description": "Read, create, edit, merge, split, OCR, and fill PDF files.",
       "tags": [
         "pdf",
         "document",
-        "reportlab"
+        "forms",
+        "ocr"
       ],
-      "author": "OpenAI",
+      "author": "K-Dense Inc.",
       "minClientVersion": "0.9.0",
-      "license": "Apache-2.0",
+      "license": "MIT",
       "deprecated": false,
-      "sourceUrl": "https://github.com/openai/skills/tree/main/skills/.curated/pdf",
-      "size": 13293,
-      "fileCount": 2,
-      "updatedAt": "2026-06-13T09:16:34.395Z",
+      "sourceUrl": "https://github.com/k-dense-ai/scientific-agent-skills",
+      "size": 57540,
+      "fileCount": 11,
+      "updatedAt": "2026-06-13T09:23:31.005Z",
       "downloadCount": 0,
       "packageBaseUrl": "/core/pdf/",
       "packageFiles": [
         {
-          "source": "LICENSE.4dd13869.txt",
-          "dest": "LICENSE.txt"
+          "source": "SKILL.f253fddd.md",
+          "dest": "SKILL.md"
         },
         {
-          "source": "SKILL.d108cf2b.md",
-          "dest": "SKILL.md"
+          "source": "forms.d5df5757.md",
+          "dest": "forms.md"
+        },
+        {
+          "source": "reference.03a5f964.md",
+          "dest": "reference.md"
+        },
+        {
+          "source": "scripts/check_bounding_boxes.0ced5224.py",
+          "dest": "scripts/check_bounding_boxes.py"
+        },
+        {
+          "source": "scripts/check_fillable_fields.1fe10b99.py",
+          "dest": "scripts/check_fillable_fields.py"
+        },
+        {
+          "source": "scripts/convert_pdf_to_images.7f58e292.py",
+          "dest": "scripts/convert_pdf_to_images.py"
+        },
+        {
+          "source": "scripts/create_validation_image.8fa9fd79.py",
+          "dest": "scripts/create_validation_image.py"
+        },
+        {
+          "source": "scripts/extract_form_field_info.bb235b36.py",
+          "dest": "scripts/extract_form_field_info.py"
+        },
+        {
+          "source": "scripts/extract_form_structure.6814e3fe.py",
+          "dest": "scripts/extract_form_structure.py"
+        },
+        {
+          "source": "scripts/fill_fillable_fields.d140872c.py",
+          "dest": "scripts/fill_fillable_fields.py"
+        },
+        {
+          "source": "scripts/fill_pdf_form_with_annotations.8a56e063.py",
+          "dest": "scripts/fill_pdf_form_with_annotations.py"
         }
       ]
     },
@@ -154,7 +191,7 @@
       "deprecated": false,
       "size": 25812,
       "fileCount": 2,
-      "updatedAt": "2026-06-13T09:16:34.395Z",
+      "updatedAt": "2026-06-13T09:23:31.005Z",
       "downloadCount": 70,
       "packageBaseUrl": "/core/projection-selection/",
       "packageFiles": [
@@ -186,7 +223,7 @@
       "deprecated": false,
       "size": 118805,
       "fileCount": 13,
-      "updatedAt": "2026-06-13T09:16:34.395Z",
+      "updatedAt": "2026-06-13T09:23:31.005Z",
       "downloadCount": 75,
       "packageBaseUrl": "/core/thematic-map/",
       "packageFiles": [
@@ -261,7 +298,7 @@
       "deprecated": true,
       "size": 1385,
       "fileCount": 1,
-      "updatedAt": "2026-06-13T09:16:34.395Z",
+      "updatedAt": "2026-06-13T09:23:31.005Z",
       "downloadCount": 35,
       "packageBaseUrl": "/core/update-test/",
       "packageFiles": [
@@ -290,7 +327,7 @@
       "sourceUrl": "https://github.com/k-dense-ai/scientific-agent-skills",
       "size": 1093662,
       "fileCount": 53,
-      "updatedAt": "2026-06-13T09:16:34.395Z",
+      "updatedAt": "2026-06-13T09:23:31.005Z",
       "downloadCount": 0,
       "packageBaseUrl": "/core/xlsx/",
       "packageFiles": [
@@ -509,5 +546,5 @@
       ]
     }
   ],
-  "lastStatsAt": "2026-06-13T09:16:35.365Z"
+  "lastStatsAt": "2026-06-13T09:23:31.621Z"
 }
