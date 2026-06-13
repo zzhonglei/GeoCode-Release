@@ -1,9 +1,10 @@
 {
-  "version": "0.1.0",
-  "displayName": "DOCX Reader",
-  "description": "Read and extract content from Word/DOCX documents.",
-  "author": "GeoCode",
-  "tags": ["docx", "word", "document", "reader"],
+  "version": "0.2.0",
+  "displayName": "DOCX Skill",
+  "description": "Create, read, edit, convert, and review Word/DOCX documents.",
+  "author": "K-Dense Inc.",
+  "tags": ["docx", "word", "document", "editing"],
   "minClientVersion": "0.9.0",
-  "license": "MIT"
+  "license": "MIT",
+  "sourceUrl": "https://github.com/k-dense-ai/scientific-agent-skills"
 }
