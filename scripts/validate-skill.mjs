@@ -173,6 +173,19 @@ function validateMeta(meta, errors, prefix) {
     // display name (displayName ?? frontmatter.name) is what actually ships
     // to the UI, so the check belongs there.
   }
+
+  // sourceUrl is OPTIONAL. When present it must be an http(s) URL. The client's
+  // "view details" link points here (e.g. an upstream repo) instead of a local
+  // README — this is how a redistributed skill links to its canonical source.
+  // A skill may omit README.md when it supplies a sourceUrl (enforced in
+  // validateSkill below).
+  if (meta.sourceUrl !== undefined) {
+    if (typeof meta.sourceUrl !== "string") {
+      errors.push(`${prefix} field sourceUrl must be a string when present`)
+    } else if (!/^https?:\/\/\S+$/.test(meta.sourceUrl.trim())) {
+      errors.push(`${prefix} field sourceUrl must be an http(s) URL when present`)
+    }
+  }
 }
 
 // ----------------------------------------------------------------------------
@@ -199,16 +212,8 @@ async function validateSkill(id, errors) {
     return
   }
 
-  // 1. README.md
-  const readmePath = path.join(manifestDir, "README.md")
-  const readme = await fs.readFile(readmePath, "utf-8").catch(() => undefined)
-  if (readme === undefined) {
-    errors.push(`${prefix} missing manifest/README.md`)
-  } else if (readme.trim() === "") {
-    errors.push(`${prefix} manifest/README.md is empty`)
-  }
-
-  // 2. meta.json (hoisted out of try so step 4 can cross-check displayName)
+  // 1. meta.json (parsed first so the README check can consult sourceUrl;
+  //    hoisted out of try so step 4 can cross-check displayName)
   let meta
   const metaPath = path.join(manifestDir, "meta.json")
   if (!(await exists(metaPath))) {
@@ -220,6 +225,17 @@ async function validateSkill(id, errors) {
     } catch (err) {
       errors.push(`${prefix} ${err.message}`)
     }
+  }
+
+  // 2. README.md — required UNLESS meta.json supplies a sourceUrl. Every skill
+  //    must have at least one human-facing info destination: a local README or
+  //    a sourceUrl the client's "view details" link can point to.
+  const hasSourceUrl = typeof meta?.sourceUrl === "string" && meta.sourceUrl.trim() !== ""
+  const readmePath = path.join(manifestDir, "README.md")
+  const readme = await fs.readFile(readmePath, "utf-8").catch(() => undefined)
+  const readmeMissingOrEmpty = readme === undefined || readme.trim() === ""
+  if (readmeMissingOrEmpty && !hasSourceUrl) {
+    errors.push(`${prefix} must provide a non-empty manifest/README.md or a sourceUrl in meta.json`)
   }
 
   // 3. SKILL.md

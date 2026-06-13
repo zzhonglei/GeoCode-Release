@@ -127,6 +127,12 @@ async function buildSkill(id, generatedAt) {
     minClientVersion: meta.minClientVersion,
     license: meta.license,
     deprecated: meta.deprecated === true ? true : false,
+    // sourceUrl, when set, is where the client's "view details" link points
+    // (e.g. an upstream repo for a redistributed skill). Emitted only when
+    // present so the client can fall back to its default link otherwise.
+    ...(typeof meta.sourceUrl === "string" && meta.sourceUrl.trim()
+      ? { sourceUrl: meta.sourceUrl.trim() }
+      : {}),
     size: totalBytes,
     fileCount: skillFiles.length,
     updatedAt: generatedAt,
