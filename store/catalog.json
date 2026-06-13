@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-06-13T01:18:24.048Z",
+  "generatedAt": "2026-06-13T01:26:31.221Z",
   "skills": [
     {
       "id": "gee-scripting",
@@ -19,7 +19,7 @@
       "deprecated": false,
       "size": 62085,
       "fileCount": 5,
-      "updatedAt": "2026-06-13T01:18:24.048Z",
+      "updatedAt": "2026-06-13T01:26:31.221Z",
       "downloadCount": 76,
       "packageBaseUrl": "/core/gee-scripting/",
       "packageFiles": [
@@ -62,7 +62,7 @@
       "deprecated": true,
       "size": 1196,
       "fileCount": 1,
-      "updatedAt": "2026-06-13T01:18:24.048Z",
+      "updatedAt": "2026-06-13T01:26:31.221Z",
       "downloadCount": 84,
       "packageBaseUrl": "/core/hello-geocode/",
       "packageFiles": [
@@ -90,7 +90,7 @@
       "deprecated": false,
       "size": 25812,
       "fileCount": 2,
-      "updatedAt": "2026-06-13T01:18:24.048Z",
+      "updatedAt": "2026-06-13T01:26:31.221Z",
       "downloadCount": 70,
       "packageBaseUrl": "/core/projection-selection/",
       "packageFiles": [
@@ -122,7 +122,7 @@
       "deprecated": false,
       "size": 118805,
       "fileCount": 13,
-      "updatedAt": "2026-06-13T01:18:24.048Z",
+      "updatedAt": "2026-06-13T01:26:31.221Z",
       "downloadCount": 75,
       "packageBaseUrl": "/core/thematic-map/",
       "packageFiles": [
@@ -182,9 +182,9 @@
     },
     {
       "id": "update-test",
-      "name": "升级测试",
-      "displayName": "升级测试",
-      "version": "0.1.1",
+      "name": "Update Test",
+      "displayName": "Update Test",
+      "version": "0.1.2",
       "description": "用于验证 GeoCode 技能商店升级流程的一次性测试技能。安装一次后,服务端再 bump 版本号,即可在「设置 → 技能商店」里看到 [更新] 标记。",
       "tags": [
         "sample",
@@ -194,10 +194,10 @@
       "author": "GeoCode",
       "minClientVersion": "0.9.0",
       "license": "MIT",
-      "deprecated": false,
+      "deprecated": true,
       "size": 1385,
       "fileCount": 1,
-      "updatedAt": "2026-06-13T01:18:24.048Z",
+      "updatedAt": "2026-06-13T01:26:31.221Z",
       "downloadCount": 35,
       "packageBaseUrl": "/core/update-test/",
       "packageFiles": [
@@ -208,5 +208,5 @@
       ]
     }
   ],
-  "lastStatsAt": "2026-06-13T01:18:24.851Z"
+  "lastStatsAt": "2026-06-13T01:26:31.769Z"
 }
