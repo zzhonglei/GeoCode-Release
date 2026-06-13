@@ -1,36 +1,269 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-06-13T09:23:31.005Z",
+  "generatedAt": "2026-06-13T09:29:42.154Z",
   "skills": [
     {
       "id": "docx-reader",
-      "name": "DOCX Reader",
-      "displayName": "DOCX Reader",
-      "version": "0.1.0",
-      "description": "Read and extract content from Word/DOCX documents.",
+      "name": "DOCX Skill",
+      "displayName": "DOCX Skill",
+      "version": "0.2.0",
+      "description": "Create, read, edit, convert, and review Word/DOCX documents.",
       "tags": [
         "docx",
         "word",
         "document",
-        "reader"
+        "editing"
       ],
-      "author": "GeoCode",
+      "author": "K-Dense Inc.",
       "minClientVersion": "0.9.0",
       "license": "MIT",
       "deprecated": false,
-      "size": 8383,
-      "fileCount": 2,
-      "updatedAt": "2026-06-13T09:23:31.005Z",
+      "sourceUrl": "https://github.com/k-dense-ai/scientific-agent-skills",
+      "size": 1121046,
+      "fileCount": 60,
+      "updatedAt": "2026-06-13T09:29:42.154Z",
       "downloadCount": 0,
       "packageBaseUrl": "/core/docx-reader/",
       "packageFiles": [
         {
-          "source": "SKILL.b0f00773.md",
+          "source": "SKILL.5ad3b4d7.md",
           "dest": "SKILL.md"
         },
         {
-          "source": "scripts/reader.753bfe2c.py",
-          "dest": "scripts/reader.py"
+          "source": "scripts/__init__.01ba4719.py",
+          "dest": "scripts/__init__.py"
+        },
+        {
+          "source": "scripts/accept_changes.0c991d2b.py",
+          "dest": "scripts/accept_changes.py"
+        },
+        {
+          "source": "scripts/comment.e86e4e17.py",
+          "dest": "scripts/comment.py"
+        },
+        {
+          "source": "scripts/office/helpers/__init__.e3b0c442.py",
+          "dest": "scripts/office/helpers/__init__.py"
+        },
+        {
+          "source": "scripts/office/helpers/merge_runs.7c40ed83.py",
+          "dest": "scripts/office/helpers/merge_runs.py"
+        },
+        {
+          "source": "scripts/office/helpers/simplify_redlines.560cb559.py",
+          "dest": "scripts/office/helpers/simplify_redlines.py"
+        },
+        {
+          "source": "scripts/office/pack.b1800987.py",
+          "dest": "scripts/office/pack.py"
+        },
+        {
+          "source": "scripts/office/schemas/ISO-IEC29500-4_2016/dml-chart.41b93bd8.xsd",
+          "dest": "scripts/office/schemas/ISO-IEC29500-4_2016/dml-chart.xsd"
+        },
+        {
+          "source": "scripts/office/schemas/ISO-IEC29500-4_2016/dml-chartDrawing.3fd0586f.xsd",
+          "dest": "scripts/office/schemas/ISO-IEC29500-4_2016/dml-chartDrawing.xsd"
+        },
+        {
+          "source": "scripts/office/schemas/ISO-IEC29500-4_2016/dml-diagram.29b254ee.xsd",
+          "dest": "scripts/office/schemas/ISO-IEC29500-4_2016/dml-diagram.xsd"
+        },
+        {
+          "source": "scripts/office/schemas/ISO-IEC29500-4_2016/dml-lockedCanvas.5cb76dab.xsd",
+          "dest": "scripts/office/schemas/ISO-IEC29500-4_2016/dml-lockedCanvas.xsd"
+        },
+        {
+          "source": "scripts/office/schemas/ISO-IEC29500-4_2016/dml-main.5375417f.xsd",
+          "dest": "scripts/office/schemas/ISO-IEC29500-4_2016/dml-main.xsd"
+        },
+        {
+          "source": "scripts/office/schemas/ISO-IEC29500-4_2016/dml-picture.5d389d42.xsd",
+          "dest": "scripts/office/schemas/ISO-IEC29500-4_2016/dml-picture.xsd"
+        },
+        {
+          "source": "scripts/office/schemas/ISO-IEC29500-4_2016/dml-spreadsheetDrawing.b4532b6d.xsd",
+          "dest": "scripts/office/schemas/ISO-IEC29500-4_2016/dml-spreadsheetDrawing.xsd"
+        },
+        {
+          "source": "scripts/office/schemas/ISO-IEC29500-4_2016/dml-wordprocessingDrawing.bdad416b.xsd",
+          "dest": "scripts/office/schemas/ISO-IEC29500-4_2016/dml-wordprocessingDrawing.xsd"
+        },
+        {
+          "source": "scripts/office/schemas/ISO-IEC29500-4_2016/pml.d173c3e5.xsd",
+          "dest": "scripts/office/schemas/ISO-IEC29500-4_2016/pml.xsd"
+        },
+        {
+          "source": "scripts/office/schemas/ISO-IEC29500-4_2016/shared-additionalCharacteristics.3c670910.xsd",
+          "dest": "scripts/office/schemas/ISO-IEC29500-4_2016/shared-additionalCharacteristics.xsd"
+        },
+        {
+          "source": "scripts/office/schemas/ISO-IEC29500-4_2016/shared-bibliography.0b364451.xsd",
+          "dest": "scripts/office/schemas/ISO-IEC29500-4_2016/shared-bibliography.xsd"
+        },
+        {
+          "source": "scripts/office/schemas/ISO-IEC29500-4_2016/shared-commonSimpleTypes.e2abacbb.xsd",
+          "dest": "scripts/office/schemas/ISO-IEC29500-4_2016/shared-commonSimpleTypes.xsd"
+        },
+        {
+          "source": "scripts/office/schemas/ISO-IEC29500-4_2016/shared-customXmlDataProperties.0ef4bb35.xsd",
+          "dest": "scripts/office/schemas/ISO-IEC29500-4_2016/shared-customXmlDataProperties.xsd"
+        },
+        {
+          "source": "scripts/office/schemas/ISO-IEC29500-4_2016/shared-customXmlSchemaProperties.0d103b99.xsd",
+          "dest": "scripts/office/schemas/ISO-IEC29500-4_2016/shared-customXmlSchemaProperties.xsd"
+        },
+        {
+          "source": "scripts/office/schemas/ISO-IEC29500-4_2016/shared-documentPropertiesCustom.9c085407.xsd",
+          "dest": "scripts/office/schemas/ISO-IEC29500-4_2016/shared-documentPropertiesCustom.xsd"
+        },
+        {
+          "source": "scripts/office/schemas/ISO-IEC29500-4_2016/shared-documentPropertiesExtended.bc92e36c.xsd",
+          "dest": "scripts/office/schemas/ISO-IEC29500-4_2016/shared-documentPropertiesExtended.xsd"
+        },
+        {
+          "source": "scripts/office/schemas/ISO-IEC29500-4_2016/shared-documentPropertiesVariantTypes.7b5b7413.xsd",
+          "dest": "scripts/office/schemas/ISO-IEC29500-4_2016/shared-documentPropertiesVariantTypes.xsd"
+        },
+        {
+          "source": "scripts/office/schemas/ISO-IEC29500-4_2016/shared-math.3213ef16.xsd",
+          "dest": "scripts/office/schemas/ISO-IEC29500-4_2016/shared-math.xsd"
+        },
+        {
+          "source": "scripts/office/schemas/ISO-IEC29500-4_2016/shared-relationshipReference.12264f3c.xsd",
+          "dest": "scripts/office/schemas/ISO-IEC29500-4_2016/shared-relationshipReference.xsd"
+        },
+        {
+          "source": "scripts/office/schemas/ISO-IEC29500-4_2016/sml.beffeed5.xsd",
+          "dest": "scripts/office/schemas/ISO-IEC29500-4_2016/sml.xsd"
+        },
+        {
+          "source": "scripts/office/schemas/ISO-IEC29500-4_2016/vml-main.f5ee623b.xsd",
+          "dest": "scripts/office/schemas/ISO-IEC29500-4_2016/vml-main.xsd"
+        },
+        {
+          "source": "scripts/office/schemas/ISO-IEC29500-4_2016/vml-officeDrawing.585bedc1.xsd",
+          "dest": "scripts/office/schemas/ISO-IEC29500-4_2016/vml-officeDrawing.xsd"
+        },
+        {
+          "source": "scripts/office/schemas/ISO-IEC29500-4_2016/vml-presentationDrawing.133c9f64.xsd",
+          "dest": "scripts/office/schemas/ISO-IEC29500-4_2016/vml-presentationDrawing.xsd"
+        },
+        {
+          "source": "scripts/office/schemas/ISO-IEC29500-4_2016/vml-spreadsheetDrawing.6bdeb169.xsd",
+          "dest": "scripts/office/schemas/ISO-IEC29500-4_2016/vml-spreadsheetDrawing.xsd"
+        },
+        {
+          "source": "scripts/office/schemas/ISO-IEC29500-4_2016/vml-wordprocessingDrawing.475dcae1.xsd",
+          "dest": "scripts/office/schemas/ISO-IEC29500-4_2016/vml-wordprocessingDrawing.xsd"
+        },
+        {
+          "source": "scripts/office/schemas/ISO-IEC29500-4_2016/wml.c2dd9f61.xsd",
+          "dest": "scripts/office/schemas/ISO-IEC29500-4_2016/wml.xsd"
+        },
+        {
+          "source": "scripts/office/schemas/ISO-IEC29500-4_2016/xml.a539aa2f.xsd",
+          "dest": "scripts/office/schemas/ISO-IEC29500-4_2016/xml.xsd"
+        },
+        {
+          "source": "scripts/office/schemas/ecma/fouth-edition/opc-contentTypes.9e0b7209.xsd",
+          "dest": "scripts/office/schemas/ecma/fouth-edition/opc-contentTypes.xsd"
+        },
+        {
+          "source": "scripts/office/schemas/ecma/fouth-edition/opc-coreProperties.45195845.xsd",
+          "dest": "scripts/office/schemas/ecma/fouth-edition/opc-coreProperties.xsd"
+        },
+        {
+          "source": "scripts/office/schemas/ecma/fouth-edition/opc-digSig.6de111e1.xsd",
+          "dest": "scripts/office/schemas/ecma/fouth-edition/opc-digSig.xsd"
+        },
+        {
+          "source": "scripts/office/schemas/ecma/fouth-edition/opc-relationships.f565adfe.xsd",
+          "dest": "scripts/office/schemas/ecma/fouth-edition/opc-relationships.xsd"
+        },
+        {
+          "source": "scripts/office/schemas/mce/mc.3a37e461.xsd",
+          "dest": "scripts/office/schemas/mce/mc.xsd"
+        },
+        {
+          "source": "scripts/office/schemas/microsoft/wml-2010.568b26ee.xsd",
+          "dest": "scripts/office/schemas/microsoft/wml-2010.xsd"
+        },
+        {
+          "source": "scripts/office/schemas/microsoft/wml-2012.0fa75578.xsd",
+          "dest": "scripts/office/schemas/microsoft/wml-2012.xsd"
+        },
+        {
+          "source": "scripts/office/schemas/microsoft/wml-2018.be0ff793.xsd",
+          "dest": "scripts/office/schemas/microsoft/wml-2018.xsd"
+        },
+        {
+          "source": "scripts/office/schemas/microsoft/wml-cex-2018.fddc2b88.xsd",
+          "dest": "scripts/office/schemas/microsoft/wml-cex-2018.xsd"
+        },
+        {
+          "source": "scripts/office/schemas/microsoft/wml-cid-2016.127ca209.xsd",
+          "dest": "scripts/office/schemas/microsoft/wml-cid-2016.xsd"
+        },
+        {
+          "source": "scripts/office/schemas/microsoft/wml-sdtdatahash-2020.842e7163.xsd",
+          "dest": "scripts/office/schemas/microsoft/wml-sdtdatahash-2020.xsd"
+        },
+        {
+          "source": "scripts/office/schemas/microsoft/wml-symex-2015.16f6f807.xsd",
+          "dest": "scripts/office/schemas/microsoft/wml-symex-2015.xsd"
+        },
+        {
+          "source": "scripts/office/soffice.a3e21840.py",
+          "dest": "scripts/office/soffice.py"
+        },
+        {
+          "source": "scripts/office/unpack.83f69cec.py",
+          "dest": "scripts/office/unpack.py"
+        },
+        {
+          "source": "scripts/office/validate.1aef24f8.py",
+          "dest": "scripts/office/validate.py"
+        },
+        {
+          "source": "scripts/office/validators/__init__.83e0f035.py",
+          "dest": "scripts/office/validators/__init__.py"
+        },
+        {
+          "source": "scripts/office/validators/base.d6358b67.py",
+          "dest": "scripts/office/validators/base.py"
+        },
+        {
+          "source": "scripts/office/validators/docx.0ef04ce8.py",
+          "dest": "scripts/office/validators/docx.py"
+        },
+        {
+          "source": "scripts/office/validators/pptx.f937961e.py",
+          "dest": "scripts/office/validators/pptx.py"
+        },
+        {
+          "source": "scripts/office/validators/redlining.f4c33fdb.py",
+          "dest": "scripts/office/validators/redlining.py"
+        },
+        {
+          "source": "scripts/templates/comments.a08ba83e.xml",
+          "dest": "scripts/templates/comments.xml"
+        },
+        {
+          "source": "scripts/templates/commentsExtended.544eeecf.xml",
+          "dest": "scripts/templates/commentsExtended.xml"
+        },
+        {
+          "source": "scripts/templates/commentsExtensible.bad10b32.xml",
+          "dest": "scripts/templates/commentsExtensible.xml"
+        },
+        {
+          "source": "scripts/templates/commentsIds.db20f961.xml",
+          "dest": "scripts/templates/commentsIds.xml"
+        },
+        {
+          "source": "scripts/templates/people.056f63aa.xml",
+          "dest": "scripts/templates/people.xml"
         }
       ]
     },
@@ -51,7 +284,7 @@
       "deprecated": false,
       "size": 62085,
       "fileCount": 5,
-      "updatedAt": "2026-06-13T09:23:31.005Z",
+      "updatedAt": "2026-06-13T09:29:42.154Z",
       "downloadCount": 76,
       "packageBaseUrl": "/core/gee-scripting/",
       "packageFiles": [
@@ -94,7 +327,7 @@
       "deprecated": true,
       "size": 1196,
       "fileCount": 1,
-      "updatedAt": "2026-06-13T09:23:31.005Z",
+      "updatedAt": "2026-06-13T09:29:42.154Z",
       "downloadCount": 84,
       "packageBaseUrl": "/core/hello-geocode/",
       "packageFiles": [
@@ -123,7 +356,7 @@
       "sourceUrl": "https://github.com/k-dense-ai/scientific-agent-skills",
       "size": 57540,
       "fileCount": 11,
-      "updatedAt": "2026-06-13T09:23:31.005Z",
+      "updatedAt": "2026-06-13T09:29:42.154Z",
       "downloadCount": 0,
       "packageBaseUrl": "/core/pdf/",
       "packageFiles": [
@@ -191,7 +424,7 @@
       "deprecated": false,
       "size": 25812,
       "fileCount": 2,
-      "updatedAt": "2026-06-13T09:23:31.005Z",
+      "updatedAt": "2026-06-13T09:29:42.154Z",
       "downloadCount": 70,
       "packageBaseUrl": "/core/projection-selection/",
       "packageFiles": [
@@ -223,7 +456,7 @@
       "deprecated": false,
       "size": 118805,
       "fileCount": 13,
-      "updatedAt": "2026-06-13T09:23:31.005Z",
+      "updatedAt": "2026-06-13T09:29:42.154Z",
       "downloadCount": 75,
       "packageBaseUrl": "/core/thematic-map/",
       "packageFiles": [
@@ -298,7 +531,7 @@
       "deprecated": true,
       "size": 1385,
       "fileCount": 1,
-      "updatedAt": "2026-06-13T09:23:31.005Z",
+      "updatedAt": "2026-06-13T09:29:42.154Z",
       "downloadCount": 35,
       "packageBaseUrl": "/core/update-test/",
       "packageFiles": [
@@ -327,7 +560,7 @@
       "sourceUrl": "https://github.com/k-dense-ai/scientific-agent-skills",
       "size": 1093662,
       "fileCount": 53,
-      "updatedAt": "2026-06-13T09:23:31.005Z",
+      "updatedAt": "2026-06-13T09:29:42.154Z",
       "downloadCount": 0,
       "packageBaseUrl": "/core/xlsx/",
       "packageFiles": [
@@ -546,5 +779,5 @@
       ]
     }
   ],
-  "lastStatsAt": "2026-06-13T09:23:31.621Z"
+  "lastStatsAt": "2026-06-13T09:29:42.829Z"
 }
