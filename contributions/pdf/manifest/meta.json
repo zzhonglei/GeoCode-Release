@@ -1,6 +1,6 @@
 {
   "version": "0.1.0",
-  "displayName": "PDF",
+  "displayName": "PDF Skill",
   "description": "Create, edit, and review PDF files.",
   "author": "OpenAI",
   "tags": ["pdf", "document", "reportlab"],
