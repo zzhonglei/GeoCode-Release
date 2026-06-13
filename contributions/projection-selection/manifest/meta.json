@@ -1,6 +1,7 @@
 {
   "version": "0.1.0",
-  "description": "Choose an appropriate projected coordinate system for your geographic analysis.",
+  "displayName": "Projection Selection",
+  "description": "Choose the right projected coordinate system for the task at hand.",
   "author": "GeoCode",
   "tags": ["projection", "crs", "cartography", "gis"],
   "minClientVersion": "0.9.0",

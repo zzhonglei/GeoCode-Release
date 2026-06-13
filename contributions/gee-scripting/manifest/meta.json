@@ -1,6 +1,7 @@
 {
   "version": "0.1.0",
-  "description": "Google Earth Engine scripting workflow guide for remote sensing analysis.",
+  "displayName": "GEE Scripting",
+  "description": "Guidance for writing and running Google Earth Engine scripts.",
   "author": "GeoCode",
   "tags": ["gee", "earth-engine", "remote-sensing"],
   "minClientVersion": "0.9.0",
