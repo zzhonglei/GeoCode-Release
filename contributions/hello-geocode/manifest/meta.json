@@ -1,8 +1,10 @@
 {
-  "version": "0.1.0",
+  "version": "0.1.1",
+  "displayName": "Hello GeoCode",
   "description": "A minimal sample skill verifying the GeoCode store pipeline.",
   "author": "GeoCode",
   "tags": ["sample", "hello-world", "verification"],
   "minClientVersion": "0.9.0",
-  "license": "MIT"
+  "license": "MIT",
+  "deprecated": true
 }
