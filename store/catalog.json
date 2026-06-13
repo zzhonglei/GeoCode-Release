@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-05-31T09:26:13.656Z",
+  "generatedAt": "2026-06-13T01:18:24.048Z",
   "skills": [
     {
       "id": "gee-scripting",
@@ -19,7 +19,7 @@
       "deprecated": false,
       "size": 62085,
       "fileCount": 5,
-      "updatedAt": "2026-05-31T09:26:13.656Z",
+      "updatedAt": "2026-06-13T01:18:24.048Z",
       "downloadCount": 76,
       "packageBaseUrl": "/core/gee-scripting/",
       "packageFiles": [
@@ -47,9 +47,9 @@
     },
     {
       "id": "hello-geocode",
-      "name": "hello-geocode",
-      "displayName": "hello-geocode",
-      "version": "0.1.0",
+      "name": "Hello GeoCode",
+      "displayName": "Hello GeoCode",
+      "version": "0.1.1",
       "description": "A minimal sample skill verifying the GeoCode store pipeline.",
       "tags": [
         "sample",
@@ -59,10 +59,10 @@
       "author": "GeoCode",
       "minClientVersion": "0.9.0",
       "license": "MIT",
-      "deprecated": false,
+      "deprecated": true,
       "size": 1196,
       "fileCount": 1,
-      "updatedAt": "2026-05-31T09:26:13.656Z",
+      "updatedAt": "2026-06-13T01:18:24.048Z",
       "downloadCount": 84,
       "packageBaseUrl": "/core/hello-geocode/",
       "packageFiles": [
@@ -90,7 +90,7 @@
       "deprecated": false,
       "size": 25812,
       "fileCount": 2,
-      "updatedAt": "2026-05-31T09:26:13.656Z",
+      "updatedAt": "2026-06-13T01:18:24.048Z",
       "downloadCount": 70,
       "packageBaseUrl": "/core/projection-selection/",
       "packageFiles": [
@@ -122,7 +122,7 @@
       "deprecated": false,
       "size": 118805,
       "fileCount": 13,
-      "updatedAt": "2026-05-31T09:26:13.656Z",
+      "updatedAt": "2026-06-13T01:18:24.048Z",
       "downloadCount": 75,
       "packageBaseUrl": "/core/thematic-map/",
       "packageFiles": [
@@ -197,7 +197,7 @@
       "deprecated": false,
       "size": 1385,
       "fileCount": 1,
-      "updatedAt": "2026-05-31T09:26:13.656Z",
+      "updatedAt": "2026-06-13T01:18:24.048Z",
       "downloadCount": 35,
       "packageBaseUrl": "/core/update-test/",
       "packageFiles": [
@@ -208,5 +208,5 @@
       ]
     }
   ],
-  "lastStatsAt": "2026-06-12T01:37:33.352Z"
+  "lastStatsAt": "2026-06-13T01:18:24.851Z"
 }
