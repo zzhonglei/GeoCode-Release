@@ -1,0 +1,9 @@
+{
+  "version": "0.1.0",
+  "displayName": "DOCX Reader",
+  "description": "Read and extract content from Word/DOCX documents.",
+  "author": "GeoCode",
+  "tags": ["docx", "word", "document", "reader"],
+  "minClientVersion": "0.9.0",
+  "license": "MIT"
+}
