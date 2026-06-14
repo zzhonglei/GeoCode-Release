@@ -328,7 +328,7 @@
       "size": 1196,
       "fileCount": 1,
       "updatedAt": "2026-06-13T09:29:42.154Z",
-      "downloadCount": 84,
+      "downloadCount": 86,
       "packageBaseUrl": "/core/hello-geocode/",
       "packageFiles": [
         {
@@ -457,7 +457,7 @@
       "size": 118805,
       "fileCount": 13,
       "updatedAt": "2026-06-13T09:29:42.154Z",
-      "downloadCount": 75,
+      "downloadCount": 78,
       "packageBaseUrl": "/core/thematic-map/",
       "packageFiles": [
         {
@@ -779,5 +779,5 @@
       ]
     }
   ],
-  "lastStatsAt": "2026-06-13T09:29:42.829Z"
+  "lastStatsAt": "2026-06-14T06:04:08.432Z"
 }
