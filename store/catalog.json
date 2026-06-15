@@ -285,7 +285,7 @@
       "size": 62085,
       "fileCount": 5,
       "updatedAt": "2026-06-13T09:29:42.154Z",
-      "downloadCount": 76,
+      "downloadCount": 82,
       "packageBaseUrl": "/core/gee-scripting/",
       "packageFiles": [
         {
@@ -328,7 +328,7 @@
       "size": 1196,
       "fileCount": 1,
       "updatedAt": "2026-06-13T09:29:42.154Z",
-      "downloadCount": 86,
+      "downloadCount": 94,
       "packageBaseUrl": "/core/hello-geocode/",
       "packageFiles": [
         {
@@ -425,7 +425,7 @@
       "size": 25812,
       "fileCount": 2,
       "updatedAt": "2026-06-13T09:29:42.154Z",
-      "downloadCount": 70,
+      "downloadCount": 75,
       "packageBaseUrl": "/core/projection-selection/",
       "packageFiles": [
         {
@@ -457,7 +457,7 @@
       "size": 118805,
       "fileCount": 13,
       "updatedAt": "2026-06-13T09:29:42.154Z",
-      "downloadCount": 78,
+      "downloadCount": 88,
       "packageBaseUrl": "/core/thematic-map/",
       "packageFiles": [
         {
@@ -532,7 +532,7 @@
       "size": 1385,
       "fileCount": 1,
       "updatedAt": "2026-06-13T09:29:42.154Z",
-      "downloadCount": 35,
+      "downloadCount": 43,
       "packageBaseUrl": "/core/update-test/",
       "packageFiles": [
         {
@@ -561,7 +561,7 @@
       "size": 1093662,
       "fileCount": 53,
       "updatedAt": "2026-06-13T09:29:42.154Z",
-      "downloadCount": 0,
+      "downloadCount": 7,
       "packageBaseUrl": "/core/xlsx/",
       "packageFiles": [
         {
@@ -779,5 +779,5 @@
       ]
     }
   ],
-  "lastStatsAt": "2026-06-14T06:04:08.432Z"
+  "lastStatsAt": "2026-06-15T06:36:33.123Z"
 }
