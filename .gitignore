@@ -5,6 +5,6 @@ dist/
 .idea/
 .vscode/
 
-# Maintainer-only personal notes (never commit)
-MAINTAINER.local.md
+# Local-only notes & docs
 *.local.md
+docs/
