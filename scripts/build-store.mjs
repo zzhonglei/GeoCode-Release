@@ -1,15 +1,19 @@
 #!/usr/bin/env node
-// Walk contributions/, content-hash every file in skill/, lay it out under
-// dist/core/<id>/, copy manifest/ files to dist/store/<id>/, and emit
-// dist/store/catalog.json. Run by .github/workflows/publish.yml on push to main.
+// Walk contributions/, content-hash every file under skill/, and lay out THREE
+// publish trees under dist/ for the two-branch stats architecture.
+// See docs/stats-two-branch-design.md.
 //
-// First-version simplifications (left for follow-up if needed):
-//   - version is read straight from manifest/meta.json (defaulting to 0.1.0).
-//     Auto-bump from commit message labels can be layered on later.
-//   - downloadCount is initialized to 0; aggregate-stats.mjs is the cron that
-//     keeps it fresh.
-//   - updatedAt = build time. Per-skill mtime would be preferable but git
-//     checkout flattens mtimes, so we stick with the build timestamp.
+//   dist/catalog/   -> deployed to the `catalog` branch (stats surface + index)
+//     store/catalog.json             schemaVersion 2: refs + per-file `ref`
+//     core/<id>/SKILL.<hash>.md       ONLY SKILL.md — keeps the stats ranking unsaturated
+//   dist/assets/    -> deployed to the `assets` branch (everything else; never stats-queried)
+//     core/<id>/<all non-SKILL.md files, hashed>
+//   dist/release/   -> legacy single-branch layout for OLD clients (transition only;
+//     store/catalog.json             schemaVersion 1, packageBaseUrl (current format)
+//     core/<id>/<all files, hashed>   flip EMIT_RELEASE=false after release is retired)
+//
+// downloadCount is emitted as 0 here; aggregate-stats.mjs fills it from the
+// date-bucket ledger (stats-history.json), which lives on the `catalog` branch.
 
 import { promises as fs } from "node:fs"
 import path from "node:path"
@@ -24,16 +28,34 @@ import {
   walkFiles,
 } from "./util.mjs"
 
-// Release layout (kept intentionally minimal — clients only ever fetch
-// catalog.json + the SKILL package files; manifest/README.md and meta.json
-// stay on the main branch for contributors and GitHub web rendering).
-//   dist/store/catalog.json
-//   dist/core/<id>/SKILL.<hash>.<ext>  (and any other files under skill/)
-const DIST_DIR = path.join(REPO_ROOT, "dist")
-const DIST_CORE = path.join(DIST_DIR, "core")
-const DIST_STORE = path.join(DIST_DIR, "store")
-const SCHEMA_VERSION = 1
+// ----------------------------------------------------------------------------
+// Config — branch names are the contract identifier (catalog refs, workflow
+// deploy targets, stats query URLs all derive from these). Change here only.
+// ----------------------------------------------------------------------------
+const REPO = "zzhonglei/GeoCode-Release"
+const CATALOG_BRANCH = "catalog" // stats surface + catalog index (only SKILL.md)
+const ASSETS_BRANCH = "assets" // bulk skill files (everything except SKILL.md)
+const EMIT_RELEASE = true // transition: also emit legacy release tree. Flip false after retirement.
+
+const SCHEMA_VERSION = 2
 const HASH_LEN = 8
+
+const DIST_DIR = path.join(REPO_ROOT, "dist")
+const DIST_CATALOG = path.join(DIST_DIR, "catalog")
+const DIST_ASSETS = path.join(DIST_DIR, "assets")
+const DIST_RELEASE = path.join(DIST_DIR, "release")
+
+// Full download bases written into the v2 catalog so the client resolves a
+// file as `refs[file.ref] + "/" + file.source` (jsdelivr) with a per-file
+// fallback to `fallbackRefs[file.ref] + "/" + file.source` (GitHub raw).
+const REFS = {
+  catalog: `https://cdn.jsdelivr.net/gh/${REPO}@${CATALOG_BRANCH}`,
+  assets: `https://cdn.jsdelivr.net/gh/${REPO}@${ASSETS_BRANCH}`,
+}
+const FALLBACK_REFS = {
+  catalog: `https://raw.githubusercontent.com/${REPO}/${CATALOG_BRANCH}`,
+  assets: `https://raw.githubusercontent.com/${REPO}/${ASSETS_BRANCH}`,
+}
 
 // ----------------------------------------------------------------------------
 // Helpers
@@ -43,7 +65,7 @@ function sha256Short(buf) {
   return createHash("sha256").update(buf).digest("hex").slice(0, HASH_LEN)
 }
 
-/** "scripts/run.py" + "abc12345" → "scripts/run.abc12345.py" */
+/** "scripts/run.py" + "abc12345" -> "scripts/run.abc12345.py" */
 function injectHash(relPath, hash) {
   const ext = path.extname(relPath)
   const dir = path.dirname(relPath)
@@ -75,48 +97,48 @@ async function buildSkill(id, generatedAt) {
   const manifestDir = path.join(root, "manifest")
   const skillDir = path.join(root, "skill")
 
-  // 1. Read manifest
   const meta = await readJson(path.join(manifestDir, "meta.json"))
-  const skillMdAbs = path.join(skillDir, "SKILL.md")
-  const skillMd = await fs.readFile(skillMdAbs, "utf-8")
+  const skillMd = await fs.readFile(path.join(skillDir, "SKILL.md"), "utf-8")
   const fm = parseFrontmatter(skillMd)
   if (!fm) throw new Error(`[${id}] SKILL.md missing frontmatter`)
   const frontmatterName = String(fm.data.name ?? "").trim()
   if (!frontmatterName) throw new Error(`[${id}] frontmatter.name is required`)
-  // UI display name. SKILL.md frontmatter.name serves a double role:
-  //   - LLM trigger label (often verbose for matching accuracy)
-  //   - UI card title (needs to be short)
-  // When both readers want different strings, contributors can set
-  // meta.displayName to override the catalog name for UI purposes while
-  // leaving frontmatter.name untouched for LLM matching. When absent we
-  // fall back to frontmatter.name so existing skills don't need to change.
+  // meta.displayName overrides the UI card title; frontmatter.name (often
+  // verbose, for LLM matching) is the fallback. Same rule as validate-skill.mjs.
   const metaDisplayName = typeof meta.displayName === "string" ? meta.displayName.trim() : ""
   const displayName = metaDisplayName || frontmatterName
 
-  // 2. Walk skill/ and lay out hashed copies under dist/core/<id>/
   const skillFiles = await walkFiles(skillDir)
   if (!skillFiles.includes("SKILL.md")) throw new Error(`[${id}] skill/SKILL.md missing`)
 
-  const packageFiles = []
+  const v2Files = [] // catalog v2 packageFiles: { source (full path), dest, ref }
+  const v1Files = [] // legacy release packageFiles: { source (relative), dest }
   let totalBytes = 0
+
   for (const rel of skillFiles) {
     const srcAbs = path.join(skillDir, rel)
     const buf = await fs.readFile(srcAbs)
-    const hashed = injectHash(rel, sha256Short(buf))
-    const destAbs = path.join(DIST_CORE, id, hashed)
-    await copyFile(srcAbs, destAbs)
-    packageFiles.push({ source: hashed.replaceAll("\\", "/"), dest: rel.replaceAll("\\", "/") })
+    const hashedRel = injectHash(rel, sha256Short(buf)).replaceAll("\\", "/")
+    const destRel = rel.replaceAll("\\", "/")
+    const isSkillMd = destRel === "SKILL.md"
+    const ref = isSkillMd ? "catalog" : "assets"
+
+    // v2: SKILL.md -> catalog branch, everything else -> assets branch.
+    v2Files.push({ source: `core/${id}/${hashedRel}`, dest: destRel, ref })
+    const branchDist = isSkillMd ? DIST_CATALOG : DIST_ASSETS
+    await copyFile(srcAbs, path.join(branchDist, "core", id, hashedRel))
+
+    // Legacy release tree: all files together, relative source under packageBaseUrl.
+    if (EMIT_RELEASE) {
+      v1Files.push({ source: hashedRel, dest: destRel })
+      await copyFile(srcAbs, path.join(DIST_RELEASE, "core", id, hashedRel))
+    }
+
     totalBytes += buf.byteLength
   }
 
-  // 3. Build the catalog row (manifest/* stays on main only — the catalog
-  //    already carries every field a client needs).
-  //    `displayName` is always emitted so the client can render skill cards
-  //    by reading a single field without any fallback logic. When meta.json
-  //    didn't supply a displayName, it equals SKILL.md frontmatter.name —
-  //    same value as `name`. `name` stays in the schema for backward
-  //    compatibility with already-installed clients.
-  return {
+  // Shared catalog row fields (both v1 and v2 carry these).
+  const common = {
     id,
     name: displayName,
     displayName,
@@ -127,9 +149,6 @@ async function buildSkill(id, generatedAt) {
     minClientVersion: meta.minClientVersion,
     license: meta.license,
     deprecated: meta.deprecated === true ? true : false,
-    // sourceUrl, when set, is where the client's "view details" link points
-    // (e.g. an upstream repo for a redistributed skill). Emitted only when
-    // present so the client can fall back to its default link otherwise.
     ...(typeof meta.sourceUrl === "string" && meta.sourceUrl.trim()
       ? { sourceUrl: meta.sourceUrl.trim() }
       : {}),
@@ -137,8 +156,11 @@ async function buildSkill(id, generatedAt) {
     fileCount: skillFiles.length,
     updatedAt: generatedAt,
     downloadCount: 0,
-    packageBaseUrl: `/core/${id}/`,
-    packageFiles,
+  }
+
+  return {
+    v2: { ...common, packageFiles: v2Files },
+    v1: { ...common, packageBaseUrl: `/core/${id}/`, packageFiles: v1Files },
   }
 }
 
@@ -153,26 +175,40 @@ async function main() {
   }
 
   await rmrf(DIST_DIR)
-  await fs.mkdir(DIST_CORE, { recursive: true })
-  await fs.mkdir(DIST_STORE, { recursive: true })
 
   const generatedAt = new Date().toISOString()
-  const ids = await listContributionIds()
-  ids.sort()
+  const ids = (await listContributionIds()).sort()
 
-  const skills = []
+  const v2Rows = []
+  const v1Rows = []
   for (const id of ids) {
     console.log(`Building ${id}...`)
-    skills.push(await buildSkill(id, generatedAt))
+    const r = await buildSkill(id, generatedAt)
+    v2Rows.push(r.v2)
+    v1Rows.push(r.v1)
   }
 
-  await writeJson(path.join(DIST_STORE, "catalog.json"), {
+  // catalog branch: v2 catalog (refs + per-file ref). The stats surface.
+  await writeJson(path.join(DIST_CATALOG, "store", "catalog.json"), {
     schemaVersion: SCHEMA_VERSION,
     generatedAt,
-    skills,
+    refs: REFS,
+    fallbackRefs: FALLBACK_REFS,
+    skills: v2Rows,
   })
 
-  console.log(`OK: built ${skills.length} skill(s) into dist/`)
+  // release branch (transition only): legacy v1 catalog for old clients.
+  if (EMIT_RELEASE) {
+    await writeJson(path.join(DIST_RELEASE, "store", "catalog.json"), {
+      schemaVersion: 1,
+      generatedAt,
+      skills: v1Rows,
+    })
+  }
+
+  console.log(
+    `OK: built ${v2Rows.length} skill(s) into dist/catalog + dist/assets${EMIT_RELEASE ? " + dist/release" : ""}`,
+  )
 }
 
 main().catch((err) => {
