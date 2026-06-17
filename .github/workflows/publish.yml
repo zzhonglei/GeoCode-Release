@@ -1,28 +1,22 @@
 name: Build and publish
 
-# On every push to main, rebuild the dist/ payload (catalog + hash-stamped
-# skill packages) and push it to the release branch. jsdelivr mirrors the
-# release branch automatically; clients fetch from there.
+# On push to main, rebuild the catalog/assets/release trees and deploy them to
+# their branches. See docs/stats-two-branch-design.md.
 #
-# The final purge step is *conditional*: it only runs when this build
-# actually moved the release branch tip. Re-runs that produce identical
-# dist/ (no commit pushed) skip the purge to avoid burning jsdelivr's
-# per-URL throttle budget on no-op refreshes. When it does run, it
-# sleeps 2 minutes first so jsdelivr's upstream view of the GitHub repo
-# has time to see the new commit — purging before propagation makes
-# jsdelivr cache the *old* content for another 12h.
+#   catalog  <- dist/catalog  (catalog.json + stats-history.json + SKILL.md only; the stats surface)
+#   assets   <- dist/assets   (every non-SKILL.md file)
+#   release  <- dist/release  (legacy single-branch layout for old clients; transition only)
+#
+# Content-hashed files deploy APPEND-ONLY (clean:false): old hashes are never
+# deleted, so a client holding a stale catalog can still fetch what it points at
+# (no 404 race). Only catalog.json / stats-history.json are overwritten.
 
 on:
   push:
     branches: [main]
     paths:
-      # Skill payload — anything under skill/ ships into core/ on release.
       - "contributions/*/skill/**"
-      # Catalog input — meta.json fields land in store/catalog.json. Other
-      # files under manifest/ (README.md, images for the README, …) only feed
-      # GitHub web rendering and must NOT cost a rebuild + CDN refetch.
       - "contributions/*/manifest/meta.json"
-      # CI tooling itself.
       - "scripts/**"
       - ".github/workflows/publish.yml"
   workflow_dispatch:
@@ -30,13 +24,10 @@ on:
 permissions:
   contents: write
 
-# Serialize all writes to the release branch. refresh-stats.yml also pushes
-# there; without this guard, a publish that overlaps with a cron could
-# clean-deploy a stale dist over fresher downloadCount/history data and
-# silently roll the stats back. We let in-progress runs finish (no cancel)
-# because each publish carries a unique commit payload.
+# Serialize ALL branch writes (publish + the refresh-stats cron both push to the
+# catalog branch). Must match refresh-stats.yml's group exactly.
 concurrency:
-  group: release-write
+  group: branch-write
   cancel-in-progress: false
 
 jobs:
@@ -48,74 +39,120 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Build store
+      - name: Build store (catalog + assets + release trees)
         run: node scripts/build-store.mjs
 
-      # Preserve the running stats-history.json across the `clean: true` deploy
-      # below. aggregate-stats.mjs records per-hash hit peaks in this file so
-      # download counts survive jsdelivr's year-window aging; if we let the
-      # clean deploy wipe it, every publish would silently reset the running
-      # peaks and the next stats refresh would lose any data that has aged out
-      # of the year window.
-      - name: Preserve stats history from release
+      # Establish the date-bucket ledger before aggregating.
+      #  - Normal run: preserve the catalog branch's existing ledger. FAIL-FAST —
+      #    a fetch/show error must stop the run, never fall through to an empty
+      #    ledger (a clean write would then wipe every accumulated count).
+      #  - First run ever (catalog branch has no ledger): generate the corrected
+      #    initial ledger from the release history + a live harvest (one-time
+      #    seed; see seed-ledger.mjs). Runs at most once, when no ledger exists.
+      - name: Establish ledger (preserve, or seed on first run)
         run: |
-          mkdir -p dist/store
-          # Fail-fast on fetch errors. If we silently fell back to an empty
-          # history here, the clean-deploy below would overwrite real history
-          # on release with {}, wiping every accumulated download peak.
-          git fetch origin release --depth 1
-          if git cat-file -e "origin/release:store/stats-history.json" 2>/dev/null; then
-            # File definitely exists on release — let any git show failure
-            # surface (don't redirect stderr away, don't || true).
-            git show "origin/release:store/stats-history.json" > dist/store/stats-history.json
-            echo "Preserved existing stats-history.json ($(wc -c < dist/store/stats-history.json) bytes)"
+          mkdir -p dist/catalog/store
+          # Distinguish "catalog branch genuinely absent" (first run -> seed) from
+          # "couldn't reach origin" (transient -> ABORT). A swallowed fetch error
+          # would make an existing branch look absent and reseed OVER its real
+          # ledger. ls-remote exits non-zero only on a real error; empty output
+          # means the branch does not exist.
+          if ! LS=$(git ls-remote origin catalog 2>/dev/null); then
+            echo "ERROR: cannot query origin for catalog branch (network?). Aborting to avoid reseeding over a real ledger." >&2
+            exit 1
+          fi
+          if [ -n "$LS" ]; then
+            # Branch exists -> its ledger is the source of truth. With bash -e, any
+            # fetch/show failure here aborts the job (never falls through to seed).
+            git fetch origin catalog --depth 1
+            git show "origin/catalog:store/stats-history.json" > dist/catalog/store/stats-history.json
+            echo "Preserved existing ledger ($(wc -c < dist/catalog/store/stats-history.json) bytes)"
           else
-            # First publish that ever touched stats — release branch has no
-            # history file yet. Safe to seed empty.
-            echo "{}" > dist/store/stats-history.json
-            echo "Initialized empty stats-history.json (release has no prior history file)"
+            echo "catalog branch does not exist — generating corrected initial ledger (one-time seed)."
+            CATALOG_PATH=dist/catalog/store/catalog.json node scripts/seed-ledger.mjs
           fi
 
-      - name: Refresh download counts (best-effort)
+      # Fill downloadCount from the ledger + a fresh harvest. FAIL-FAST: a
+      # non-zero exit (no data at all, or a corrupt ledger) aborts the whole
+      # publish rather than deploying a downloadCount=0 catalog.
+      - name: Refresh download counts
+        run: CATALOG_PATH=dist/catalog/store/catalog.json node scripts/aggregate-stats.mjs
+
+      # Mirror the corrected counts into the legacy release (v1) catalog so OLD
+      # clients also see the right numbers during the transition — including the
+      # seeded docx/pdf that release's own saturated stats can't surface.
+      - name: Mirror downloadCount into legacy release catalog
         run: |
-          CATALOG_PATH=dist/store/catalog.json node scripts/aggregate-stats.mjs || \
-            echo "Stats refresh failed (non-fatal at publish time)"
+          if [ ! -f dist/release/store/catalog.json ]; then
+            echo "No release catalog (EMIT_RELEASE off) — skipping mirror."; exit 0
+          fi
+          node -e '
+            const fs = require("fs");
+            const v2 = JSON.parse(fs.readFileSync("dist/catalog/store/catalog.json", "utf8"));
+            const counts = Object.fromEntries(v2.skills.map((s) => [s.id, s.downloadCount]));
+            const p = "dist/release/store/catalog.json";
+            const v1 = JSON.parse(fs.readFileSync(p, "utf8"));
+            for (const s of v1.skills) s.downloadCount = counts[s.id] ?? 0;
+            if (v2.lastStatsAt) v1.lastStatsAt = v2.lastStatsAt;
+            fs.writeFileSync(p, JSON.stringify(v1, null, 2) + "\n");
+            console.log("Mirrored downloadCount into release catalog.");
+          '
 
-      # Snapshot the release branch tip before deploy so we can decide
-      # afterwards whether the deploy actually changed anything.
-      - name: Capture pre-deploy release SHA
+      - name: Capture pre-deploy SHAs
         id: pre
-        run: echo "sha=$(git ls-remote origin release | awk '{print $1}')" >> "$GITHUB_OUTPUT"
+        run: |
+          echo "catalog=$(git ls-remote origin catalog | awk '{print $1}')" >> "$GITHUB_OUTPUT"
+          echo "release=$(git ls-remote origin release | awk '{print $1}')" >> "$GITHUB_OUTPUT"
 
-      - name: Deploy to release branch
+      # Deploy order matters: assets first, then release, then catalog LAST. The
+      # catalog (index) must only go live after the assets it references exist.
+      - name: Deploy assets branch
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: assets
+          folder: dist/assets
+          clean: false
+          commit-message: "chore: assets from ${{ github.sha }}"
+
+      - name: Deploy release branch (legacy, transition)
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: release
-          folder: dist
-          clean: true
-          commit-message: "chore: rebuild from ${{ github.sha }}"
+          folder: dist/release
+          clean: false
+          commit-message: "chore: release from ${{ github.sha }}"
 
-      - name: Capture post-deploy release SHA
+      - name: Deploy catalog branch (index + stats surface)
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: catalog
+          folder: dist/catalog
+          clean: false
+          commit-message: "chore: catalog from ${{ github.sha }}"
+
+      - name: Capture post-deploy SHAs
         id: post
-        run: echo "sha=$(git ls-remote origin release | awk '{print $1}')" >> "$GITHUB_OUTPUT"
+        run: |
+          echo "catalog=$(git ls-remote origin catalog | awk '{print $1}')" >> "$GITHUB_OUTPUT"
+          echo "release=$(git ls-remote origin release | awk '{print $1}')" >> "$GITHUB_OUTPUT"
 
-      # Sleep 2 minutes before purge: jsdelivr's "is the GitHub branch
-      # newer than my cache?" check lags GitHub by tens of seconds to
-      # a couple of minutes. Purging immediately after deploy makes
-      # jsdelivr's first refetch see the *old* commit and re-cache it.
-      - name: Wait for GitHub propagation
-        if: steps.pre.outputs.sha != steps.post.outputs.sha
+      # Sleep so jsdelivr's upstream view sees the new commit before we purge;
+      # purging too early re-caches the OLD catalog for ~12h.
+      - name: Wait for propagation
+        if: steps.pre.outputs.catalog != steps.post.outputs.catalog || steps.pre.outputs.release != steps.post.outputs.release
         run: sleep 120
 
-      # Force jsdelivr to drop its cached catalog.json and refetch the
-      # now-propagated commit. SKILL files don't need purging — their
-      # content-hashed filenames already bypass the CDN cache.
-      - name: Purge jsdelivr cache
-        if: steps.pre.outputs.sha != steps.post.outputs.sha
+      # Purge only the mutable catalog.json on branches whose tip moved. Hashed
+      # files are content-addressed and never need purging.
+      - name: Purge changed catalog.json from jsdelivr
         run: |
-          curl -sfL "https://purge.jsdelivr.net/gh/${{ github.repository }}@release/store/catalog.json" \
-            || echo "jsdelivr purge failed (non-fatal — cache will refresh within 12h anyway)"
-
-      - name: Skip purge (no release change)
-        if: steps.pre.outputs.sha == steps.post.outputs.sha
-        run: echo "Release branch unchanged (${{ steps.pre.outputs.sha }}); skipping purge to preserve jsdelivr throttle budget."
+          if [ "${{ steps.pre.outputs.catalog }}" != "${{ steps.post.outputs.catalog }}" ]; then
+            curl -sfL "https://purge.jsdelivr.net/gh/${{ github.repository }}@catalog/store/catalog.json" || echo "catalog purge failed (non-fatal)"
+          else
+            echo "catalog branch unchanged; skipping purge."
+          fi
+          if [ "${{ steps.pre.outputs.release }}" != "${{ steps.post.outputs.release }}" ]; then
+            curl -sfL "https://purge.jsdelivr.net/gh/${{ github.repository }}@release/store/catalog.json" || echo "release purge failed (non-fatal)"
+          else
+            echo "release branch unchanged; skipping purge."
+          fi

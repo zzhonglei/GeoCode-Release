@@ -1,10 +1,12 @@
 name: Refresh download counts
 
-# Hourly cron that pulls jsdelivr stats and overwrites downloadCount in the
-# release branch's store/catalog.json. The catalog source-of-truth lives on
-# the release branch (it's CI-managed), so we check that branch out, run the
-# aggregator script (fetched from main since release intentionally has no
-# scripts/ directory), and commit if anything changed.
+# Hourly cron that re-harvests jsdelivr stats into the date-bucket ledger and
+# updates downloadCount in the CATALOG branch's store/catalog.json. The catalog
+# (and its stats-history.json ledger) live on the `catalog` branch; the
+# aggregator is fetched from main (the catalog branch has no scripts/ dir).
+#
+# Note: the `catalog` branch is created by the first publish. Until that runs,
+# this cron's checkout will fail (harmless — it just retries next hour).
 
 on:
   schedule:
@@ -14,12 +16,11 @@ on:
 permissions:
   contents: write
 
-# Share the release-write lock with publish.yml so the two never race.
-# Without this, a cron tick could push a commit that a publish then
-# clean-deploys over (or vice versa), silently rolling back the loser's
-# changes.
+# Share the branch-write lock with publish.yml so the two never race on the
+# catalog branch (a cron push and a publish clean-merge must not interleave).
+# Must match publish.yml's group exactly.
 concurrency:
-  group: release-write
+  group: branch-write
   cancel-in-progress: false
 
 jobs:
@@ -28,7 +29,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
         with:
-          ref: release
+          ref: catalog
           fetch-depth: 1
 
       - uses: actions/setup-node@v5
@@ -41,6 +42,8 @@ jobs:
           curl -sfL "https://raw.githubusercontent.com/${{ github.repository }}/main/scripts/aggregate-stats.mjs" \
             -o .ci/aggregate-stats.mjs
 
+      # Default CATALOG_PATH is ./store/catalog.json — correct on the catalog
+      # branch. aggregate reads ./store/stats-history.json (the ledger) beside it.
       - name: Refresh stats
         run: node .ci/aggregate-stats.mjs
 
@@ -49,14 +52,10 @@ jobs:
           rm -rf .ci
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          # Stage everything under store/ — catches both modifications to
-          # catalog.json and a brand-new stats-history.json that the script
-          # may create on first successful fetch. Plain `git add <file>` would
-          # fail with "pathspec did not match" if history.json doesn't exist
-          # yet on this branch.
+          # Stage both catalog.json (downloadCount) and stats-history.json (ledger).
           git add -A store/
           if git diff --cached --quiet; then
-            echo "No catalog or history changes."
+            echo "No catalog or ledger changes."
             exit 0
           fi
           git commit -m "chore: refresh download counts"
