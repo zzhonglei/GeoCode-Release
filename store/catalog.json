@@ -285,7 +285,7 @@
       "size": 62085,
       "fileCount": 5,
       "updatedAt": "2026-06-13T09:29:42.154Z",
-      "downloadCount": 85,
+      "downloadCount": 92,
       "packageBaseUrl": "/core/gee-scripting/",
       "packageFiles": [
         {
@@ -425,7 +425,7 @@
       "size": 25812,
       "fileCount": 2,
       "updatedAt": "2026-06-13T09:29:42.154Z",
-      "downloadCount": 78,
+      "downloadCount": 85,
       "packageBaseUrl": "/core/projection-selection/",
       "packageFiles": [
         {
@@ -457,7 +457,7 @@
       "size": 118805,
       "fileCount": 13,
       "updatedAt": "2026-06-13T09:29:42.154Z",
-      "downloadCount": 91,
+      "downloadCount": 99,
       "packageBaseUrl": "/core/thematic-map/",
       "packageFiles": [
         {
@@ -779,5 +779,5 @@
       ]
     }
   ],
-  "lastStatsAt": "2026-06-16T05:28:23.530Z"
+  "lastStatsAt": "2026-06-17T05:10:53.153Z"
 }
