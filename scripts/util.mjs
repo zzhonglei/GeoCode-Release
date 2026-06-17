@@ -3,8 +3,11 @@
 
 import { promises as fs } from "node:fs"
 import path from "node:path"
+import { fileURLToPath } from "node:url"
 
-export const REPO_ROOT = path.resolve(new URL("..", import.meta.url).pathname)
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
+export const REPO_ROOT = path.resolve(__dirname, "..")
 export const CONTRIBUTIONS_DIR = path.join(REPO_ROOT, "contributions")
 export const ID_REGEX = /^[a-z][a-z0-9-]*[a-z0-9]$/
 
