@@ -1,0 +1,9 @@
+{
+  "version": "0.1.0",
+  "displayName": "QGIS Probe Wrapper",
+  "description": "Fixes QGIS environment probe JSON parsing on Windows by cleaning batch file output.",
+  "author": "Greeneggdog",
+  "tags": ["qgis", "windows", "probe", "fix", "batch"],
+  "minClientVersion": "0.9.0",
+  "license": "MIT"
+}
