@@ -32,6 +32,16 @@ const OLD_HISTORY_URL = `https://raw.githubusercontent.com/${REPO}/release/store
 const SKILL_RE = /^\/core\/([^/]+)\/SKILL\.[a-f0-9]+\.md$/
 const SENTINEL = "seed" // synthetic date key; real harvests only ever emit YYYY-MM-DD
 
+// Hand-pinned baselines for skills whose SKILL.md was never visible on @release
+// (saturated). Their sibling-file estimate fluctuates run-to-run (siblings hit
+// the same top-100 cap), so we pin a stable, conservative floor here instead.
+// This only sets the ONE-TIME initial display; once the catalog branch serves
+// new clients, real per-install counts accrue on top and overtake the floor.
+const MANUAL_SEED = {
+  "docx-reader": 10,
+  pdf: 2,
+}
+
 async function harvestAll(ref) {
   // path -> { date: hits }, max-merged across day+year, ALL files (not just SKILL.md)
   const out = {}
@@ -90,12 +100,19 @@ async function main() {
 
   // (b) aged-out SKILL.md hashes from the existing scalar history (paths the
   //     live harvest didn't return -> add as a sentinel bucket).
+  // The old release history is the ONLY source for aged-out hashes (e.g. xlsx,
+  // an old update-test version). A transient failure must abort the one-time
+  // seed rather than silently baking an incomplete baseline. Only a genuine 404
+  // (release never had a history file) is tolerated; any other status or a
+  // network error throws -> aborts (caught by main().catch -> exit 2).
   let oldHist = {}
-  try {
-    const r = await fetch(OLD_HISTORY_URL)
-    if (r.ok) oldHist = await r.json()
-  } catch (e) {
-    console.warn(`(warn) couldn't fetch old history: ${e.message}`)
+  const r = await fetch(OLD_HISTORY_URL)
+  if (r.status === 404) {
+    console.warn("Old release history not found (404) — proceeding without aged-out backfill.")
+  } else if (!r.ok) {
+    throw new Error(`old history fetch failed: ${r.status} ${r.statusText} — aborting seed`)
+  } else {
+    oldHist = await r.json()
   }
   for (const [p, scalar] of Object.entries(oldHist)) {
     const m = p.match(SKILL_RE)
@@ -112,6 +129,13 @@ async function main() {
   //     install estimate from the most-hit sibling file in the harvest.
   for (const id of currentIds) {
     if (prov[id].harvest + prov[id].seed > 0) continue
+    // Prefer a hand-pinned stable floor over the fluctuating sibling estimate.
+    if (MANUAL_SEED[id] != null) {
+      release[info[id].skillPath] = { [SENTINEL]: MANUAL_SEED[id] }
+      prov[id].seed += MANUAL_SEED[id]
+      prov[id].note = "手钉固定值"
+      continue
+    }
     let best = 0
     for (const sp of info[id].siblingPaths) {
       const s = bsum(harvest[sp])
@@ -120,7 +144,7 @@ async function main() {
     if (best > 0) {
       release[info[id].skillPath] = { [SENTINEL]: best }
       prov[id].seed += best
-      prov[id].note = "兄弟文件反推"
+      prov[id].note = "兄弟文件反推(无手钉值)"
     } else {
       prov[id].note = "无数据(真 0)"
     }

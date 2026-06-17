@@ -52,12 +52,23 @@ jobs:
       - name: Establish ledger (preserve, or seed on first run)
         run: |
           mkdir -p dist/catalog/store
-          git fetch origin catalog --depth 1 || true
-          if git cat-file -e "origin/catalog:store/stats-history.json" 2>/dev/null; then
+          # Distinguish "catalog branch genuinely absent" (first run -> seed) from
+          # "couldn't reach origin" (transient -> ABORT). A swallowed fetch error
+          # would make an existing branch look absent and reseed OVER its real
+          # ledger. ls-remote exits non-zero only on a real error; empty output
+          # means the branch does not exist.
+          if ! LS=$(git ls-remote origin catalog 2>/dev/null); then
+            echo "ERROR: cannot query origin for catalog branch (network?). Aborting to avoid reseeding over a real ledger." >&2
+            exit 1
+          fi
+          if [ -n "$LS" ]; then
+            # Branch exists -> its ledger is the source of truth. With bash -e, any
+            # fetch/show failure here aborts the job (never falls through to seed).
+            git fetch origin catalog --depth 1
             git show "origin/catalog:store/stats-history.json" > dist/catalog/store/stats-history.json
             echo "Preserved existing ledger ($(wc -c < dist/catalog/store/stats-history.json) bytes)"
           else
-            echo "No ledger on catalog branch — generating corrected initial ledger (one-time seed)."
+            echo "catalog branch does not exist — generating corrected initial ledger (one-time seed)."
             CATALOG_PATH=dist/catalog/store/catalog.json node scripts/seed-ledger.mjs
           fi
 
