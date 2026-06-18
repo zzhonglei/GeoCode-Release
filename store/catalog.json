@@ -352,7 +352,7 @@
       "size": 62085,
       "fileCount": 5,
       "updatedAt": "2026-06-17T08:12:29.875Z",
-      "downloadCount": 92,
+      "downloadCount": 97,
       "packageFiles": [
         {
           "source": "core/gee-scripting/SKILL.d9a70d7b.md",
@@ -506,7 +506,7 @@
       "size": 25812,
       "fileCount": 2,
       "updatedAt": "2026-06-17T08:12:29.875Z",
-      "downloadCount": 85,
+      "downloadCount": 93,
       "packageFiles": [
         {
           "source": "core/projection-selection/SKILL.299bc567.md",
@@ -925,5 +925,5 @@
       ]
     }
   ],
-  "lastStatsAt": "2026-06-17T08:12:32.760Z"
+  "lastStatsAt": "2026-06-18T01:38:24.086Z"
 }
