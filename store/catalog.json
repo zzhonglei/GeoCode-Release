@@ -30,7 +30,7 @@
       "size": 1121046,
       "fileCount": 60,
       "updatedAt": "2026-06-17T08:12:29.875Z",
-      "downloadCount": 10,
+      "downloadCount": 13,
       "packageFiles": [
         {
           "source": "core/docx-reader/SKILL.5ad3b4d7.md",
@@ -352,7 +352,7 @@
       "size": 62085,
       "fileCount": 5,
       "updatedAt": "2026-06-17T08:12:29.875Z",
-      "downloadCount": 97,
+      "downloadCount": 110,
       "packageFiles": [
         {
           "source": "core/gee-scripting/SKILL.d9a70d7b.md",
@@ -399,7 +399,7 @@
       "size": 1196,
       "fileCount": 1,
       "updatedAt": "2026-06-17T08:12:29.875Z",
-      "downloadCount": 94,
+      "downloadCount": 98,
       "packageFiles": [
         {
           "source": "core/hello-geocode/SKILL.24e1f28b.md",
@@ -428,7 +428,7 @@
       "size": 57540,
       "fileCount": 11,
       "updatedAt": "2026-06-17T08:12:29.875Z",
-      "downloadCount": 2,
+      "downloadCount": 6,
       "packageFiles": [
         {
           "source": "core/pdf/SKILL.f253fddd.md",
@@ -506,7 +506,7 @@
       "size": 25812,
       "fileCount": 2,
       "updatedAt": "2026-06-17T08:12:29.875Z",
-      "downloadCount": 93,
+      "downloadCount": 103,
       "packageFiles": [
         {
           "source": "core/projection-selection/SKILL.299bc567.md",
@@ -539,7 +539,7 @@
       "size": 118805,
       "fileCount": 13,
       "updatedAt": "2026-06-17T08:12:29.875Z",
-      "downloadCount": 99,
+      "downloadCount": 103,
       "packageFiles": [
         {
           "source": "core/thematic-map/SKILL.7adb9dc6.md",
@@ -626,7 +626,7 @@
       "size": 1385,
       "fileCount": 1,
       "updatedAt": "2026-06-17T08:12:29.875Z",
-      "downloadCount": 46,
+      "downloadCount": 49,
       "packageFiles": [
         {
           "source": "core/update-test/SKILL.fe0b6e15.md",
@@ -655,7 +655,7 @@
       "size": 1093662,
       "fileCount": 53,
       "updatedAt": "2026-06-17T08:12:29.875Z",
-      "downloadCount": 7,
+      "downloadCount": 10,
       "packageFiles": [
         {
           "source": "core/xlsx/SKILL.5e202804.md",
@@ -925,5 +925,5 @@
       ]
     }
   ],
-  "lastStatsAt": "2026-06-18T01:38:24.086Z"
+  "lastStatsAt": "2026-06-19T05:20:57.988Z"
 }
