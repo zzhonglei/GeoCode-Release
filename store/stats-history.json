@@ -103,14 +103,14 @@
     "/core/update-test/SKILL.03c282ed.md": {
       "seed": 4
     },
-    "/core/xlsx/SKILL.5e202804.md": {
-      "seed": 7
-    },
     "/core/docx-reader/SKILL.5ad3b4d7.md": {
-      "seed": 10
+      "seed": 68
     },
     "/core/pdf/SKILL.f253fddd.md": {
-      "seed": 2
+      "seed": 19
+    },
+    "/core/xlsx/SKILL.5e202804.md": {
+      "seed": 66
     }
   },
   "catalog": {
