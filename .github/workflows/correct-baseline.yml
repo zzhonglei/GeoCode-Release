@@ -1,0 +1,76 @@
+name: Correct download baseline (manual stopgap)
+
+# MANUAL, re-runnable stopgap for the transition window. A few skills (docx, xlsx,
+# pdf) carry so many package files that on the legacy @release branch those files
+# saturate jsdelivr's top-100 stats window and push the skill's own SKILL.md out of
+# it — so the harvester can never count them and they sit at a hand-pinned floor.
+#
+# This job re-derives their TRUE install total from their most-hit sibling file
+# (every install fetches the whole package) and re-pins the catalog ledger baseline.
+# It is SAFE to run repeatedly: the correction is monotonic (never lowers a value),
+# so running it a few times during the wait keeps docx/xlsx/pdf from drifting back
+# down as old clients keep installing.
+#
+# Retire this workflow once the adapted client ships and real install traffic moves
+# to @catalog (where SKILL.md is always visible and these skills count natively).
+# See docs/stats-two-branch-design.md.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+# Share the branch-write lock with publish.yml / refresh-stats.yml so this never
+# races them on the catalog branch.
+concurrency:
+  group: branch-write
+  cancel-in-progress: false
+
+jobs:
+  correct:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: catalog
+          fetch-depth: 1
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: "20"
+
+      # The catalog branch has no scripts/ dir; fetch both scripts from main.
+      - name: Fetch scripts from main
+        run: |
+          mkdir -p .ci
+          curl -sfL "https://raw.githubusercontent.com/${{ github.repository }}/main/scripts/correct-baseline.mjs" \
+            -o .ci/correct-baseline.mjs
+          curl -sfL "https://raw.githubusercontent.com/${{ github.repository }}/main/scripts/aggregate-stats.mjs" \
+            -o .ci/aggregate-stats.mjs
+
+      # Default CATALOG_PATH is ./store/catalog.json — correct on the catalog branch.
+      # correct-baseline fixes the ledger seeds; aggregate rebuilds downloadCount.
+      - name: Correct ledger baseline
+        run: node .ci/correct-baseline.mjs
+
+      - name: Rebuild downloadCount from corrected ledger
+        run: node .ci/aggregate-stats.mjs
+
+      - name: Commit if changed
+        run: |
+          rm -rf .ci
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A store/
+          if git diff --cached --quiet; then
+            echo "No baseline changes — nothing to commit."
+            exit 0
+          fi
+          git commit -m "chore: correct download baseline for saturated skills"
+          git push
+
+      - name: Purge corrected catalog.json from jsdelivr
+        run: |
+          curl -sfL "https://purge.jsdelivr.net/gh/${{ github.repository }}@catalog/store/catalog.json" \
+            || echo "purge failed (non-fatal)"
