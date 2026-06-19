@@ -58,6 +58,7 @@ jobs:
         run: node .ci/aggregate-stats.mjs
 
       - name: Commit if changed
+        id: commit
         run: |
           rm -rf .ci
           git config user.name "github-actions[bot]"
@@ -65,12 +66,22 @@ jobs:
           git add -A store/
           if git diff --cached --quiet; then
             echo "No baseline changes — nothing to commit."
+            echo "changed=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
           git commit -m "chore: correct download baseline for saturated skills"
           git push
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
+      # jsdelivr's upstream may still see the previous commit; purging too early
+      # re-caches the OLD catalog for ~12h. Mirror publish.yml's propagation wait,
+      # and only when the branch actually moved.
+      - name: Wait for propagation
+        if: steps.commit.outputs.changed == 'true'
+        run: sleep 120
 
       - name: Purge corrected catalog.json from jsdelivr
+        if: steps.commit.outputs.changed == 'true'
         run: |
           curl -sfL "https://purge.jsdelivr.net/gh/${{ github.repository }}@catalog/store/catalog.json" \
             || echo "purge failed (non-fatal)"
