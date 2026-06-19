@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-06-17T08:12:29.875Z",
+  "generatedAt": "2026-06-19T10:26:40.838Z",
   "refs": {
     "catalog": "https://cdn.jsdelivr.net/gh/zzhonglei/GeoCode-Release@catalog",
     "assets": "https://cdn.jsdelivr.net/gh/zzhonglei/GeoCode-Release@assets"
@@ -29,7 +29,7 @@
       "sourceUrl": "https://github.com/k-dense-ai/scientific-agent-skills",
       "size": 1121046,
       "fileCount": 60,
-      "updatedAt": "2026-06-17T08:12:29.875Z",
+      "updatedAt": "2026-06-19T10:26:40.838Z",
       "downloadCount": 13,
       "packageFiles": [
         {
@@ -351,7 +351,7 @@
       "deprecated": false,
       "size": 62085,
       "fileCount": 5,
-      "updatedAt": "2026-06-17T08:12:29.875Z",
+      "updatedAt": "2026-06-19T10:26:40.838Z",
       "downloadCount": 110,
       "packageFiles": [
         {
@@ -398,7 +398,7 @@
       "deprecated": true,
       "size": 1196,
       "fileCount": 1,
-      "updatedAt": "2026-06-17T08:12:29.875Z",
+      "updatedAt": "2026-06-19T10:26:40.838Z",
       "downloadCount": 98,
       "packageFiles": [
         {
@@ -427,7 +427,7 @@
       "sourceUrl": "https://github.com/k-dense-ai/scientific-agent-skills",
       "size": 57540,
       "fileCount": 11,
-      "updatedAt": "2026-06-17T08:12:29.875Z",
+      "updatedAt": "2026-06-19T10:26:40.838Z",
       "downloadCount": 6,
       "packageFiles": [
         {
@@ -505,7 +505,7 @@
       "deprecated": false,
       "size": 25812,
       "fileCount": 2,
-      "updatedAt": "2026-06-17T08:12:29.875Z",
+      "updatedAt": "2026-06-19T10:26:40.838Z",
       "downloadCount": 103,
       "packageFiles": [
         {
@@ -538,7 +538,7 @@
       "deprecated": false,
       "size": 118805,
       "fileCount": 13,
-      "updatedAt": "2026-06-17T08:12:29.875Z",
+      "updatedAt": "2026-06-19T10:26:40.838Z",
       "downloadCount": 103,
       "packageFiles": [
         {
@@ -625,7 +625,7 @@
       "deprecated": true,
       "size": 1385,
       "fileCount": 1,
-      "updatedAt": "2026-06-17T08:12:29.875Z",
+      "updatedAt": "2026-06-19T10:26:40.838Z",
       "downloadCount": 49,
       "packageFiles": [
         {
@@ -654,7 +654,7 @@
       "sourceUrl": "https://github.com/k-dense-ai/scientific-agent-skills",
       "size": 1093662,
       "fileCount": 53,
-      "updatedAt": "2026-06-17T08:12:29.875Z",
+      "updatedAt": "2026-06-19T10:26:40.838Z",
       "downloadCount": 10,
       "packageFiles": [
         {
@@ -925,5 +925,5 @@
       ]
     }
   ],
-  "lastStatsAt": "2026-06-19T05:20:57.988Z"
+  "lastStatsAt": "2026-06-19T10:26:43.822Z"
 }
