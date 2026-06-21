@@ -352,7 +352,7 @@
       "size": 62085,
       "fileCount": 5,
       "updatedAt": "2026-06-19T10:26:40.838Z",
-      "downloadCount": 116,
+      "downloadCount": 120,
       "packageFiles": [
         {
           "source": "core/gee-scripting/SKILL.d9a70d7b.md",
@@ -399,7 +399,7 @@
       "size": 1196,
       "fileCount": 1,
       "updatedAt": "2026-06-19T10:26:40.838Z",
-      "downloadCount": 98,
+      "downloadCount": 101,
       "packageFiles": [
         {
           "source": "core/hello-geocode/SKILL.24e1f28b.md",
@@ -428,7 +428,7 @@
       "size": 57540,
       "fileCount": 11,
       "updatedAt": "2026-06-19T10:26:40.838Z",
-      "downloadCount": 23,
+      "downloadCount": 28,
       "packageFiles": [
         {
           "source": "core/pdf/SKILL.f253fddd.md",
@@ -506,7 +506,7 @@
       "size": 25812,
       "fileCount": 2,
       "updatedAt": "2026-06-19T10:26:40.838Z",
-      "downloadCount": 106,
+      "downloadCount": 110,
       "packageFiles": [
         {
           "source": "core/projection-selection/SKILL.299bc567.md",
@@ -539,7 +539,7 @@
       "size": 118805,
       "fileCount": 13,
       "updatedAt": "2026-06-19T10:26:40.838Z",
-      "downloadCount": 103,
+      "downloadCount": 108,
       "packageFiles": [
         {
           "source": "core/thematic-map/SKILL.7adb9dc6.md",
@@ -925,5 +925,5 @@
       ]
     }
   ],
-  "lastStatsAt": "2026-06-20T05:42:14.865Z"
+  "lastStatsAt": "2026-06-21T06:17:02.864Z"
 }
