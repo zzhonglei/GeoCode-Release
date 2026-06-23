@@ -399,7 +399,7 @@
       "size": 1196,
       "fileCount": 1,
       "updatedAt": "2026-06-19T10:26:40.838Z",
-      "downloadCount": 101,
+      "downloadCount": 103,
       "packageFiles": [
         {
           "source": "core/hello-geocode/SKILL.24e1f28b.md",
@@ -539,7 +539,7 @@
       "size": 118805,
       "fileCount": 13,
       "updatedAt": "2026-06-19T10:26:40.838Z",
-      "downloadCount": 117,
+      "downloadCount": 119,
       "packageFiles": [
         {
           "source": "core/thematic-map/SKILL.7adb9dc6.md",
@@ -925,5 +925,5 @@
       ]
     }
   ],
-  "lastStatsAt": "2026-06-22T05:26:47.555Z"
+  "lastStatsAt": "2026-06-23T05:13:19.181Z"
 }
