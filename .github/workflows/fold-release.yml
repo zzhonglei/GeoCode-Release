@@ -1,19 +1,17 @@
-name: Correct download baseline (manual stopgap)
+name: Fold release into catalog (one-time migration)
 
-# MANUAL, re-runnable stopgap for the transition window. A few skills (docx, xlsx,
-# pdf) carry so many package files that on the legacy @release branch those files
-# saturate jsdelivr's top-100 stats window and push the skill's own SKILL.md out of
-# it — so the harvester can never count them and they sit at a hand-pinned floor.
-#
-# This job re-derives their TRUE install total from their most-hit sibling file
-# (every install fetches the whole package) and re-pins the catalog ledger baseline.
-# It is SAFE to run repeatedly: the correction is monotonic (never lowers a value),
-# so running it a few times during the wait keeps docx/xlsx/pdf from drifting back
-# down as old clients keep installing.
-#
-# Retire this workflow once the adapted client ships and real install traffic moves
-# to @catalog (where SKILL.md is always visible and these skills count natively).
+# ONE-TIME, manually-dispatched migration. Folds the `release` population's lifetime
+# download contribution into the catalog ledger as a frozen seed, then drops
+# ledger.release entirely — making the catalog branch's stats fully self-contained so
+# the release branch can later be retired/deleted with ZERO impact on downloadCount.
 # See docs/stats-two-branch-design.md.
+#
+# PRECONDITION: aggregate-stats.mjs on main must ALREADY carry QUERY_REFS = ["catalog"]
+# (release no longer harvested) and correct-baseline must be retired. Otherwise the
+# next harvest / baseline-correction would re-create ledger.release and undo the fold.
+#
+# Idempotent: fold-release-into-catalog.mjs is a no-op once ledger.release is gone, so
+# an accidental re-run is harmless. Retire this workflow after a successful run.
 
 on:
   workflow_dispatch:
@@ -28,7 +26,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  correct:
+  fold:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
@@ -44,17 +42,17 @@ jobs:
       - name: Fetch scripts from main
         run: |
           mkdir -p .ci
-          curl -sfL "https://raw.githubusercontent.com/${{ github.repository }}/main/scripts/correct-baseline.mjs" \
-            -o .ci/correct-baseline.mjs
+          curl -sfL "https://raw.githubusercontent.com/${{ github.repository }}/main/scripts/fold-release-into-catalog.mjs" \
+            -o .ci/fold-release-into-catalog.mjs
           curl -sfL "https://raw.githubusercontent.com/${{ github.repository }}/main/scripts/aggregate-stats.mjs" \
             -o .ci/aggregate-stats.mjs
 
       # Default CATALOG_PATH is ./store/catalog.json — correct on the catalog branch.
-      # correct-baseline fixes the ledger seeds; aggregate rebuilds downloadCount.
-      - name: Correct ledger baseline
-        run: node .ci/correct-baseline.mjs
+      # fold rewrites the ledger seeds; aggregate rebuilds downloadCount from it.
+      - name: Fold release ledger into catalog seeds
+        run: node .ci/fold-release-into-catalog.mjs
 
-      - name: Rebuild downloadCount from corrected ledger
+      - name: Rebuild downloadCount from folded ledger
         run: node .ci/aggregate-stats.mjs
 
       - name: Commit if changed
@@ -65,22 +63,21 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add -A store/
           if git diff --cached --quiet; then
-            echo "No baseline changes — nothing to commit."
+            echo "No changes — already folded."
             echo "changed=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
-          git commit -m "chore: correct download baseline for saturated skills"
+          git commit -m "chore: fold release ledger into catalog (one-time migration)"
           git push
           echo "changed=true" >> "$GITHUB_OUTPUT"
 
       # jsdelivr's upstream may still see the previous commit; purging too early
-      # re-caches the OLD catalog for ~12h. Mirror publish.yml's propagation wait,
-      # and only when the branch actually moved.
+      # re-caches the OLD catalog for ~12h. Mirror publish.yml's propagation wait.
       - name: Wait for propagation
         if: steps.commit.outputs.changed == 'true'
         run: sleep 120
 
-      - name: Purge corrected catalog.json from jsdelivr
+      - name: Purge folded catalog.json from jsdelivr
         if: steps.commit.outputs.changed == 'true'
         run: |
           curl -sfL "https://purge.jsdelivr.net/gh/${{ github.repository }}@catalog/store/catalog.json" \

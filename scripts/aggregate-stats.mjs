@@ -33,8 +33,12 @@ import path from "node:path"
 
 const REPO = "zzhonglei/GeoCode-Release"
 // Refs whose SKILL.md hits we COUNT. `assets` is never queried (we don't count
-// asset files). Drop "release" from this list once the release branch is retired.
-const QUERY_REFS = ["catalog", "release"]
+// asset files). `release` is no longer queried: its lifetime contribution was
+// folded into the catalog ledger as a frozen seed (see fold-release-into-catalog.mjs),
+// so the catalog branch's stats are now self-contained and the release branch can be
+// retired without affecting downloadCount. Re-harvesting it would also double-count
+// the seed, so it must stay out of this list.
+const QUERY_REFS = ["catalog"]
 const PERIODS = ["day", "year"]
 
 // publish.yml points CATALOG_PATH at dist/catalog/store/catalog.json (built but
