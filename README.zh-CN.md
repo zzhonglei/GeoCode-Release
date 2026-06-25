@@ -58,9 +58,10 @@ GeoCode 当前以 0.9.x 系列进行公开预览，从 [Releases](https://github
 
 | 版本 | 发布日期 | 更新说明 |
 | :--- | :--- | :--- |
-| [**v0.9.5**](https://github.com/zzhonglei/GeoCode-Release/releases/tag/v0.9.5) `最新` | 2026-06-13 | `优化` Skill 集市 —— 浏览、安装、管理 Skill 的体验更顺手 |
+| [**v0.9.6**](https://github.com/zzhonglei/GeoCode-Release/releases/tag/v0.9.6) `最新` | 2026-06-25 | `优化` 重构 Skill 集市的下载逻辑<br>`优化` GEE 环境的后台管理方式，支持代理<br>`优化` 增强 GeoAgent 的联网搜索能力<br>`优化` 增强 GeoAgent 对 Word、PDF 等文档的读取能力<br>`修复` 部分情况下 QGIS 环境工作异常<br>`修复` 输入栏附件文件编码错误<br>`修复` 部分情况下地理数据预览异常 |
+| [**v0.9.5**](https://github.com/zzhonglei/GeoCode-Release/releases/tag/v0.9.5) | 2026-06-13 | `优化` Skill 集市 —— 浏览、安装、管理 Skill 的体验更顺手 |
 | [**v0.9.4**](https://github.com/zzhonglei/GeoCode-Release/releases/tag/v0.9.4) | 2026-06-12 | `紧急修复` 针对 v0.9.3 的紧急修复——Windows 安装程序的文件组织错误 |
-| [**v0.9.3**](https://github.com/zzhonglei/GeoCode-Release/releases/tag/v0.9.3) | 2026-06-12 | `新增` 内置 Playwright MCP，智能体可以自己操控浏览器了（默认关闭，需手动开启）<br>`优化` OSM 数据下载子智能体的工作流程更加顺畅<br>`优化` 智能体读取地理数据更高效<br>`修复` 部分模型视觉能力失效的问题<br>`修复` Codex（OpenAI 订阅）无法登录的问题<br>`修复` 若干已知问题 |
+| [**v0.9.3**](https://github.com/zzhonglei/GeoCode-Release/releases/tag/v0.9.3) | 2026-06-12 | `新增` 内置 [Playwright MCP](https://github.com/microsoft/playwright-mcp)，智能体可以自己操控浏览器了（默认关闭，需手动开启）<br>`优化` OSM 数据下载子智能体的工作流程更加顺畅<br>`优化` 智能体读取地理数据更高效<br>`修复` 部分模型视觉能力失效的问题<br>`修复` Codex（OpenAI 订阅）无法登录的问题<br>`修复` 若干已知问题 |
 | [**v0.9.2**](https://github.com/zzhonglei/GeoCode-Release/releases/tag/v0.9.2) | 2026-05-07 | `修复` 部分 QGIS 版本的兼容性问题<br>`修复` 部分 Windows 机型「设置」窗口卡顿问题 |
 | [**v0.9.1**](https://github.com/zzhonglei/GeoCode-Release/releases/tag/v0.9.1) | 2026-05-05 | `修复` Windows 平台 Google Earth Engine 显示异常 |
 | [**v0.9.0**](https://github.com/zzhonglei/GeoCode-Release/releases/tag/v0.9.0) | 2026-05-04 | `首发` 公开预览版 |
