@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-06-26T15:49:51.182Z",
+  "generatedAt": "2026-06-26T15:59:25.162Z",
   "skills": [
     {
       "id": "china-admin-boundaries",
@@ -21,7 +21,7 @@
       "deprecated": false,
       "size": 18820846,
       "fileCount": 4,
-      "updatedAt": "2026-06-26T15:49:51.182Z",
+      "updatedAt": "2026-06-26T15:59:25.162Z",
       "downloadCount": 0,
       "packageBaseUrl": "/core/china-admin-boundaries/",
       "packageFiles": [
@@ -47,7 +47,7 @@
       "id": "china-statistics-data",
       "name": "China Statistics Data",
       "displayName": "China Statistics Data",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "description": "Guidance for finding and downloading official thematic statistics from the National Bureau of Statistics of China.",
       "tags": [
         "china",
@@ -60,14 +60,14 @@
       "minClientVersion": "0.9.0",
       "license": "MIT",
       "deprecated": false,
-      "size": 11027,
+      "size": 11164,
       "fileCount": 1,
-      "updatedAt": "2026-06-26T15:49:51.182Z",
+      "updatedAt": "2026-06-26T15:59:25.162Z",
       "downloadCount": 0,
       "packageBaseUrl": "/core/china-statistics-data/",
       "packageFiles": [
         {
-          "source": "SKILL.9070abb1.md",
+          "source": "SKILL.9730863e.md",
           "dest": "SKILL.md"
         }
       ]
@@ -91,7 +91,7 @@
       "sourceUrl": "https://github.com/k-dense-ai/scientific-agent-skills",
       "size": 1121046,
       "fileCount": 60,
-      "updatedAt": "2026-06-26T15:49:51.182Z",
+      "updatedAt": "2026-06-26T15:59:25.162Z",
       "downloadCount": 95,
       "packageBaseUrl": "/core/docx-reader/",
       "packageFiles": [
@@ -354,7 +354,7 @@
       "deprecated": false,
       "size": 62085,
       "fileCount": 5,
-      "updatedAt": "2026-06-26T15:49:51.182Z",
+      "updatedAt": "2026-06-26T15:59:25.162Z",
       "downloadCount": 129,
       "packageBaseUrl": "/core/gee-scripting/",
       "packageFiles": [
@@ -397,7 +397,7 @@
       "deprecated": true,
       "size": 1196,
       "fileCount": 1,
-      "updatedAt": "2026-06-26T15:49:51.182Z",
+      "updatedAt": "2026-06-26T15:59:25.162Z",
       "downloadCount": 103,
       "packageBaseUrl": "/core/hello-geocode/",
       "packageFiles": [
@@ -426,7 +426,7 @@
       "sourceUrl": "https://github.com/k-dense-ai/scientific-agent-skills",
       "size": 57540,
       "fileCount": 11,
-      "updatedAt": "2026-06-26T15:49:51.182Z",
+      "updatedAt": "2026-06-26T15:59:25.162Z",
       "downloadCount": 36,
       "packageBaseUrl": "/core/pdf/",
       "packageFiles": [
@@ -494,7 +494,7 @@
       "deprecated": false,
       "size": 25812,
       "fileCount": 2,
-      "updatedAt": "2026-06-26T15:49:51.182Z",
+      "updatedAt": "2026-06-26T15:59:25.162Z",
       "downloadCount": 117,
       "packageBaseUrl": "/core/projection-selection/",
       "packageFiles": [
@@ -526,7 +526,7 @@
       "deprecated": false,
       "size": 6846856,
       "fileCount": 15,
-      "updatedAt": "2026-06-26T15:49:51.182Z",
+      "updatedAt": "2026-06-26T15:59:25.162Z",
       "downloadCount": 152,
       "packageBaseUrl": "/core/thematic-map/",
       "packageFiles": [
@@ -609,7 +609,7 @@
       "deprecated": true,
       "size": 1385,
       "fileCount": 1,
-      "updatedAt": "2026-06-26T15:49:51.182Z",
+      "updatedAt": "2026-06-26T15:59:25.162Z",
       "downloadCount": 49,
       "packageBaseUrl": "/core/update-test/",
       "packageFiles": [
@@ -638,7 +638,7 @@
       "sourceUrl": "https://github.com/k-dense-ai/scientific-agent-skills",
       "size": 1093662,
       "fileCount": 53,
-      "updatedAt": "2026-06-26T15:49:51.182Z",
+      "updatedAt": "2026-06-26T15:59:25.162Z",
       "downloadCount": 100,
       "packageBaseUrl": "/core/xlsx/",
       "packageFiles": [
@@ -857,5 +857,5 @@
       ]
     }
   ],
-  "lastStatsAt": "2026-06-26T15:49:53.895Z"
+  "lastStatsAt": "2026-06-26T15:59:27.609Z"
 }
