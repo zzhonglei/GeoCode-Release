@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-06-26T10:22:22.069Z",
+  "generatedAt": "2026-06-26T10:51:32.016Z",
   "refs": {
     "catalog": "https://cdn.jsdelivr.net/gh/zzhonglei/GeoCode-Release@catalog",
     "assets": "https://cdn.jsdelivr.net/gh/zzhonglei/GeoCode-Release@assets"
@@ -29,7 +29,7 @@
       "sourceUrl": "https://github.com/k-dense-ai/scientific-agent-skills",
       "size": 1121046,
       "fileCount": 60,
-      "updatedAt": "2026-06-26T10:22:22.069Z",
+      "updatedAt": "2026-06-26T10:51:32.016Z",
       "downloadCount": 95,
       "packageFiles": [
         {
@@ -351,7 +351,7 @@
       "deprecated": false,
       "size": 62085,
       "fileCount": 5,
-      "updatedAt": "2026-06-26T10:22:22.069Z",
+      "updatedAt": "2026-06-26T10:51:32.016Z",
       "downloadCount": 129,
       "packageFiles": [
         {
@@ -398,7 +398,7 @@
       "deprecated": true,
       "size": 1196,
       "fileCount": 1,
-      "updatedAt": "2026-06-26T10:22:22.069Z",
+      "updatedAt": "2026-06-26T10:51:32.016Z",
       "downloadCount": 103,
       "packageFiles": [
         {
@@ -427,7 +427,7 @@
       "sourceUrl": "https://github.com/k-dense-ai/scientific-agent-skills",
       "size": 57540,
       "fileCount": 11,
-      "updatedAt": "2026-06-26T10:22:22.069Z",
+      "updatedAt": "2026-06-26T10:51:32.016Z",
       "downloadCount": 36,
       "packageFiles": [
         {
@@ -505,7 +505,7 @@
       "deprecated": false,
       "size": 25812,
       "fileCount": 2,
-      "updatedAt": "2026-06-26T10:22:22.069Z",
+      "updatedAt": "2026-06-26T10:51:32.016Z",
       "downloadCount": 117,
       "packageFiles": [
         {
@@ -524,7 +524,7 @@
       "id": "thematic-map",
       "name": "Thematic Mapping",
       "displayName": "Thematic Mapping",
-      "version": "0.3.0",
+      "version": "0.3.1",
       "description": "Compose polished thematic maps that follow cartographic conventions.",
       "tags": [
         "mapping",
@@ -536,9 +536,9 @@
       "minClientVersion": "0.9.0",
       "license": "MIT",
       "deprecated": false,
-      "size": 6852885,
-      "fileCount": 16,
-      "updatedAt": "2026-06-26T10:22:22.069Z",
+      "size": 6846856,
+      "fileCount": 15,
+      "updatedAt": "2026-06-26T10:51:32.016Z",
       "downloadCount": 152,
       "packageFiles": [
         {
@@ -612,13 +612,8 @@
           "ref": "assets"
         },
         {
-          "source": "core/thematic-map/templates/中国东北三省地图示例.9efae9a0.md",
-          "dest": "templates/中国东北三省地图示例.md",
-          "ref": "assets"
-        },
-        {
-          "source": "core/thematic-map/templates/中国地图示例(frykit).c50de68d.md",
-          "dest": "templates/中国地图示例(frykit).md",
+          "source": "core/thematic-map/templates/china-terrain-map.df442fce.md",
+          "dest": "templates/china-terrain-map.md",
           "ref": "assets"
         }
       ]
@@ -640,7 +635,7 @@
       "deprecated": true,
       "size": 1385,
       "fileCount": 1,
-      "updatedAt": "2026-06-26T10:22:22.069Z",
+      "updatedAt": "2026-06-26T10:51:32.016Z",
       "downloadCount": 49,
       "packageFiles": [
         {
@@ -669,7 +664,7 @@
       "sourceUrl": "https://github.com/k-dense-ai/scientific-agent-skills",
       "size": 1093662,
       "fileCount": 53,
-      "updatedAt": "2026-06-26T10:22:22.069Z",
+      "updatedAt": "2026-06-26T10:51:32.016Z",
       "downloadCount": 100,
       "packageFiles": [
         {
@@ -940,5 +935,5 @@
       ]
     }
   ],
-  "lastStatsAt": "2026-06-26T10:22:23.283Z"
+  "lastStatsAt": "2026-06-26T10:51:34.481Z"
 }
