@@ -32,7 +32,7 @@ The three **Optional** libraries are only needed when a reference explicitly cal
 
 ## How to Work Through This Document
 
-**One element at a time: read its reference, write its code, then move to the next. Never read all references up front. Never write the whole script in one pass.**
+**One element at a time: read its reference, write its code, then move to the next. NEVER read all references up front. NEVER write the whole script in one pass.**
 
 Reading everything first floods your context and leads to a rushed, broken script. Read a bit, write a bit.
 
@@ -44,6 +44,14 @@ The user reads, runs, and modifies every script you write — and well-placed co
 
 - **Annotate every adjustable map element parameter** (title, legend, scale bar, colorbar, etc.) so the user knows exactly where to tweak the appearance.
 - **Comment the purpose of each major step** in the script — what it does and why.
+
+## China Base Map (whole-China shortcut)
+
+If the study area is **the whole of China**, do not build the frame by hand. The `china_base` module renders a standards-compliant China base map — national boundary, nine-dash line, province boundaries, coastline, maritime gradient, and a South China Sea inset — in one call, and returns a normal `fig, ax`.
+
+**For a whole-China map**: read [`references/china-base-map.md`](references/china-base-map.md) and use `create_china_map(...)` in place of the next four sections (*Establishing the Geographic Frame*, *Adding the Map Frame*, *Adding a Basemap*, *Adding the Study Area Boundary*) — they are all handled for you. Then continue from *Adding the Data Layers* (overlay your data via `draw_china`) and finish as usual.
+
+For any sub-national or non-China extent, ignore this and follow the general workflow below.
 
 ## Establishing the Geographic Frame
 
