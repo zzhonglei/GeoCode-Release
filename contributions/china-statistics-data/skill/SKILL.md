@@ -13,7 +13,7 @@ The National Bureau of Statistics data portal is not a simple static download pa
 
 Before entering the data-download workflow, look at the tools currently available to you. If Playwright MCP browser-control tools are present, use them to open the official NBS website and work through the visible interface just as a user would.
 
-When you find that Playwright MCP is not available, do not continue with the NBS data-download workflow yet. In your own words, remind the user to open GeoCode's top-right status button and enable Playwright MCP, explaining that you need browser-control capability before you can operate the NBS website and download thematic data.
+When you find that Playwright MCP is not available, do not continue with the NBS data-download workflow yet. In your own words, remind the user to open GeoCode's top-right status button and enable Playwright MCP, explaining that you need browser-control capability before you can operate the NBS website and download thematic data.The GeoCode platform has included Playwright MCP since version 0.9.3, but users need to manually enable it before they can use its tools.
 
 After the user enables Playwright MCP, continue from the official NBS website instead of relying on unofficial mirrors, guessed portal URLs, or hidden request parameters.
 
