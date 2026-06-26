@@ -17,6 +17,8 @@ When you find that Playwright MCP is not available, do not continue with the NBS
 
 After the user enables Playwright MCP, continue from the official NBS website instead of relying on unofficial mirrors, guessed portal URLs, or hidden request parameters.
 
+**important:** You cannot perform any other tasks while waiting for the user to enable MCP.
+
 ## NBS Data Platform Structure
 
 The main working site for this skill is the National Bureau of Statistics data platform: `https://data.stats.gov.cn/dg/website/page.html`. The site is organized as a navigation-based data platform. When you operate it through Playwright MCP, first identify which navigation entry matches the user's requested geography and time frequency, then open the corresponding page and work from the visible table interface.
@@ -40,37 +42,37 @@ The top-level navigation contains these major sections:
 
 For geospatial and thematic mapping tasks, the most common entry point is **地区数据**. This menu contains province-level, major-city, Hong Kong, Macao, and Taiwan datasets. The URL hash suffix tells you which page you are on:
 
-| URL suffix | Navigation item | What the page contains |
-|:---|:---|:---|
-| `fsMonthData` | 分省月度数据 | Monthly statistics for provinces, autonomous regions, and municipalities, such as monthly CPI and high-frequency industrial indicators. |
-| `fsQuarterData` | 分省季度数据 | Quarterly statistics for provinces, autonomous regions, and municipalities, such as quarterly GDP. |
-| `fsYearData` | 分省年度数据 | Annual statistics for provinces, autonomous regions, and municipalities. This is often the best starting point for province-level thematic maps and contains many indicator categories. |
-| `mainMonthData` | 主要城市月度价格 | Monthly price statistics for major cities, such as consumer prices and commodity prices. |
-| `hongKongYearData` | 香港特别行政区年度数据 | Annual statistics for the Hong Kong Special Administrative Region. |
-| `macaoYearData` | 澳门特别行政区年度数据 | Annual statistics for the Macao Special Administrative Region. |
-| `taiwanYearData` | 台湾省年度数据 | Annual statistics for Taiwan Province. |
+| URL suffix         | Navigation item        | What the page contains                                                                                                                                                                  |
+| :----------------- | :--------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `fsMonthData`      | 分省月度数据           | Monthly statistics for provinces, autonomous regions, and municipalities, such as monthly CPI and high-frequency industrial indicators.                                                 |
+| `fsQuarterData`    | 分省季度数据           | Quarterly statistics for provinces, autonomous regions, and municipalities, such as quarterly GDP.                                                                                      |
+| `fsYearData`       | 分省年度数据           | Annual statistics for provinces, autonomous regions, and municipalities. This is often the best starting point for province-level thematic maps and contains many indicator categories. |
+| `mainMonthData`    | 主要城市月度价格       | Monthly price statistics for major cities, such as consumer prices and commodity prices.                                                                                                |
+| `hongKongYearData` | 香港特别行政区年度数据 | Annual statistics for the Hong Kong Special Administrative Region.                                                                                                                      |
+| `macaoYearData`    | 澳门特别行政区年度数据 | Annual statistics for the Macao Special Administrative Region.                                                                                                                          |
+| `taiwanYearData`   | 台湾省年度数据         | Annual statistics for Taiwan Province.                                                                                                                                                  |
 
 Use these direct page URLs when you already know the correct regional data entry:
 
-| Page | URL |
-|:---|:---|
-| 分省月度数据 | `https://data.stats.gov.cn/dg/website/page.html#/pc/national/fsMonthData` |
-| 分省季度数据 | `https://data.stats.gov.cn/dg/website/page.html#/pc/national/fsQuarterData` |
-| 分省年度数据 | `https://data.stats.gov.cn/dg/website/page.html#/pc/national/fsYearData` |
-| 主要城市月度价格 | `https://data.stats.gov.cn/dg/website/page.html#/pc/national/mainMonthData` |
+| Page                   | URL                                                                            |
+| :--------------------- | :----------------------------------------------------------------------------- |
+| 分省月度数据           | `https://data.stats.gov.cn/dg/website/page.html#/pc/national/fsMonthData`      |
+| 分省季度数据           | `https://data.stats.gov.cn/dg/website/page.html#/pc/national/fsQuarterData`    |
+| 分省年度数据           | `https://data.stats.gov.cn/dg/website/page.html#/pc/national/fsYearData`       |
+| 主要城市月度价格       | `https://data.stats.gov.cn/dg/website/page.html#/pc/national/mainMonthData`    |
 | 香港特别行政区年度数据 | `https://data.stats.gov.cn/dg/website/page.html#/pc/national/hongKongYearData` |
-| 澳门特别行政区年度数据 | `https://data.stats.gov.cn/dg/website/page.html#/pc/national/macaoYearData` |
-| 台湾省年度数据 | `https://data.stats.gov.cn/dg/website/page.html#/pc/national/taiwanYearData` |
+| 澳门特别行政区年度数据 | `https://data.stats.gov.cn/dg/website/page.html#/pc/national/macaoYearData`    |
+| 台湾省年度数据         | `https://data.stats.gov.cn/dg/website/page.html#/pc/national/taiwanYearData`   |
 
 Use this quick selection rule:
 
-| Geography | Monthly | Quarterly | Annual |
-|:---|:---:|:---:|:---:|
-| Provinces, autonomous regions, municipalities | `fsMonthData` | `fsQuarterData` | `fsYearData` |
-| Major cities | `mainMonthData` | - | Use the corresponding major-city annual entry if the site exposes it for the requested indicator. |
-| Hong Kong | - | - | `hongKongYearData` |
-| Macao | - | - | `macaoYearData` |
-| Taiwan Province | - | - | `taiwanYearData` |
+| Geography                                     |     Monthly     |    Quarterly    |                                              Annual                                               |
+| :-------------------------------------------- | :-------------: | :-------------: | :-----------------------------------------------------------------------------------------------: |
+| Provinces, autonomous regions, municipalities |  `fsMonthData`  | `fsQuarterData` |                                           `fsYearData`                                            |
+| Major cities                                  | `mainMonthData` |        -        | Use the corresponding major-city annual entry if the site exposes it for the requested indicator. |
+| Hong Kong                                     |        -        |        -        |                                        `hongKongYearData`                                         |
+| Macao                                         |        -        |        -        |                                          `macaoYearData`                                          |
+| Taiwan Province                               |        -        |        -        |                                         `taiwanYearData`                                          |
 
 When the user asks for province-level annual thematic data, prefer `fsYearData` first. When the user asks for monthly or quarterly province-level indicators, use `fsMonthData` or `fsQuarterData` instead. When the user asks for Hong Kong, Macao, or Taiwan annual statistics, use their dedicated annual pages instead of forcing them into the mainland province table.
 
