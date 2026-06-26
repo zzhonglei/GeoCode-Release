@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-06-25T04:24:07.726Z",
+  "generatedAt": "2026-06-26T10:22:22.069Z",
   "skills": [
     {
       "id": "docx-reader",
@@ -21,7 +21,7 @@
       "sourceUrl": "https://github.com/k-dense-ai/scientific-agent-skills",
       "size": 1121046,
       "fileCount": 60,
-      "updatedAt": "2026-06-25T04:24:07.726Z",
+      "updatedAt": "2026-06-26T10:22:22.069Z",
       "downloadCount": 95,
       "packageBaseUrl": "/core/docx-reader/",
       "packageFiles": [
@@ -284,7 +284,7 @@
       "deprecated": false,
       "size": 62085,
       "fileCount": 5,
-      "updatedAt": "2026-06-25T04:24:07.726Z",
+      "updatedAt": "2026-06-26T10:22:22.069Z",
       "downloadCount": 129,
       "packageBaseUrl": "/core/gee-scripting/",
       "packageFiles": [
@@ -327,7 +327,7 @@
       "deprecated": true,
       "size": 1196,
       "fileCount": 1,
-      "updatedAt": "2026-06-25T04:24:07.726Z",
+      "updatedAt": "2026-06-26T10:22:22.069Z",
       "downloadCount": 103,
       "packageBaseUrl": "/core/hello-geocode/",
       "packageFiles": [
@@ -356,7 +356,7 @@
       "sourceUrl": "https://github.com/k-dense-ai/scientific-agent-skills",
       "size": 57540,
       "fileCount": 11,
-      "updatedAt": "2026-06-25T04:24:07.726Z",
+      "updatedAt": "2026-06-26T10:22:22.069Z",
       "downloadCount": 36,
       "packageBaseUrl": "/core/pdf/",
       "packageFiles": [
@@ -424,7 +424,7 @@
       "deprecated": false,
       "size": 25812,
       "fileCount": 2,
-      "updatedAt": "2026-06-25T04:24:07.726Z",
+      "updatedAt": "2026-06-26T10:22:22.069Z",
       "downloadCount": 117,
       "packageBaseUrl": "/core/projection-selection/",
       "packageFiles": [
@@ -442,7 +442,7 @@
       "id": "thematic-map",
       "name": "Thematic Mapping",
       "displayName": "Thematic Mapping",
-      "version": "0.2.0",
+      "version": "0.3.0",
       "description": "Compose polished thematic maps that follow cartographic conventions.",
       "tags": [
         "mapping",
@@ -454,15 +454,19 @@
       "minClientVersion": "0.9.0",
       "license": "MIT",
       "deprecated": false,
-      "size": 118805,
-      "fileCount": 13,
-      "updatedAt": "2026-06-25T04:24:07.726Z",
+      "size": 6852885,
+      "fileCount": 16,
+      "updatedAt": "2026-06-26T10:22:22.069Z",
       "downloadCount": 152,
       "packageBaseUrl": "/core/thematic-map/",
       "packageFiles": [
         {
-          "source": "SKILL.7adb9dc6.md",
+          "source": "SKILL.c921ea95.md",
           "dest": "SKILL.md"
+        },
+        {
+          "source": "data/china_thematic_base_wgs84.ddcc802c.gpkg",
+          "dest": "data/china_thematic_base_wgs84.gpkg"
         },
         {
           "source": "references/basemap.4106f00f.md",
@@ -471,6 +475,10 @@
         {
           "source": "references/cartopy-projection.e442b2bb.md",
           "dest": "references/cartopy-projection.md"
+        },
+        {
+          "source": "references/china-base-map.c984b634.md",
+          "dest": "references/china-base-map.md"
         },
         {
           "source": "references/legend.a02461da.md",
@@ -499,6 +507,10 @@
         {
           "source": "scripts/basemap_helpers.7fe22ce7.py",
           "dest": "scripts/basemap_helpers.py"
+        },
+        {
+          "source": "scripts/china_base.ed7373e3.py",
+          "dest": "scripts/china_base.py"
         },
         {
           "source": "scripts/legend_helpers.ff9b4ca8.py",
@@ -531,7 +543,7 @@
       "deprecated": true,
       "size": 1385,
       "fileCount": 1,
-      "updatedAt": "2026-06-25T04:24:07.726Z",
+      "updatedAt": "2026-06-26T10:22:22.069Z",
       "downloadCount": 49,
       "packageBaseUrl": "/core/update-test/",
       "packageFiles": [
@@ -560,7 +572,7 @@
       "sourceUrl": "https://github.com/k-dense-ai/scientific-agent-skills",
       "size": 1093662,
       "fileCount": 53,
-      "updatedAt": "2026-06-25T04:24:07.726Z",
+      "updatedAt": "2026-06-26T10:22:22.069Z",
       "downloadCount": 100,
       "packageBaseUrl": "/core/xlsx/",
       "packageFiles": [
@@ -779,5 +791,5 @@
       ]
     }
   ],
-  "lastStatsAt": "2026-06-25T04:24:09.215Z"
+  "lastStatsAt": "2026-06-26T10:22:23.283Z"
 }
