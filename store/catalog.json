@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-06-26T10:51:32.016Z",
+  "generatedAt": "2026-06-26T13:23:27.148Z",
   "refs": {
     "catalog": "https://cdn.jsdelivr.net/gh/zzhonglei/GeoCode-Release@catalog",
     "assets": "https://cdn.jsdelivr.net/gh/zzhonglei/GeoCode-Release@assets"
@@ -10,6 +10,50 @@
     "assets": "https://raw.githubusercontent.com/zzhonglei/GeoCode-Release/assets"
   },
   "skills": [
+    {
+      "id": "china-admin-boundaries",
+      "name": "China Admin Boundaries",
+      "displayName": "China Admin Boundaries",
+      "version": "0.1.0",
+      "description": "Official, compliant vector boundaries of China's provinces, cities and counties.",
+      "tags": [
+        "china",
+        "boundaries",
+        "administrative-divisions",
+        "gis",
+        "vector-data"
+      ],
+      "author": "GeoCode",
+      "minClientVersion": "0.9.0",
+      "license": "MIT",
+      "deprecated": false,
+      "size": 18820846,
+      "fileCount": 4,
+      "updatedAt": "2026-06-26T13:23:27.148Z",
+      "downloadCount": 0,
+      "packageFiles": [
+        {
+          "source": "core/china-admin-boundaries/SKILL.f1778b8e.md",
+          "dest": "SKILL.md",
+          "ref": "catalog"
+        },
+        {
+          "source": "core/china-admin-boundaries/data/china_city.a3038b09.geojson",
+          "dest": "data/china_city.geojson",
+          "ref": "assets"
+        },
+        {
+          "source": "core/china-admin-boundaries/data/china_county.22db6c54.geojson",
+          "dest": "data/china_county.geojson",
+          "ref": "assets"
+        },
+        {
+          "source": "core/china-admin-boundaries/data/china_province.672b3219.geojson",
+          "dest": "data/china_province.geojson",
+          "ref": "assets"
+        }
+      ]
+    },
     {
       "id": "docx-reader",
       "name": "DOCX Skill",
@@ -29,7 +73,7 @@
       "sourceUrl": "https://github.com/k-dense-ai/scientific-agent-skills",
       "size": 1121046,
       "fileCount": 60,
-      "updatedAt": "2026-06-26T10:51:32.016Z",
+      "updatedAt": "2026-06-26T13:23:27.148Z",
       "downloadCount": 95,
       "packageFiles": [
         {
@@ -351,7 +395,7 @@
       "deprecated": false,
       "size": 62085,
       "fileCount": 5,
-      "updatedAt": "2026-06-26T10:51:32.016Z",
+      "updatedAt": "2026-06-26T13:23:27.148Z",
       "downloadCount": 129,
       "packageFiles": [
         {
@@ -398,7 +442,7 @@
       "deprecated": true,
       "size": 1196,
       "fileCount": 1,
-      "updatedAt": "2026-06-26T10:51:32.016Z",
+      "updatedAt": "2026-06-26T13:23:27.148Z",
       "downloadCount": 103,
       "packageFiles": [
         {
@@ -427,7 +471,7 @@
       "sourceUrl": "https://github.com/k-dense-ai/scientific-agent-skills",
       "size": 57540,
       "fileCount": 11,
-      "updatedAt": "2026-06-26T10:51:32.016Z",
+      "updatedAt": "2026-06-26T13:23:27.148Z",
       "downloadCount": 36,
       "packageFiles": [
         {
@@ -505,7 +549,7 @@
       "deprecated": false,
       "size": 25812,
       "fileCount": 2,
-      "updatedAt": "2026-06-26T10:51:32.016Z",
+      "updatedAt": "2026-06-26T13:23:27.148Z",
       "downloadCount": 117,
       "packageFiles": [
         {
@@ -538,7 +582,7 @@
       "deprecated": false,
       "size": 6846856,
       "fileCount": 15,
-      "updatedAt": "2026-06-26T10:51:32.016Z",
+      "updatedAt": "2026-06-26T13:23:27.148Z",
       "downloadCount": 152,
       "packageFiles": [
         {
@@ -635,7 +679,7 @@
       "deprecated": true,
       "size": 1385,
       "fileCount": 1,
-      "updatedAt": "2026-06-26T10:51:32.016Z",
+      "updatedAt": "2026-06-26T13:23:27.148Z",
       "downloadCount": 49,
       "packageFiles": [
         {
@@ -664,7 +708,7 @@
       "sourceUrl": "https://github.com/k-dense-ai/scientific-agent-skills",
       "size": 1093662,
       "fileCount": 53,
-      "updatedAt": "2026-06-26T10:51:32.016Z",
+      "updatedAt": "2026-06-26T13:23:27.148Z",
       "downloadCount": 100,
       "packageFiles": [
         {
@@ -935,5 +979,5 @@
       ]
     }
   ],
-  "lastStatsAt": "2026-06-26T10:51:34.481Z"
+  "lastStatsAt": "2026-06-26T13:23:28.751Z"
 }
