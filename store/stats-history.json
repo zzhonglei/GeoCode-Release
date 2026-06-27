@@ -6,23 +6,28 @@
     },
     "/core/pdf/SKILL.f253fddd.md": {
       "2026-06-17": 4,
-      "seed": 32
+      "seed": 32,
+      "2026-06-25": 3
     },
     "/core/thematic-map/SKILL.7adb9dc6.md": {
       "2026-06-17": 4,
-      "seed": 148
+      "seed": 148,
+      "2026-06-25": 5
     },
     "/core/docx-reader/SKILL.5ad3b4d7.md": {
       "2026-06-17": 3,
-      "seed": 92
+      "seed": 92,
+      "2026-06-25": 3
     },
     "/core/gee-scripting/SKILL.d9a70d7b.md": {
       "2026-06-17": 3,
-      "seed": 126
+      "seed": 126,
+      "2026-06-25": 5
     },
     "/core/projection-selection/SKILL.299bc567.md": {
       "2026-06-17": 3,
-      "seed": 114
+      "seed": 114,
+      "2026-06-25": 3
     },
     "/core/update-test/SKILL.fe0b6e15.md": {
       "2026-06-17": 3,
@@ -30,7 +35,8 @@
     },
     "/core/xlsx/SKILL.5e202804.md": {
       "2026-06-17": 3,
-      "seed": 97
+      "seed": 97,
+      "2026-06-25": 3
     }
   }
 }

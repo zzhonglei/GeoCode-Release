@@ -103,7 +103,7 @@
       "size": 1121046,
       "fileCount": 60,
       "updatedAt": "2026-06-26T15:59:25.162Z",
-      "downloadCount": 95,
+      "downloadCount": 98,
       "packageFiles": [
         {
           "source": "core/docx-reader/SKILL.5ad3b4d7.md",
@@ -425,7 +425,7 @@
       "size": 62085,
       "fileCount": 5,
       "updatedAt": "2026-06-26T15:59:25.162Z",
-      "downloadCount": 129,
+      "downloadCount": 134,
       "packageFiles": [
         {
           "source": "core/gee-scripting/SKILL.d9a70d7b.md",
@@ -501,7 +501,7 @@
       "size": 57540,
       "fileCount": 11,
       "updatedAt": "2026-06-26T15:59:25.162Z",
-      "downloadCount": 36,
+      "downloadCount": 39,
       "packageFiles": [
         {
           "source": "core/pdf/SKILL.f253fddd.md",
@@ -579,7 +579,7 @@
       "size": 25812,
       "fileCount": 2,
       "updatedAt": "2026-06-26T15:59:25.162Z",
-      "downloadCount": 117,
+      "downloadCount": 120,
       "packageFiles": [
         {
           "source": "core/projection-selection/SKILL.299bc567.md",
@@ -612,7 +612,7 @@
       "size": 6846856,
       "fileCount": 15,
       "updatedAt": "2026-06-26T15:59:25.162Z",
-      "downloadCount": 152,
+      "downloadCount": 157,
       "packageFiles": [
         {
           "source": "core/thematic-map/SKILL.c921ea95.md",
@@ -738,7 +738,7 @@
       "size": 1093662,
       "fileCount": 53,
       "updatedAt": "2026-06-26T15:59:25.162Z",
-      "downloadCount": 100,
+      "downloadCount": 103,
       "packageFiles": [
         {
           "source": "core/xlsx/SKILL.5e202804.md",
@@ -1008,5 +1008,5 @@
       ]
     }
   ],
-  "lastStatsAt": "2026-06-26T15:59:27.609Z"
+  "lastStatsAt": "2026-06-27T04:13:43.079Z"
 }
