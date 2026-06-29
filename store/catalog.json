@@ -74,7 +74,7 @@
       "size": 11164,
       "fileCount": 1,
       "updatedAt": "2026-06-26T15:59:25.162Z",
-      "downloadCount": 0,
+      "downloadCount": 2,
       "packageFiles": [
         {
           "source": "core/china-statistics-data/SKILL.9730863e.md",
@@ -1008,5 +1008,5 @@
       ]
     }
   ],
-  "lastStatsAt": "2026-06-28T00:12:52.977Z"
+  "lastStatsAt": "2026-06-29T04:56:59.510Z"
 }
