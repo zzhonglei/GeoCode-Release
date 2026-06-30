@@ -35,7 +35,7 @@ import {
 const REPO = "zzhonglei/GeoCode-Release"
 const CATALOG_BRANCH = "catalog" // stats surface + catalog index (only SKILL.md)
 const ASSETS_BRANCH = "assets" // bulk skill files (everything except SKILL.md)
-const EMIT_RELEASE = true // transition: also emit legacy release tree. Flip false after retirement.
+const EMIT_RELEASE = false // release retired (frozen): no longer emit the legacy tree. See docs/stats-two-branch-design.md §8 P3.
 
 const SCHEMA_VERSION = 2
 const HASH_LEN = 8

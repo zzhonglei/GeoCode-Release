@@ -45,7 +45,7 @@ function semverGt(a, b) {
 }
 
 // ----------------------------------------------------------------------------
-// Release-branch catalog snapshot (for monotonic version check)
+// Catalog-branch snapshot (for monotonic version check)
 // ----------------------------------------------------------------------------
 
 /**
@@ -83,19 +83,22 @@ function getChangedSkillIds() {
 }
 
 /**
- * Read store/catalog.json from the release branch via `git show`. Returns a
+ * Read store/catalog.json from the catalog branch via `git show`. Returns a
  * Map<id, version-string> for skills already published. Returns an empty Map
  * when the branch / file isn't available (first publish, shallow clone, etc.).
+ *
+ * The version baseline lives on the `catalog` branch (v2 catalog). The retired
+ * `release` branch is no longer consulted — see docs/stats-two-branch-design.md §6.5.
  */
-function loadReleaseVersions() {
+function loadCatalogVersions() {
   let blob
   try {
-    blob = execFileSync("git", ["show", "origin/release:store/catalog.json"], {
+    blob = execFileSync("git", ["show", "origin/catalog:store/catalog.json"], {
       stdio: ["ignore", "pipe", "ignore"],
       encoding: "utf-8",
     })
   } catch {
-    // No release branch yet, or no catalog at that path — treat all PR skills
+    // No catalog branch yet, or no catalog at that path — treat all PR skills
     // as brand new. The monotonic check then only enforces semver shape.
     return new Map()
   }
@@ -103,7 +106,7 @@ function loadReleaseVersions() {
   try {
     parsed = JSON.parse(blob)
   } catch (err) {
-    console.warn(`Warning: release catalog.json is not valid JSON (${err.message}); skipping monotonic check.`)
+    console.warn(`Warning: catalog.json is not valid JSON (${err.message}); skipping monotonic check.`)
     return new Map()
   }
   const out = new Map()
@@ -141,7 +144,7 @@ function validateMeta(meta, errors, prefix) {
   requireString("minClientVersion")
   requireString("license")
   // version is required and must be MAJOR.MINOR.PATCH. Monotonic check below
-  // (validateVersionMonotonic) compares it against the release branch.
+  // (validateVersionMonotonic) compares it against the catalog branch.
   requireString("version")
   if (typeof meta.version === "string" && meta.version.trim() !== "" && !parseSemver(meta.version)) {
     errors.push(`${prefix} field version must be MAJOR.MINOR.PATCH (e.g. "0.1.0")`)
@@ -279,25 +282,25 @@ async function validateSkill(id, errors) {
 // ----------------------------------------------------------------------------
 
 /**
- * For every PR-modified skill that already exists on the release branch,
+ * For every PR-modified skill that already exists on the catalog branch,
  * require its meta.json version to be strictly greater than the published
- * version. Brand-new skills (no entry on release) are exempt — only their
+ * version. Brand-new skills (no entry on catalog) are exempt — only their
  * semver shape was already enforced by validateMeta.
  *
  * Skills that are not part of this PR are not checked, so an unrelated PR
  * cannot fail just because some other skill happens to share its current
- * version with the release branch.
+ * version with the catalog branch.
  *
  * Downgrades are forbidden (===, < both fail). To pull a bad release, ship a
  * higher-numbered patch with the rollback.
  *
  * Outside a PR context (no GITHUB_BASE_REF), we still flag any id that has
- * a numerically lower version than release — that catches accidental
+ * a numerically lower version than the catalog — that catches accidental
  * downgrades during ad-hoc/manual runs without scaring off contributors who
  * touch unrelated skills.
  */
 async function validateVersionMonotonic(ids, errors) {
-  const released = loadReleaseVersions()
+  const released = loadCatalogVersions()
   if (released.size === 0) return // first publish — nothing to compare against
 
   const changed = getChangedSkillIds() // Set<string> | null

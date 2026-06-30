@@ -1,11 +1,14 @@
 name: Build and publish
 
-# On push to main, rebuild the catalog/assets/release trees and deploy them to
-# their branches. See docs/stats-two-branch-design.md.
+# On push to main, rebuild the catalog/assets trees and deploy them to their
+# branches. See docs/stats-two-branch-design.md.
 #
 #   catalog  <- dist/catalog  (catalog.json + stats-history.json + SKILL.md only; the stats surface)
 #   assets   <- dist/assets   (every non-SKILL.md file)
-#   release  <- dist/release  (legacy single-branch layout for old clients; transition only)
+#
+# The legacy `release` branch is RETIRED (frozen): it is no longer rebuilt or
+# deployed. Old clients keep reading its last-published state until its traffic
+# drops to ~0 and the branch can be deleted. See design doc §8 (P3).
 #
 # Content-hashed files deploy APPEND-ONLY (clean:false): old hashes are never
 # deleted, so a client holding a stale catalog can still fetch what it points at
@@ -39,7 +42,7 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Build store (catalog + assets + release trees)
+      - name: Build store (catalog + assets trees)
         run: node scripts/build-store.mjs
 
       # Establish the date-bucket ledger before aggregating.
@@ -78,34 +81,13 @@ jobs:
       - name: Refresh download counts
         run: CATALOG_PATH=dist/catalog/store/catalog.json node scripts/aggregate-stats.mjs
 
-      # Mirror the corrected counts into the legacy release (v1) catalog so OLD
-      # clients also see the right numbers during the transition — including the
-      # seeded docx/pdf that release's own saturated stats can't surface.
-      - name: Mirror downloadCount into legacy release catalog
-        run: |
-          if [ ! -f dist/release/store/catalog.json ]; then
-            echo "No release catalog (EMIT_RELEASE off) — skipping mirror."; exit 0
-          fi
-          node -e '
-            const fs = require("fs");
-            const v2 = JSON.parse(fs.readFileSync("dist/catalog/store/catalog.json", "utf8"));
-            const counts = Object.fromEntries(v2.skills.map((s) => [s.id, s.downloadCount]));
-            const p = "dist/release/store/catalog.json";
-            const v1 = JSON.parse(fs.readFileSync(p, "utf8"));
-            for (const s of v1.skills) s.downloadCount = counts[s.id] ?? 0;
-            if (v2.lastStatsAt) v1.lastStatsAt = v2.lastStatsAt;
-            fs.writeFileSync(p, JSON.stringify(v1, null, 2) + "\n");
-            console.log("Mirrored downloadCount into release catalog.");
-          '
-
       - name: Capture pre-deploy SHAs
         id: pre
         run: |
           echo "catalog=$(git ls-remote origin catalog | awk '{print $1}')" >> "$GITHUB_OUTPUT"
-          echo "release=$(git ls-remote origin release | awk '{print $1}')" >> "$GITHUB_OUTPUT"
 
-      # Deploy order matters: assets first, then release, then catalog LAST. The
-      # catalog (index) must only go live after the assets it references exist.
+      # Deploy order matters: assets first, then catalog LAST. The catalog
+      # (index) must only go live after the assets it references exist.
       - name: Deploy assets branch
         uses: JamesIves/github-pages-deploy-action@v4
         with:
@@ -113,14 +95,6 @@ jobs:
           folder: dist/assets
           clean: false
           commit-message: "chore: assets from ${{ github.sha }}"
-
-      - name: Deploy release branch (legacy, transition)
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          branch: release
-          folder: dist/release
-          clean: false
-          commit-message: "chore: release from ${{ github.sha }}"
 
       - name: Deploy catalog branch (index + stats surface)
         uses: JamesIves/github-pages-deploy-action@v4
@@ -134,15 +108,14 @@ jobs:
         id: post
         run: |
           echo "catalog=$(git ls-remote origin catalog | awk '{print $1}')" >> "$GITHUB_OUTPUT"
-          echo "release=$(git ls-remote origin release | awk '{print $1}')" >> "$GITHUB_OUTPUT"
 
       # Sleep so jsdelivr's upstream view sees the new commit before we purge;
       # purging too early re-caches the OLD catalog for ~12h.
       - name: Wait for propagation
-        if: steps.pre.outputs.catalog != steps.post.outputs.catalog || steps.pre.outputs.release != steps.post.outputs.release
+        if: steps.pre.outputs.catalog != steps.post.outputs.catalog
         run: sleep 120
 
-      # Purge only the mutable catalog.json on branches whose tip moved. Hashed
+      # Purge only the mutable catalog.json when the catalog tip moved. Hashed
       # files are content-addressed and never need purging.
       - name: Purge changed catalog.json from jsdelivr
         run: |
@@ -150,9 +123,4 @@ jobs:
             curl -sfL "https://purge.jsdelivr.net/gh/${{ github.repository }}@catalog/store/catalog.json" || echo "catalog purge failed (non-fatal)"
           else
             echo "catalog branch unchanged; skipping purge."
-          fi
-          if [ "${{ steps.pre.outputs.release }}" != "${{ steps.post.outputs.release }}" ]; then
-            curl -sfL "https://purge.jsdelivr.net/gh/${{ github.repository }}@release/store/catalog.json" || echo "release purge failed (non-fatal)"
-          else
-            echo "release branch unchanged; skipping purge."
           fi
