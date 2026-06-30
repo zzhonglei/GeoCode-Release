@@ -30,7 +30,7 @@
       "size": 18820846,
       "fileCount": 4,
       "updatedAt": "2026-06-26T15:59:25.162Z",
-      "downloadCount": 19,
+      "downloadCount": 32,
       "packageFiles": [
         {
           "source": "core/china-admin-boundaries/SKILL.f1778b8e.md",
@@ -74,7 +74,7 @@
       "size": 11164,
       "fileCount": 1,
       "updatedAt": "2026-06-26T15:59:25.162Z",
-      "downloadCount": 2,
+      "downloadCount": 9,
       "packageFiles": [
         {
           "source": "core/china-statistics-data/SKILL.9730863e.md",
@@ -425,7 +425,7 @@
       "size": 62085,
       "fileCount": 5,
       "updatedAt": "2026-06-26T15:59:25.162Z",
-      "downloadCount": 140,
+      "downloadCount": 142,
       "packageFiles": [
         {
           "source": "core/gee-scripting/SKILL.d9a70d7b.md",
@@ -612,7 +612,7 @@
       "size": 6846856,
       "fileCount": 15,
       "updatedAt": "2026-06-26T15:59:25.162Z",
-      "downloadCount": 170,
+      "downloadCount": 183,
       "packageFiles": [
         {
           "source": "core/thematic-map/SKILL.c921ea95.md",
@@ -1008,5 +1008,5 @@
       ]
     }
   ],
-  "lastStatsAt": "2026-06-29T04:56:59.510Z"
+  "lastStatsAt": "2026-06-30T04:21:56.911Z"
 }
