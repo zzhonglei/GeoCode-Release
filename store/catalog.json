@@ -30,7 +30,7 @@
       "size": 18820846,
       "fileCount": 4,
       "updatedAt": "2026-06-30T12:05:24.852Z",
-      "downloadCount": 39,
+      "downloadCount": 43,
       "packageFiles": [
         {
           "source": "core/china-admin-boundaries/SKILL.f1778b8e.md",
@@ -612,7 +612,7 @@
       "size": 6846856,
       "fileCount": 15,
       "updatedAt": "2026-06-30T12:05:24.852Z",
-      "downloadCount": 197,
+      "downloadCount": 201,
       "packageFiles": [
         {
           "source": "core/thematic-map/SKILL.c921ea95.md",
@@ -1008,5 +1008,5 @@
       ]
     }
   ],
-  "lastStatsAt": "2026-07-01T05:52:32.861Z"
+  "lastStatsAt": "2026-07-02T05:08:29.700Z"
 }
