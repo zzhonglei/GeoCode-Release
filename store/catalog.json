@@ -103,7 +103,7 @@
       "size": 1121046,
       "fileCount": 60,
       "updatedAt": "2026-06-30T12:05:24.852Z",
-      "downloadCount": 125,
+      "downloadCount": 128,
       "packageFiles": [
         {
           "source": "core/docx-reader/SKILL.5ad3b4d7.md",
@@ -1008,5 +1008,5 @@
       ]
     }
   ],
-  "lastStatsAt": "2026-07-10T04:10:03.373Z"
+  "lastStatsAt": "2026-07-11T03:37:04.380Z"
 }
