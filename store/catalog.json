@@ -30,7 +30,7 @@
       "size": 18820846,
       "fileCount": 4,
       "updatedAt": "2026-06-30T12:05:24.852Z",
-      "downloadCount": 159,
+      "downloadCount": 161,
       "packageFiles": [
         {
           "source": "core/china-admin-boundaries/SKILL.f1778b8e.md",
@@ -74,7 +74,7 @@
       "size": 11164,
       "fileCount": 1,
       "updatedAt": "2026-06-30T12:05:24.852Z",
-      "downloadCount": 96,
+      "downloadCount": 99,
       "packageFiles": [
         {
           "source": "core/china-statistics-data/SKILL.9730863e.md",
@@ -103,7 +103,7 @@
       "size": 1121046,
       "fileCount": 60,
       "updatedAt": "2026-06-30T12:05:24.852Z",
-      "downloadCount": 178,
+      "downloadCount": 181,
       "packageFiles": [
         {
           "source": "core/docx-reader/SKILL.5ad3b4d7.md",
@@ -425,7 +425,7 @@
       "size": 62085,
       "fileCount": 5,
       "updatedAt": "2026-06-30T12:05:24.852Z",
-      "downloadCount": 208,
+      "downloadCount": 210,
       "packageFiles": [
         {
           "source": "core/gee-scripting/SKILL.d9a70d7b.md",
@@ -501,7 +501,7 @@
       "size": 57540,
       "fileCount": 11,
       "updatedAt": "2026-06-30T12:05:24.852Z",
-      "downloadCount": 119,
+      "downloadCount": 122,
       "packageFiles": [
         {
           "source": "core/pdf/SKILL.f253fddd.md",
@@ -579,7 +579,7 @@
       "size": 25812,
       "fileCount": 2,
       "updatedAt": "2026-06-30T12:05:24.852Z",
-      "downloadCount": 191,
+      "downloadCount": 193,
       "packageFiles": [
         {
           "source": "core/projection-selection/SKILL.299bc567.md",
@@ -612,7 +612,7 @@
       "size": 6846856,
       "fileCount": 15,
       "updatedAt": "2026-06-30T12:05:24.852Z",
-      "downloadCount": 320,
+      "downloadCount": 322,
       "packageFiles": [
         {
           "source": "core/thematic-map/SKILL.c921ea95.md",
@@ -738,7 +738,7 @@
       "size": 1093662,
       "fileCount": 53,
       "updatedAt": "2026-06-30T12:05:24.852Z",
-      "downloadCount": 187,
+      "downloadCount": 190,
       "packageFiles": [
         {
           "source": "core/xlsx/SKILL.5e202804.md",
@@ -1008,5 +1008,5 @@
       ]
     }
   ],
-  "lastStatsAt": "2026-08-15T01:46:43.326Z"
+  "lastStatsAt": "2026-08-17T01:52:15.430Z"
 }
