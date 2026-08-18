@@ -612,7 +612,7 @@
       "size": 6846856,
       "fileCount": 15,
       "updatedAt": "2026-06-30T12:05:24.852Z",
-      "downloadCount": 322,
+      "downloadCount": 325,
       "packageFiles": [
         {
           "source": "core/thematic-map/SKILL.c921ea95.md",
@@ -1008,5 +1008,5 @@
       ]
     }
   ],
-  "lastStatsAt": "2026-08-17T01:52:15.430Z"
+  "lastStatsAt": "2026-08-18T01:47:49.037Z"
 }
