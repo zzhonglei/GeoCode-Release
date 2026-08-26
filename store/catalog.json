@@ -103,7 +103,7 @@
       "size": 1121046,
       "fileCount": 60,
       "updatedAt": "2026-06-30T12:05:24.852Z",
-      "downloadCount": 184,
+      "downloadCount": 187,
       "packageFiles": [
         {
           "source": "core/docx-reader/SKILL.5ad3b4d7.md",
@@ -501,7 +501,7 @@
       "size": 57540,
       "fileCount": 11,
       "updatedAt": "2026-06-30T12:05:24.852Z",
-      "downloadCount": 128,
+      "downloadCount": 131,
       "packageFiles": [
         {
           "source": "core/pdf/SKILL.f253fddd.md",
@@ -738,7 +738,7 @@
       "size": 1093662,
       "fileCount": 53,
       "updatedAt": "2026-06-30T12:05:24.852Z",
-      "downloadCount": 196,
+      "downloadCount": 199,
       "packageFiles": [
         {
           "source": "core/xlsx/SKILL.5e202804.md",
@@ -1008,5 +1008,5 @@
       ]
     }
   ],
-  "lastStatsAt": "2026-08-20T01:48:16.613Z"
+  "lastStatsAt": "2026-08-26T01:55:14.586Z"
 }
