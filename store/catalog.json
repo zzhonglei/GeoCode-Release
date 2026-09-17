@@ -30,7 +30,7 @@
       "size": 18820846,
       "fileCount": 4,
       "updatedAt": "2026-06-30T12:05:24.852Z",
-      "downloadCount": 200,
+      "downloadCount": 202,
       "packageFiles": [
         {
           "source": "core/china-admin-boundaries/SKILL.f1778b8e.md",
@@ -1008,5 +1008,5 @@
       ]
     }
   ],
-  "lastStatsAt": "2026-09-16T00:17:35.114Z"
+  "lastStatsAt": "2026-09-17T01:20:32.577Z"
 }
