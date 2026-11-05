@@ -30,7 +30,7 @@
       "size": 18820846,
       "fileCount": 4,
       "updatedAt": "2026-06-30T12:05:24.852Z",
-      "downloadCount": 230,
+      "downloadCount": 233,
       "packageFiles": [
         {
           "source": "core/china-admin-boundaries/SKILL.f1778b8e.md",
@@ -103,7 +103,7 @@
       "size": 1121046,
       "fileCount": 60,
       "updatedAt": "2026-06-30T12:05:24.852Z",
-      "downloadCount": 226,
+      "downloadCount": 229,
       "packageFiles": [
         {
           "source": "core/docx-reader/SKILL.5ad3b4d7.md",
@@ -501,7 +501,7 @@
       "size": 57540,
       "fileCount": 11,
       "updatedAt": "2026-06-30T12:05:24.852Z",
-      "downloadCount": 167,
+      "downloadCount": 170,
       "packageFiles": [
         {
           "source": "core/pdf/SKILL.f253fddd.md",
@@ -612,7 +612,7 @@
       "size": 6846856,
       "fileCount": 15,
       "updatedAt": "2026-06-30T12:05:24.852Z",
-      "downloadCount": 391,
+      "downloadCount": 394,
       "packageFiles": [
         {
           "source": "core/thematic-map/SKILL.c921ea95.md",
@@ -1008,5 +1008,5 @@
       ]
     }
   ],
-  "lastStatsAt": "2026-10-22T01:27:31.606Z"
+  "lastStatsAt": "2026-11-05T02:20:49.180Z"
 }
